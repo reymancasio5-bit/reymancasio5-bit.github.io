@@ -42,7 +42,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 radial-gradient(ellipse at 20% 30%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
             pointer-events: none;
@@ -214,9 +214,7 @@
             text-align: center;
         }
 
-        .header-stat:last-child {
-            border-right: none;
-        }
+        .header-stat:last-child { border-right: none; }
 
         .stat-number {
             display: block;
@@ -249,7 +247,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Desktop nav list */
         .nav-desktop {
             display: flex;
             justify-content: center;
@@ -290,10 +287,8 @@
             width: 80%;
         }
 
-        /* ===================== MOBILE SLIDE NAV ===================== */
-        .nav-mobile {
-            display: none;
-        }
+        /* ===================== MOBILE NAV ===================== */
+        .nav-mobile { display: none; }
 
         /* ===================== CONTAINER ===================== */
         .container {
@@ -304,10 +299,7 @@
             z-index: 1;
         }
 
-        section {
-            margin-bottom: 80px;
-            animation: fadeIn 0.6s ease;
-        }
+        section { margin-bottom: 80px; }
 
         h2 {
             font-size: 2.5rem;
@@ -350,9 +342,7 @@
             transition: left 0.5s ease;
         }
 
-        .card:hover::before {
-            left: 100%;
-        }
+        .card:hover::before { left: 100%; }
 
         .card:hover {
             transform: translateY(-8px);
@@ -360,17 +350,8 @@
             box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
         }
 
-        .card h3 {
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .card .date {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
+        .card h3 { color: var(--accent); font-size: 1.5rem; margin-bottom: 10px; }
+        .card .date { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px; }
 
         /* Skills Grid */
         .skills-grid {
@@ -396,7 +377,7 @@
             box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
         }
 
-        /* Project Card */
+        /* ===================== PROJECT CARD ===================== */
         .project-card {
             background: var(--bg-card);
             padding: 40px;
@@ -418,9 +399,7 @@
             transition: height 0.4s ease;
         }
 
-        .project-card:hover::after {
-            height: 100%;
-        }
+        .project-card:hover::after { height: 100%; }
 
         .project-card:hover {
             transform: translateX(8px);
@@ -437,25 +416,11 @@
             gap: 20px;
         }
 
-        .project-title {
-            color: var(--accent);
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
+        .project-title { color: var(--accent); font-size: 1.8rem; margin-bottom: 10px; }
+        .project-tech { color: var(--text-secondary); font-weight: 500; font-size: 1rem; }
+        .project-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-        .project-tech {
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 1rem;
-        }
-
-        .project-actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        /* Workflow Diagram */
+        /* ===================== WORKFLOW DIAGRAM ===================== */
         .workflow-diagram {
             background: var(--bg-secondary);
             border-radius: 10px;
@@ -465,8 +430,11 @@
             border: 1px solid var(--border);
         }
 
+        /* Always horizontal row — scrolls on mobile */
         .workflow-container {
             display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
             align-items: center;
             gap: 15px;
             min-width: max-content;
@@ -481,7 +449,7 @@
             min-width: 140px;
             text-align: center;
             transition: all 0.3s ease;
-            position: relative;
+            flex-shrink: 0;
         }
 
         .workflow-node:hover {
@@ -490,22 +458,25 @@
         }
 
         .workflow-node.telegram { border-color: var(--node-telegram); }
-        .workflow-node.ai { border-color: var(--node-ai); }
-        .workflow-node.sheets { border-color: var(--node-sheets); }
-        .workflow-node.drive { border-color: var(--node-drive); }
-        .workflow-node.gmail { border-color: var(--node-gmail); }
+        .workflow-node.ai       { border-color: var(--node-ai); }
+        .workflow-node.sheets   { border-color: var(--node-sheets); }
+        .workflow-node.drive    { border-color: var(--node-drive); }
+        .workflow-node.gmail    { border-color: var(--node-gmail); }
         .workflow-node.conditional { border-color: #ff9800; }
 
-        .node-icon { font-size: 2rem; margin-bottom: 10px; }
+        .node-icon  { font-size: 2rem; margin-bottom: 10px; }
         .node-label { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
 
-        .workflow-arrow { color: var(--accent); font-size: 1.5rem; flex-shrink: 0; }
-
-        .project-description {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 25px;
+        /* FIX 2: Arrow is ALWAYS pointing right — never rotates */
+        .workflow-arrow {
+            color: var(--accent);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            display: inline-block;
+            line-height: 1;
         }
+
+        .project-description { color: var(--text-secondary); line-height: 1.8; margin-bottom: 25px; }
 
         .project-features { list-style: none; padding-left: 0; }
 
@@ -526,7 +497,7 @@
             font-weight: bold;
         }
 
-        /* Buttons */
+        /* ===================== BUTTONS ===================== */
         .btn {
             display: inline-block;
             padding: 12px 30px;
@@ -545,60 +516,33 @@
         .btn::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255,255,255,0.3);
             transform: translate(-50%, -50%);
             transition: width 0.5s ease, height 0.5s ease;
         }
 
         .btn:hover::before { width: 300px; height: 300px; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4); }
-        .btn span { position: relative; z-index: 1; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,212,255,0.4); }
+        .btn span  { position: relative; z-index: 1; }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--accent);
-            border: 2px solid var(--accent);
-        }
-
+        .btn-secondary { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
         .btn-secondary:hover { background: var(--accent); color: var(--bg-primary); }
 
-        /* Contact buttons */
-        .contact-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
+        .contact-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
         .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; }
         .btn-whatsapp:hover { box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
-
         .btn-email { background: linear-gradient(135deg, #ea4335, #c5221f); color: #fff; }
         .btn-email:hover { box-shadow: 0 8px 25px rgba(234,67,53,0.4); }
-
         .btn-linkedin { background: linear-gradient(135deg, #0077B5, #005983); color: #fff; }
         .btn-linkedin:hover { box-shadow: 0 8px 25px rgba(0,119,181,0.4); }
 
-        /* Resume Section */
-        .resume-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
+        /* ===================== RESUME ===================== */
+        .resume-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
 
-        .resume-block {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 22px;
-        }
+        .resume-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 22px; }
 
         .resume-block h4 {
             color: var(--accent);
@@ -619,11 +563,7 @@
             color: var(--text-secondary);
         }
 
-        .resume-item::before {
-            content: '▸';
-            color: var(--accent);
-            flex-shrink: 0;
-        }
+        .resume-item::before { content: '▸'; color: var(--accent); flex-shrink: 0; }
 
         .resume-cta {
             text-align: center;
@@ -633,13 +573,9 @@
             border-radius: 12px;
         }
 
-        .resume-cta p {
-            color: var(--text-secondary);
-            margin-bottom: 18px;
-            font-size: 0.95rem;
-        }
+        .resume-cta p { color: var(--text-secondary); margin-bottom: 18px; font-size: 0.95rem; }
 
-        /* Footer */
+        /* ===================== FOOTER ===================== */
         footer {
             background: var(--bg-secondary);
             text-align: center;
@@ -650,43 +586,70 @@
 
         footer p { color: var(--text-secondary); }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* ===================== ANIMATIONS ===================== */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===================== MOBILE STYLES ===================== */
+        /* ===================== MOBILE ===================== */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
+            h1      { font-size: 2.5rem; }
             .tagline { font-size: 1.2rem; }
-            h2 { font-size: 2rem; }
+            h2      { font-size: 2rem; }
             .skills-grid { grid-template-columns: 1fr; }
-            .workflow-arrow { transform: rotate(90deg); }
+
+            /* Project header stacks on mobile */
             .project-header { flex-direction: column; }
-            .project-card { padding: 25px; }
+            .project-card   { padding: 25px; }
+
+            /* Stats stack on mobile */
             .header-stats { flex-direction: column; }
-            .header-stat { border-right: none; border-bottom: 1px solid rgba(0,212,255,0.15); }
+            .header-stat  { border-right: none; border-bottom: 1px solid rgba(0,212,255,0.15); }
             .header-stat:last-child { border-bottom: none; }
-            .resume-grid { grid-template-columns: 1fr; }
+
+            .resume-grid  { grid-template-columns: 1fr; }
             .contact-buttons { flex-direction: column; align-items: center; }
-            .header-node { display: none; }
+            .header-node  { display: none; }
+
+            /* ---- FIX 2: workflow stays horizontal, just scrolls ---- */
+            .workflow-diagram {
+                padding: 15px 10px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .workflow-container {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                min-width: max-content;
+                padding: 10px 5px;
+                gap: 10px;
+            }
+
+            .workflow-node {
+                min-width: 110px;
+                padding: 14px 16px;
+            }
+
+            .node-icon { font-size: 1.5rem; margin-bottom: 6px; }
+            .node-label { font-size: 0.75rem; }
+
+            /* Arrow NEVER rotates */
+            .workflow-arrow {
+                font-size: 1.2rem;
+                transform: none !important;
+            }
 
             /* Hide desktop nav, show mobile nav */
             .nav-desktop { display: none; }
-            .nav-mobile { display: block; }
+            .nav-mobile  { display: block; }
 
-            /* Mobile slide nav */
+            /* ---- Mobile slide nav ---- */
             .mobile-nav-wrapper {
                 position: relative;
                 width: 100%;
@@ -696,46 +659,43 @@
             .mobile-nav-track {
                 display: flex;
                 align-items: center;
-                gap: 0;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
                 -ms-overflow-style: none;
-                padding: 0 20px;
+                padding: 4px 24px;
             }
 
-            .mobile-nav-track::-webkit-scrollbar {
-                display: none;
-            }
+            .mobile-nav-track::-webkit-scrollbar { display: none; }
 
             .mobile-nav-item {
                 scroll-snap-align: center;
                 flex-shrink: 0;
-                padding: 10px 22px;
+                padding: 10px 20px;
                 color: var(--text-secondary);
                 text-decoration: none;
                 font-weight: 600;
                 font-size: 0.95rem;
                 white-space: nowrap;
                 border-bottom: 2px solid transparent;
-                transition: all 0.25s ease;
+                transition: color 0.25s ease, border-color 0.25s ease;
                 letter-spacing: 0.5px;
+                cursor: pointer;
+                user-select: none;
             }
 
-            .mobile-nav-item.active,
-            .mobile-nav-item:active {
+            .mobile-nav-item.active {
                 color: var(--accent);
                 border-bottom-color: var(--accent);
             }
 
-            /* Fade edges indicator */
+            /* Fade edges */
             .mobile-nav-wrapper::before,
             .mobile-nav-wrapper::after {
                 content: '';
                 position: absolute;
-                top: 0;
-                bottom: 0;
+                top: 0; bottom: 0;
                 width: 28px;
                 z-index: 2;
                 pointer-events: none;
@@ -751,12 +711,12 @@
                 background: linear-gradient(to left, rgba(21,26,53,0.95), transparent);
             }
 
-            /* Swipe dots */
+            /* Dots */
             .nav-dots {
                 display: flex;
                 justify-content: center;
                 gap: 5px;
-                padding: 6px 0 2px;
+                padding: 5px 0 3px;
             }
 
             .nav-dot {
@@ -815,7 +775,7 @@
         </div>
     </header>
 
-    <nav>
+    <nav id="mainNav">
         <!-- Desktop Nav -->
         <ul class="nav-desktop">
             <li><a href="#about">About</a></li>
@@ -831,13 +791,13 @@
         <div class="nav-mobile">
             <div class="mobile-nav-wrapper">
                 <div class="mobile-nav-track" id="mobileNavTrack">
-                    <a href="#about" class="mobile-nav-item active" data-section="about">About</a>
-                    <a href="#skills" class="mobile-nav-item" data-section="skills">Skills</a>
-                    <a href="#experience" class="mobile-nav-item" data-section="experience">Experience</a>
-                    <a href="#projects" class="mobile-nav-item" data-section="projects">Projects</a>
-                    <a href="#education" class="mobile-nav-item" data-section="education">Education</a>
-                    <a href="#resume" class="mobile-nav-item" data-section="resume">Resume</a>
-                    <a href="#contact" class="mobile-nav-item" data-section="contact">Contact</a>
+                    <a class="mobile-nav-item active" data-section="about">About</a>
+                    <a class="mobile-nav-item" data-section="skills">Skills</a>
+                    <a class="mobile-nav-item" data-section="experience">Experience</a>
+                    <a class="mobile-nav-item" data-section="projects">Projects</a>
+                    <a class="mobile-nav-item" data-section="education">Education</a>
+                    <a class="mobile-nav-item" data-section="resume">Resume</a>
+                    <a class="mobile-nav-item" data-section="contact">Contact</a>
                 </div>
             </div>
             <div class="nav-dots" id="navDots">
@@ -896,7 +856,7 @@
         <section id="projects">
             <h2>Featured Automation Projects</h2>
 
-            <!-- Project 1: Receipt Data Entry Automation -->
+            <!-- Project 1 -->
             <div class="project-card">
                 <div class="project-header">
                     <div>
@@ -964,7 +924,7 @@
                 </ul>
             </div>
 
-            <!-- Project 2: Overdue Invoice Reminder System -->
+            <!-- Project 2 -->
             <div class="project-card">
                 <div class="project-header">
                     <div>
@@ -1034,7 +994,7 @@
             </div>
         </section>
 
-        <!-- Education comes BEFORE Resume (swapped order) -->
+        <!-- Education BEFORE Resume -->
         <section id="education">
             <h2>Education</h2>
             <div class="card">
@@ -1116,85 +1076,137 @@
         <p style="margin-top: 10px; font-size: 0.9rem;">Built with passion for automation and efficiency.</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
-        // ===================== DESKTOP SMOOTH SCROLL =====================
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                const target = document.querySelector(href);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+        // =============================================================
+        // UTILITY: scroll to a section's h2 heading, offset by nav bar
+        // =============================================================
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+
+            const nav = document.getElementById('mainNav');
+            const navHeight = nav ? nav.offsetHeight : 0;
+
+            // Target the h2 inside the section for precise heading scroll
+            const heading = section.querySelector('h2');
+            const target  = heading || section;
+
+            const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 12;
+            window.scrollTo({ top, behavior: 'smooth' });
+        }
+
+        // =============================================================
+        // DESKTOP NAV — click scrolls to h2 of that section
+        // =============================================================
+        document.querySelectorAll('.nav-desktop a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const id = this.getAttribute('href').replace('#', '');
+                scrollToSection(id);
             });
         });
 
-        // ===================== SCROLL REVEAL =====================
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        // =============================================================
+        // SCROLL REVEAL
+        // =============================================================
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.style.opacity = '1';
+                    e.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-        document.querySelectorAll('section').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'all 0.6s ease';
-            observer.observe(section);
+        document.querySelectorAll('section').forEach(s => {
+            s.style.opacity   = '0';
+            s.style.transform = 'translateY(20px)';
+            s.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            revealObserver.observe(s);
         });
 
-        // ===================== MOBILE NAV: ACTIVE STATE + DOTS =====================
-        const sections = ['about', 'skills', 'experience', 'projects', 'education', 'resume', 'contact'];
-        const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
-        const navDots = document.querySelectorAll('.nav-dot');
-        const mobileNavTrack = document.getElementById('mobileNavTrack');
+        // =============================================================
+        // MOBILE NAV
+        // =============================================================
+        const sectionIds  = ['about', 'skills', 'experience', 'projects', 'education', 'resume', 'contact'];
+        const mobileItems = document.querySelectorAll('.mobile-nav-item');
+        const navDots     = document.querySelectorAll('.nav-dot');
+        const mobileTrack = document.getElementById('mobileNavTrack');
+        const mainNav     = document.getElementById('mainNav');
 
-        function setActiveNav(sectionId) {
-            const index = sections.indexOf(sectionId);
-            if (index === -1) return;
+        // When user taps a nav item, lock out scroll-detection briefly
+        // so the highlight doesn't immediately jump to the wrong section
+        // while the smooth-scroll animation is still in progress.
+        let scrollLocked = false;
+        let lockTimer    = null;
 
-            // Update nav items
-            mobileNavItems.forEach((item, i) => {
-                item.classList.toggle('active', i === index);
-            });
+        // ---------- Set which nav item is highlighted ----------
+        function setActive(index) {
+            if (index < 0 || index >= sectionIds.length) return;
 
-            // Update dots
-            navDots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
+            mobileItems.forEach((item, i) => item.classList.toggle('active', i === index));
+            navDots.forEach((dot,  i) => dot.classList.toggle('active',  i === index));
 
-            // Scroll the active nav item into view (center it)
-            const activeItem = mobileNavItems[index];
-            if (activeItem && mobileNavTrack) {
-                const trackRect = mobileNavTrack.getBoundingClientRect();
-                const itemRect = activeItem.getBoundingClientRect();
-                const scrollLeft = mobileNavTrack.scrollLeft + itemRect.left - trackRect.left - (trackRect.width / 2) + (itemRect.width / 2);
-                mobileNavTrack.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+            // Auto-centre the active tab in the sliding nav strip
+            const activeItem = mobileItems[index];
+            if (activeItem && mobileTrack) {
+                const tr = mobileTrack.getBoundingClientRect();
+                const ir = activeItem.getBoundingClientRect();
+                const target = mobileTrack.scrollLeft + ir.left - tr.left - (tr.width / 2) + (ir.width / 2);
+                mobileTrack.scrollTo({ left: target, behavior: 'smooth' });
             }
         }
 
-        // Intersection Observer for active section highlight
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setActiveNav(entry.target.id);
-                }
-            });
-        }, { threshold: 0.4, rootMargin: '-60px 0px -40% 0px' });
+        // ---------- FIX 1 + FIX 3: tap a nav item ----------
+        mobileItems.forEach((item, index) => {
+            item.addEventListener('click', function () {
+                const id = this.getAttribute('data-section');
 
-        sections.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) sectionObserver.observe(el);
+                // Immediately highlight the tapped item (FIX 1)
+                setActive(index);
+
+                // Lock scroll-based detection so it can't override us (FIX 1)
+                scrollLocked = true;
+                clearTimeout(lockTimer);
+                lockTimer = setTimeout(() => { scrollLocked = false; }, 1400);
+
+                // Scroll to the section's h2 heading (FIX 3)
+                scrollToSection(id);
+            });
         });
 
-        // Download JSON workflow function
+        // ---------- FIX 1: scroll-position based active detection ----------
+        // Using getBoundingClientRect per section is reliable and doesn't
+        // conflict with IntersectionObserver timing quirks.
+        function getActiveIndexByScroll() {
+            const navH   = mainNav ? mainNav.offsetHeight : 60;
+            // Treat any section whose top is within the top 40% of the viewport as active
+            const trigger = navH + 40;
+
+            let best = 0;
+            sectionIds.forEach((id, i) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const rect = el.getBoundingClientRect();
+                // Section has scrolled up past the trigger line → candidate
+                if (rect.top <= trigger) best = i;
+            });
+            return best;
+        }
+
+        function onScroll() {
+            if (scrollLocked) return;           // respect tap-lock
+            setActive(getActiveIndexByScroll());
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Set correct initial highlight on page load
+        setActive(getActiveIndexByScroll());
+
+        // =============================================================
+        // DOWNLOAD JSON
+        // =============================================================
         function downloadJSON(project) {
             let filename, data;
 
@@ -1207,9 +1219,9 @@
             }
 
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
+            const url  = URL.createObjectURL(blob);
+            const a    = document.createElement('a');
+            a.href     = url;
             a.download = filename;
             document.body.appendChild(a);
             a.click();
