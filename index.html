@@ -3,95 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marquee Example</title>
+    <title>Portfolio</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #f0f0f0;
-        }
-        .marquee {
-            white-space: nowrap;
-            overflow: hidden;
-            box-sizing: border-box;
-            position: relative;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-            height: 50px;
-        }
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 20s linear infinite;
-            will-change: transform;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        .marquee:hover .marquee-content {
-            animation: marquee 40s linear infinite;
-        }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background: #333; color: #fff; padding: 20px; text-align: center; }
+        nav { margin: 20px; }
+        nav a { margin: 10px; color: #333; text-decoration: none; }
+        section { padding: 20px; }
+        footer { background: #333; color: #fff; text-align: center; padding: 10px; position: fixed; width: 100%; bottom: 0; }
+        .marquee { position: relative; overflow: hidden; white-space: nowrap; }
+        .marquee-content { display: inline-block; animation: marquee 20s linear infinite; } 
+        @keyframes marquee { 0% { transform: translate(0); } 100% { transform: translate(-100%); } }
+        .marquee-fade { background: linear-gradient(to right, transparent, white 120px, white 80%, transparent 100%); }
     </style>
 </head>
 <body>
-    <div class="marquee" id="marquee">
-        <div class="marquee-content" id="marqueeContent">
-            <span>Item 1</span>
-            <span>Item 2</span>
-            <span>Item 3</span>
-            <span>Item 4</span>
-            <span>Item 5</span>
-            <span>Item 6</span>
+    <header>
+        <h1>My Portfolio</h1>
+    </header>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <section id="about">
+        <h2>About Me</h2>
+        <p>This is a brief about me.</p>
+    </section>
+    <section id="skills">
+        <h2>Skills</h2>
+        <p>Here are my skills.</p>
+    </section>
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="workflow-diagram">Workflow Diagram Here</div>
+        <p>Descriptions of projects.</p>
+    </section>
+    <section id="resume">
+        <h2>Resume</h2>
+        <p>Link to resume.</p>
+    </section>
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <button>Contact via Email</button>
+    </section>
+    <div class="marquee marquee-fade">
+        <div class="marquee-content">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>React</span>
+            <span>Node.js</span>
+            <span>Python</span>
+            <span>Java</span>
         </div>
     </div>
+    <footer>
+        <p>© 2026 My Portfolio. All Rights Reserved.</p>
+    </footer>
     <script>
-        const marquee = document.getElementById('marquee');
-        const marqueeContent = document.getElementById('marqueeContent');
-        let isDragging = false;
-        let startX;
-        let scrollLeft;
-
-        marquee.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.pageX - marquee.offsetLeft;
-            scrollLeft = marquee.scrollLeft;
+        const marquee = document.querySelector('.marquee-content');
+        let hover = false;
+        marquee.addEventListener('mouseover', () => {
+            hover = true;
+            marquee.style.animationDuration = '40s';
         });
-
-        marquee.addEventListener('mouseleave', () => {
-            isDragging = false;
+        marquee.addEventListener('mouseout', () => {
+            hover = false;
+            marquee.style.animationDuration = '20s';
         });
-
-        marquee.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-
-        marquee.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.pageX - marquee.offsetLeft;
-            const walk = (x - startX) * 2; // scroll-fast
-            marquee.scrollLeft = scrollLeft - walk;
-        });
-
-        // Touch events for mobile
-        marquee.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            startX = e.touches[0].pageX - marquee.offsetLeft;
-            scrollLeft = marquee.scrollLeft;
-        });
-
-        marquee.addEventListener('touchend', () => {
-            isDragging = false;
-        });
-
-        marquee.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.touches[0].pageX - marquee.offsetLeft;
-            const walk = (x - startX) * 2;
-            marquee.scrollLeft = scrollLeft - walk;
-        });
+        // Add drag functionality...
+        // Note: Implement drag logic here. 
     </script>
 </body>
 </html>
