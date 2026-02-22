@@ -38,25 +38,23 @@
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background:
-                radial-gradient(ellipse at 20% 30%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 30%, rgba(0,212,255,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(138,43,226,0.1) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* ===================== HEADER ===================== */
+        /* ── HEADER ── */
         header {
             position: relative;
             background: linear-gradient(135deg, #070b1f 0%, #0d1230 40%, #111830 100%);
             padding: 110px 20px 90px;
             text-align: center;
             border-bottom: 2px solid var(--border);
-            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 10px 60px rgba(0,0,0,0.7);
             overflow: hidden;
         }
 
@@ -74,10 +72,8 @@
         header::after {
             content: '';
             position: absolute;
-            top: -40%;
-            left: -10%;
-            width: 70%;
-            height: 200%;
+            top: -40%; left: -10%;
+            width: 70%; height: 200%;
             background: radial-gradient(ellipse, rgba(0,212,255,0.12) 0%, rgba(138,43,226,0.08) 40%, transparent 70%);
             animation: orbPulse 6s ease-in-out infinite alternate;
             pointer-events: none;
@@ -85,22 +81,15 @@
 
         .header-orb2 {
             position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 60%;
-            height: 160%;
+            top: -20%; right: -10%;
+            width: 60%; height: 160%;
             background: radial-gradient(ellipse, rgba(138,43,226,0.12) 0%, rgba(0,212,255,0.06) 40%, transparent 70%);
             animation: orbPulse 8s ease-in-out infinite alternate-reverse;
             pointer-events: none;
             z-index: 0;
         }
 
-        .header-nodes {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
+        .header-nodes { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; }
 
         .header-node {
             position: absolute;
@@ -113,41 +102,25 @@
             white-space: nowrap;
         }
 
-        .header-node:nth-child(1) { top: 15%; left: 5%; border-color: #0088cc; color: #0088cc; animation-delay: 0s; }
-        .header-node:nth-child(2) { top: 70%; left: 3%; border-color: #34a853; color: #34a853; animation-delay: 1.5s; }
-        .header-node:nth-child(3) { top: 25%; right: 4%; border-color: #ea4335; color: #ea4335; animation-delay: 3s; }
-        .header-node:nth-child(4) { top: 65%; right: 5%; border-color: #8a2be2; color: #8a2be2; animation-delay: 4.5s; }
-        .header-node:nth-child(5) { top: 45%; left: 8%; border-color: #4285f4; color: #4285f4; animation-delay: 2s; }
-        .header-node:nth-child(6) { top: 80%; right: 8%; border-color: #ff9800; color: #ff9800; animation-delay: 1s; }
+        .header-node:nth-child(1) { top:15%; left:5%;   border-color:#0088cc; color:#0088cc; animation-delay:0s;   }
+        .header-node:nth-child(2) { top:70%; left:3%;   border-color:#34a853; color:#34a853; animation-delay:1.5s; }
+        .header-node:nth-child(3) { top:25%; right:4%;  border-color:#ea4335; color:#ea4335; animation-delay:3s;   }
+        .header-node:nth-child(4) { top:65%; right:5%;  border-color:#8a2be2; color:#8a2be2; animation-delay:4.5s; }
+        .header-node:nth-child(5) { top:45%; left:8%;   border-color:#4285f4; color:#4285f4; animation-delay:2s;   }
+        .header-node:nth-child(6) { top:80%; right:8%;  border-color:#ff9800; color:#ff9800; animation-delay:1s;   }
 
-        @keyframes floatNode {
-            0%, 100% { transform: translateY(0px); opacity: 0.18; }
-            50% { transform: translateY(-12px); opacity: 0.28; }
-        }
+        @keyframes floatNode  { 0%,100%{transform:translateY(0);opacity:0.18} 50%{transform:translateY(-12px);opacity:0.28} }
+        @keyframes gridMove   { 0%{background-position:0 0} 100%{background-position:60px 60px} }
+        @keyframes orbPulse   { 0%{transform:scale(1) translate(0,0)} 100%{transform:scale(1.15) translate(3%,-5%)} }
 
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 60px 60px; }
-        }
-
-        @keyframes orbPulse {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.15) translate(3%, -5%); }
-        }
-
-        .header-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
+        .header-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
 
         .profile-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
+            background: rgba(0,212,255,0.1);
+            border: 1px solid rgba(0,212,255,0.3);
             border-radius: 30px;
             padding: 6px 18px;
             font-size: 0.85rem;
@@ -160,17 +133,13 @@
 
         .profile-badge::before {
             content: '';
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background: var(--accent);
             border-radius: 50%;
             animation: blink 1.5s ease-in-out infinite;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
         h1 {
             font-size: 3.5rem;
@@ -200,15 +169,13 @@
             border-radius: 12px;
             overflow: hidden;
             max-width: 720px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-left: auto; margin-right: auto;
             background: rgba(10,14,39,0.5);
             backdrop-filter: blur(10px);
         }
 
         .header-stat {
-            flex: 1;
-            min-width: 140px;
+            flex: 1; min-width: 140px;
             padding: 18px 20px;
             border-right: 1px solid rgba(0,212,255,0.15);
             text-align: center;
@@ -218,8 +185,7 @@
 
         .stat-number {
             display: block;
-            font-size: 1.6rem;
-            font-weight: 700;
+            font-size: 1.6rem; font-weight: 700;
             background: linear-gradient(135deg, var(--accent), #8a2be2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -235,16 +201,15 @@
             margin-top: 3px;
         }
 
-        /* ===================== DESKTOP NAV ===================== */
+        /* ── NAV ── */
         nav {
-            position: sticky;
-            top: 0;
-            background: rgba(21, 26, 53, 0.95);
+            position: sticky; top: 0;
+            background: rgba(21,26,53,0.95);
             backdrop-filter: blur(10px);
             padding: 15px 0;
             border-bottom: 1px solid var(--border);
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .nav-desktop {
@@ -268,35 +233,26 @@
         .nav-desktop a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
+            bottom: 0; left: 50%;
+            width: 0; height: 2px;
             background: var(--accent);
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
 
         .nav-desktop a:hover,
-        .nav-desktop a.active {
-            color: var(--accent);
-        }
-
+        .nav-desktop a.active { color: var(--accent); }
         .nav-desktop a:hover::after,
-        .nav-desktop a.active::after {
-            width: 80%;
-        }
+        .nav-desktop a.active::after { width: 80%; }
 
-        /* ===================== MOBILE NAV ===================== */
         .nav-mobile { display: none; }
 
-        /* ===================== CONTAINER ===================== */
+        /* ── CONTAINER ── */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 60px 20px;
-            position: relative;
-            z-index: 1;
+            position: relative; z-index: 1;
         }
 
         section { margin-bottom: 80px; }
@@ -312,14 +268,12 @@
         h2::after {
             content: '';
             position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60%;
-            height: 3px;
+            bottom: -10px; left: 0;
+            width: 60%; height: 3px;
             background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
         }
 
-        /* ===================== CARDS ===================== */
+        /* ── CARDS ── */
         .card {
             background: var(--bg-card);
             padding: 30px;
@@ -334,31 +288,18 @@
         .card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,212,255,0.1), transparent);
             transition: left 0.5s ease;
         }
 
         .card:hover::before { left: 100%; }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
-        }
-
+        .card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 15px 40px rgba(0,212,255,0.2); }
         .card h3 { color: var(--accent); font-size: 1.5rem; margin-bottom: 10px; }
         .card .date { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px; }
 
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
 
         .skill-tag {
             background: var(--bg-secondary);
@@ -374,10 +315,10 @@
             background: var(--bg-card);
             border-color: var(--accent);
             transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
+            box-shadow: 0 8px 25px rgba(0,212,255,0.15);
         }
 
-        /* ===================== PROJECT CARD ===================== */
+        /* ── PROJECT CARD ── */
         .project-card {
             background: var(--bg-card);
             padding: 40px;
@@ -391,36 +332,27 @@
         .project-card::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 0;
+            top: 0; left: 0;
+            width: 4px; height: 0;
             background: var(--accent);
             transition: height 0.4s ease;
         }
 
         .project-card:hover::after { height: 100%; }
-
-        .project-card:hover {
-            transform: translateX(8px);
-            border-color: var(--accent);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
-        }
+        .project-card:hover { transform: translateX(8px); border-color: var(--accent); box-shadow: 0 15px 40px rgba(0,212,255,0.2); }
 
         .project-header {
             display: flex;
             justify-content: space-between;
             align-items: start;
             margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-wrap: wrap; gap: 20px;
         }
 
         .project-title { color: var(--accent); font-size: 1.8rem; margin-bottom: 10px; }
-        .project-tech { color: var(--text-secondary); font-weight: 500; font-size: 1rem; }
+        .project-tech  { color: var(--text-secondary); font-weight: 500; font-size: 1rem; }
         .project-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-        /* ===================== WORKFLOW DIAGRAM ===================== */
         .workflow-diagram {
             background: var(--bg-secondary);
             border-radius: 10px;
@@ -430,7 +362,6 @@
             border: 1px solid var(--border);
         }
 
-        /* Always horizontal row — scrolls on mobile */
         .workflow-container {
             display: flex;
             flex-direction: row;
@@ -452,37 +383,26 @@
             flex-shrink: 0;
         }
 
-        .workflow-node:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
-        }
+        .workflow-node:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,212,255,0.3); }
 
-        .workflow-node.telegram { border-color: var(--node-telegram); }
-        .workflow-node.ai       { border-color: var(--node-ai); }
-        .workflow-node.sheets   { border-color: var(--node-sheets); }
-        .workflow-node.drive    { border-color: var(--node-drive); }
-        .workflow-node.gmail    { border-color: var(--node-gmail); }
+        .workflow-node.telegram   { border-color: var(--node-telegram); }
+        .workflow-node.ai         { border-color: var(--node-ai); }
+        .workflow-node.sheets     { border-color: var(--node-sheets); }
+        .workflow-node.drive      { border-color: var(--node-drive); }
+        .workflow-node.gmail      { border-color: var(--node-gmail); }
         .workflow-node.conditional { border-color: #ff9800; }
 
         .node-icon img { width: 46px; height: 46px; object-fit: contain; border-radius: 6px; }
-        .node-label { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
+        .node-label    { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
 
-        /* FIX 2: Arrow is ALWAYS pointing right — never rotates */
-        .workflow-arrow {
-            color: var(--accent);
-            font-size: 1.5rem;
-            flex-shrink: 0;
-            display: inline-block;
-            line-height: 1;
-        }
+        .workflow-arrow { color: var(--accent); font-size: 1.5rem; flex-shrink: 0; display: inline-block; line-height: 1; }
 
         .project-description { color: var(--text-secondary); line-height: 1.8; margin-bottom: 25px; }
 
         .project-features { list-style: none; padding-left: 0; }
 
         .project-features li {
-            padding: 10px 0;
-            padding-left: 30px;
+            padding: 10px 0 10px 30px;
             position: relative;
             color: var(--text-secondary);
             line-height: 1.6;
@@ -490,14 +410,12 @@
 
         .project-features li::before {
             content: '✓';
-            position: absolute;
-            left: 0;
+            position: absolute; left: 0;
             color: var(--accent);
-            font-size: 1.3rem;
-            font-weight: bold;
+            font-size: 1.3rem; font-weight: bold;
         }
 
-        /* ===================== BUTTONS ===================== */
+        /* ── BUTTONS ── */
         .btn {
             display: inline-block;
             padding: 12px 30px;
@@ -507,10 +425,8 @@
             border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            border: none; cursor: pointer;
+            position: relative; overflow: hidden;
         }
 
         .btn::before {
@@ -520,7 +436,7 @@
             width: 0; height: 0;
             border-radius: 50%;
             background: rgba(255,255,255,0.3);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%,-50%);
             transition: width 0.5s ease, height 0.5s ease;
         }
 
@@ -532,16 +448,15 @@
         .btn-secondary:hover { background: var(--accent); color: var(--bg-primary); }
 
         .contact-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
-        .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; }
-        .btn-whatsapp:hover { box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
-        .btn-email { background: linear-gradient(135deg, #ea4335, #c5221f); color: #fff; }
-        .btn-email:hover { box-shadow: 0 8px 25px rgba(234,67,53,0.4); }
-        .btn-linkedin { background: linear-gradient(135deg, #0077B5, #005983); color: #fff; }
-        .btn-linkedin:hover { box-shadow: 0 8px 25px rgba(0,119,181,0.4); }
+        .btn-whatsapp  { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; }
+        .btn-whatsapp:hover  { box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
+        .btn-email     { background: linear-gradient(135deg, #ea4335, #c5221f); color: #fff; }
+        .btn-email:hover     { box-shadow: 0 8px 25px rgba(234,67,53,0.4); }
+        .btn-linkedin  { background: linear-gradient(135deg, #0077B5, #005983); color: #fff; }
+        .btn-linkedin:hover  { box-shadow: 0 8px 25px rgba(0,119,181,0.4); }
 
-        /* ===================== RESUME ===================== */
-        .resume-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
-
+        /* ── RESUME ── */
+        .resume-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
         .resume-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 22px; }
 
         .resume-block h4 {
@@ -555,19 +470,14 @@
         }
 
         .resume-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 10px;
-            font-size: 0.92rem;
-            color: var(--text-secondary);
+            display: flex; align-items: flex-start; gap: 10px;
+            margin-bottom: 10px; font-size: 0.92rem; color: var(--text-secondary);
         }
 
         .resume-item::before { content: '▸'; color: var(--accent); flex-shrink: 0; }
 
         .resume-cta {
-            text-align: center;
-            padding: 28px;
+            text-align: center; padding: 28px;
             background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, rgba(138,43,226,0.05) 100%);
             border: 1px dashed rgba(0,212,255,0.3);
             border-radius: 12px;
@@ -575,7 +485,7 @@
 
         .resume-cta p { color: var(--text-secondary); margin-bottom: 18px; font-size: 0.95rem; }
 
-        /* ===================== FOOTER ===================== */
+        /* ── FOOTER ── */
         footer {
             background: var(--bg-secondary);
             text-align: center;
@@ -586,199 +496,47 @@
 
         footer p { color: var(--text-secondary); }
 
-        /* ===================== ANIMATIONS ===================== */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInDown { from{opacity:0;transform:translateY(-30px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeInUp   { from{opacity:0;transform:translateY(30px)}  to{opacity:1;transform:translateY(0)} }
 
-        /* ===================== MOBILE ===================== */
-        @media (max-width: 768px) {
-            h1      { font-size: 2.5rem; }
-            .tagline { font-size: 1.2rem; }
-            h2      { font-size: 2rem; }
-            .skills-grid { grid-template-columns: 1fr; }
-
-            /* Project header stacks on mobile */
-            .project-header { flex-direction: column; }
-            .project-card   { padding: 25px; }
-
-            /* Stats stack on mobile */
-            .header-stats { flex-direction: column; }
-            .header-stat  { border-right: none; border-bottom: 1px solid rgba(0,212,255,0.15); }
-            .header-stat:last-child { border-bottom: none; }
-
-            .resume-grid  { grid-template-columns: 1fr; }
-            .contact-buttons { flex-direction: column; align-items: center; }
-            .header-node  { display: none; }
-
-            /* ---- FIX 2: workflow stays horizontal, just scrolls ---- */
-            .workflow-diagram {
-                padding: 15px 10px;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .workflow-container {
-                flex-direction: row !important;
-                flex-wrap: nowrap !important;
-                min-width: max-content;
-                padding: 10px 5px;
-                gap: 10px;
-            }
-
-            .workflow-node {
-                min-width: 110px;
-                padding: 14px 16px;
-            }
-
-            .node-icon { font-size: 1.5rem; margin-bottom: 6px; }
-            .node-label { font-size: 0.75rem; }
-
-            /* Arrow NEVER rotates */
-            .workflow-arrow {
-                font-size: 1.2rem;
-                transform: none !important;
-            }
-
-            /* Hide desktop nav, show mobile nav */
-            .nav-desktop { display: none; }
-            .nav-mobile  { display: block; }
-
-            /* ---- Mobile slide nav ---- */
-            .mobile-nav-wrapper {
-                position: relative;
-                width: 100%;
-                overflow: hidden;
-            }
-
-            .mobile-nav-track {
-                display: flex;
-                align-items: center;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-                padding: 4px 24px;
-            }
-
-            .mobile-nav-track::-webkit-scrollbar { display: none; }
-
-            .mobile-nav-item {
-                scroll-snap-align: center;
-                flex-shrink: 0;
-                padding: 10px 20px;
-                color: var(--text-secondary);
-                text-decoration: none;
-                font-weight: 600;
-                font-size: 0.95rem;
-                white-space: nowrap;
-                border-bottom: 2px solid transparent;
-                transition: color 0.25s ease, border-color 0.25s ease;
-                letter-spacing: 0.5px;
-                cursor: pointer;
-                user-select: none;
-            }
-
-            .mobile-nav-item.active {
-                color: var(--accent);
-                border-bottom-color: var(--accent);
-            }
-
-            /* Fade edges */
-            .mobile-nav-wrapper::before,
-            .mobile-nav-wrapper::after {
-                content: '';
-                position: absolute;
-                top: 0; bottom: 0;
-                width: 28px;
-                z-index: 2;
-                pointer-events: none;
-            }
-
-            .mobile-nav-wrapper::before {
-                left: 0;
-                background: linear-gradient(to right, rgba(21,26,53,0.95), transparent);
-            }
-
-            .mobile-nav-wrapper::after {
-                right: 0;
-                background: linear-gradient(to left, rgba(21,26,53,0.95), transparent);
-            }
-
-            /* Dots */
-            .nav-dots {
-                display: flex;
-                justify-content: center;
-                gap: 5px;
-                padding: 5px 0 3px;
-            }
-
-            .nav-dot {
-                width: 4px;
-                height: 4px;
-                border-radius: 50%;
-                background: var(--border);
-                transition: all 0.3s ease;
-            }
-
-            .nav-dot.active {
-                background: var(--accent);
-                width: 16px;
-                border-radius: 2px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .nav-mobile { display: none; }
-        }
-        /* ===================== PROFILE PHOTO ===================== */
+        /* ── PROFILE PHOTO ── */
         .profile-photo-wrapper {
             margin: 18px auto 22px;
-            width: 160px;
-            height: 160px;
+            width: 160px; height: 160px;
             position: relative;
             animation: fadeInDown 0.7s ease 0.1s backwards;
         }
 
         .profile-photo-wrapper::before {
             content: '';
-            position: absolute;
-            inset: -4px;
+            position: absolute; inset: -4px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--accent) 0%, #8a2be2 100%);
             z-index: 0;
             animation: spinBorder 6s linear infinite;
         }
 
-        @keyframes spinBorder {
-            0%   { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spinBorder { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
 
         .profile-photo {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
+            position: relative; z-index: 1;
+            width: 100%; height: 100%;
             border-radius: 50%;
-            object-fit: cover;
-            object-position: center top;
+            object-fit: cover; object-position: center top;
             border: 4px solid var(--bg-primary);
             display: block;
         }
 
-        /* ===================== MARQUEE SECTION ===================== */
+        /* ════════════════════════════════════════════════════════════
+           MARQUEE SYSTEM
+           The viewport clips the track and applies the fade mask.
+           The track is a raw flex row — position driven entirely by JS.
+        ════════════════════════════════════════════════════════════ */
+
         .marquee-section {
             padding: 50px 0 30px;
             margin-bottom: 60px;
-            position: relative;
-            z-index: 1;
+            position: relative; z-index: 1;
         }
 
         .marquee-section-title {
@@ -790,55 +548,48 @@
             margin-bottom: 28px;
         }
 
-        .marquee-track-wrapper {
-            overflow: hidden;
+        .marquee-viewport {
             position: relative;
+            overflow: hidden;
             margin-bottom: 22px;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
-        .marquee-track-wrapper::before,
-        .marquee-track-wrapper::after {
+        .marquee-viewport:active { cursor: grabbing; }
+
+        /*
+         * Fade mask — gradient overlay on both edges.
+         * pointer-events:none so it doesn't block drag/hover on items.
+         */
+        .marquee-viewport::before {
             content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 80px;
+            position: absolute; inset: 0;
             z-index: 2;
             pointer-events: none;
-        }
-
-        .marquee-track-wrapper::before {
-            left: 0;
-            background: linear-gradient(to right, var(--bg-primary), transparent);
-        }
-
-        .marquee-track-wrapper::after {
-            right: 0;
-            background: linear-gradient(to left, var(--bg-primary), transparent);
+            background: linear-gradient(
+                to right,
+                var(--bg-primary)    0%,
+                transparent         12%,
+                transparent         88%,
+                var(--bg-primary)  100%
+            );
         }
 
         .marquee-track {
             display: flex;
             gap: 30px;
             width: max-content;
-            animation: marqueeScroll 20s linear infinite;
-        }
-
-        .marquee-track-reverse {
-            animation-direction: reverse;
-        }
-
-        @keyframes marqueeScroll {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            will-change: transform;
+            padding: 8px 0;
         }
 
         .marquee-item {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
+            width: 60px; height: 60px;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 14px;
@@ -852,23 +603,103 @@
         }
 
         .marquee-item img {
-            width: 36px;
-            height: 36px;
+            width: 36px; height: 36px;
             object-fit: contain;
             border-radius: 6px;
+            display: block;
+            pointer-events: none;
         }
 
-        .marquee-label {
-            text-align: center;
-            font-size: 0.72rem;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            h1       { font-size: 2.5rem; }
+            .tagline { font-size: 1.2rem; }
+            h2       { font-size: 2rem; }
+            .skills-grid     { grid-template-columns: 1fr; }
+            .project-header  { flex-direction: column; }
+            .project-card    { padding: 25px; }
+            .header-stats    { flex-direction: column; }
+            .header-stat     { border-right: none; border-bottom: 1px solid rgba(0,212,255,0.15); }
+            .header-stat:last-child { border-bottom: none; }
+            .resume-grid     { grid-template-columns: 1fr; }
+            .contact-buttons { flex-direction: column; align-items: center; }
+            .header-node     { display: none; }
+
+            .workflow-diagram { padding: 15px 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .workflow-container { flex-direction: row !important; flex-wrap: nowrap !important; min-width: max-content; padding: 10px 5px; gap: 10px; }
+            .workflow-node  { min-width: 110px; padding: 14px 16px; }
+            .node-label     { font-size: 0.75rem; }
+            .workflow-arrow { font-size: 1.2rem; transform: none !important; }
+
+            .nav-desktop { display: none; }
+            .nav-mobile  { display: block; }
+
+            .mobile-nav-wrapper { position: relative; width: 100%; overflow: hidden; }
+
+            .mobile-nav-track {
+                display: flex; align-items: center;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; -ms-overflow-style: none;
+                padding: 4px 24px;
+            }
+
+            .mobile-nav-track::-webkit-scrollbar { display: none; }
+
+            .mobile-nav-item {
+                scroll-snap-align: center;
+                flex-shrink: 0;
+                padding: 10px 20px;
+                color: var(--text-secondary);
+                text-decoration: none;
+                font-weight: 600; font-size: 0.95rem;
+                white-space: nowrap;
+                border-bottom: 2px solid transparent;
+                transition: color 0.25s ease, border-color 0.25s ease;
+                letter-spacing: 0.5px;
+                cursor: pointer; user-select: none;
+            }
+
+            .mobile-nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+            .mobile-nav-wrapper::before,
+            .mobile-nav-wrapper::after {
+                content: '';
+                position: absolute; top: 0; bottom: 0;
+                width: 28px; z-index: 2; pointer-events: none;
+            }
+
+            .mobile-nav-wrapper::before { left: 0; background: linear-gradient(to right, rgba(21,26,53,0.95), transparent); }
+            .mobile-nav-wrapper::after  { right: 0; background: linear-gradient(to left,  rgba(21,26,53,0.95), transparent); }
+
+            .nav-dots { display: flex; justify-content: center; gap: 5px; padding: 5px 0 3px; }
+
+            .nav-dot {
+                width: 4px; height: 4px;
+                border-radius: 50%;
+                background: var(--border);
+                transition: all 0.3s ease;
+            }
+
+            .nav-dot.active { background: var(--accent); width: 16px; border-radius: 2px; }
+
+            .marquee-viewport::before {
+                background: linear-gradient(
+                    to right,
+                    var(--bg-primary)  0%,
+                    transparent       8%,
+                    transparent      92%,
+                    var(--bg-primary) 100%
+                );
+            }
         }
+
+        @media (min-width: 769px) { .nav-mobile { display: none; } }
     </style>
 </head>
 <body>
+
     <header>
         <div class="header-orb2"></div>
         <div class="header-nodes">
@@ -881,34 +712,21 @@
         </div>
         <div class="header-content">
             <div class="profile-badge">Available for Remote Work</div>
-	    <div class="profile-photo-wrapper">
-            <img class="profile-photo" src="https://raw.githubusercontent.com/reymancasio5-bit/reymancasio5-bit.github.io/refs/heads/main/My%20Profile.jpeg" alt="Reyman D. Casio">
+            <div class="profile-photo-wrapper">
+                <img class="profile-photo" src="https://raw.githubusercontent.com/reymancasio5-bit/reymancasio5-bit.github.io/refs/heads/main/My%20Profile.jpeg" alt="Reyman D. Casio">
             </div>
             <h1>Reyman D. Casio</h1>
             <p class="tagline">Automation Specialist & CRM Support</p>
             <div class="header-stats">
-                <div class="header-stat">
-                    <span class="stat-number">2+</span>
-                    <span class="stat-label">Years Remote XP</span>
-                </div>
-                <div class="header-stat">
-                    <span class="stat-number">90%</span>
-                    <span class="stat-label">Time Saved via Automation</span>
-                </div>
-                <div class="header-stat">
-                    <span class="stat-number">n8n</span>
-                    <span class="stat-label">Automation Platform</span>
-                </div>
-                <div class="header-stat">
-                    <span class="stat-number">5+</span>
-                    <span class="stat-label">CRM & API Integrations</span>
-                </div>
+                <div class="header-stat"><span class="stat-number">2+</span><span class="stat-label">Years Remote XP</span></div>
+                <div class="header-stat"><span class="stat-number">90%</span><span class="stat-label">Time Saved via Automation</span></div>
+                <div class="header-stat"><span class="stat-number">n8n</span><span class="stat-label">Automation Platform</span></div>
+                <div class="header-stat"><span class="stat-number">5+</span><span class="stat-label">CRM & API Integrations</span></div>
             </div>
         </div>
     </header>
 
     <nav id="mainNav">
-        <!-- Desktop Nav -->
         <ul class="nav-desktop">
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -919,7 +737,6 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
 
-        <!-- Mobile Slide Nav -->
         <div class="nav-mobile">
             <div class="mobile-nav-wrapper">
                 <div class="mobile-nav-track" id="mobileNavTrack">
@@ -934,22 +751,20 @@
             </div>
             <div class="nav-dots" id="navDots">
                 <div class="nav-dot active"></div>
-                <div class="nav-dot"></div>
-                <div class="nav-dot"></div>
-                <div class="nav-dot"></div>
-                <div class="nav-dot"></div>
-                <div class="nav-dot"></div>
-                <div class="nav-dot"></div>
+                <div class="nav-dot"></div><div class="nav-dot"></div>
+                <div class="nav-dot"></div><div class="nav-dot"></div>
+                <div class="nav-dot"></div><div class="nav-dot"></div>
             </div>
         </div>
     </nav>
 
     <div class="container">
+
         <section id="about">
             <h2>Professional Summary</h2>
             <div class="card">
-                <p style="font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8;">
-                	I design automation systems that replace repetitive manual work with scalable, AI-driven workflows. Specializing in n8n and CRM automation, I help businesses streamline operations, structure data intelligently, and build systems that support growth.
+                <p style="font-size:1.1rem;color:var(--text-secondary);line-height:1.8;">
+                    I design automation systems that replace repetitive manual work with scalable, AI-driven workflows. Specializing in n8n and CRM automation, I help businesses streamline operations, structure data intelligently, and build systems that support growth.
                 </p>
             </div>
         </section>
@@ -975,12 +790,12 @@
             <div class="card">
                 <h3>Automation & CRM Specialist (Remote)</h3>
                 <p class="date">January 2023 – 2025</p>
-                <ul style="color: var(--text-secondary); padding-left: 20px;">
-                    <li style="margin-bottom: 10px;">Designed and deployed automation workflows using n8n to streamline business operations for remote clients.</li>
-                    <li style="margin-bottom: 10px;">Built CRM systems to manage leads, sales pipelines, and customer lifecycle processes.</li>
-                    <li style="margin-bottom: 10px;">Integrated third-party tools (Telegram, Google Sheets, APIs) to automate repetitive administrative tasks.</li>
-                    <li style="margin-bottom: 10px;">Reduced manual data entry workload by implementing AI-powered automation solutions.</li>
-                    <li style="margin-bottom: 10px;">Maintained system documentation and provided technical support to clients.</li>
+                <ul style="color:var(--text-secondary);padding-left:20px;">
+                    <li style="margin-bottom:10px;">Designed and deployed automation workflows using n8n to streamline business operations for remote clients.</li>
+                    <li style="margin-bottom:10px;">Built CRM systems to manage leads, sales pipelines, and customer lifecycle processes.</li>
+                    <li style="margin-bottom:10px;">Integrated third-party tools (Telegram, Google Sheets, APIs) to automate repetitive administrative tasks.</li>
+                    <li style="margin-bottom:10px;">Reduced manual data entry workload by implementing AI-powered automation solutions.</li>
+                    <li style="margin-bottom:10px;">Maintained system documentation and provided technical support to clients.</li>
                 </ul>
             </div>
         </section>
@@ -988,7 +803,6 @@
         <section id="projects">
             <h2>Featured Automation Projects</h2>
 
-            <!-- Project 1 -->
             <div class="project-card">
                 <div class="project-header">
                     <div>
@@ -996,55 +810,27 @@
                         <p class="project-tech">n8n + AI + Telegram Bot + Google Drive + Google Sheets</p>
                     </div>
                     <div class="project-actions">
-                        <a href="#" class="btn btn-secondary" onclick="downloadJSON('receipt'); return false;">
-                            <span>📥 Download Workflow</span>
-                        </a>
+                        <a href="#" class="btn btn-secondary" onclick="downloadJSON('receipt');return false;"><span>📥 Download Workflow</span></a>
                     </div>
                 </div>
-
-                <p class="project-description">
-                    An intelligent automation system that transforms manual receipt processing into a seamless, AI-powered workflow. Users simply send receipt photos via Telegram, and the system automatically extracts data, categorizes expenses, and maintains organized financial records.
-                </p>
-
+                <p class="project-description">An intelligent automation system that transforms manual receipt processing into a seamless, AI-powered workflow. Users simply send receipt photos via Telegram, and the system automatically extracts data, categorizes expenses, and maintains organized financial records.</p>
                 <div class="workflow-diagram">
                     <div class="workflow-container">
-                        <div class="workflow-node telegram">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div>
-                            <div class="node-label">Telegram<br>Trigger</div>
-                        </div>
+                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Telegram<br>Trigger</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node telegram">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div>
-                            <div class="node-label">Get<br>File</div>
-                        </div>
+                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Get<br>File</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node drive">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg"></div>
-                            <div class="node-label">Upload to<br>Drive</div>
-                        </div>
+                        <div class="workflow-node drive"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg"></div><div class="node-label">Upload to<br>Drive</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node drive">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg"></div>
-                            <div class="node-label">Share<br>File</div>
-                        </div>
+                        <div class="workflow-node drive"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg"></div><div class="node-label">Share<br>File</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node ai">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg"></div>
-                            <div class="node-label">AI Extract<br>Data</div>
-                        </div>
+                        <div class="workflow-node ai"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg"></div><div class="node-label">AI Extract<br>Data</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node sheets">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div>
-                            <div class="node-label">Append to<br>Sheet</div>
-                        </div>
+                        <div class="workflow-node sheets"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div><div class="node-label">Append to<br>Sheet</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node telegram">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div>
-                            <div class="node-label">Send<br>Confirmation</div>
-                        </div>
+                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Send<br>Confirmation</div></div>
                     </div>
                 </div>
-
                 <ul class="project-features">
                     <li><strong>Telegram Integration:</strong> Users send receipt photos directly via Telegram bot for instant processing</li>
                     <li><strong>Cloud Storage:</strong> Automatic upload to Google Drive with secure sharing permissions</li>
@@ -1056,7 +842,6 @@
                 </ul>
             </div>
 
-            <!-- Project 2 -->
             <div class="project-card">
                 <div class="project-header">
                     <div>
@@ -1064,55 +849,27 @@
                         <p class="project-tech">n8n + Telegram Bot + Gmail + Google Sheets</p>
                     </div>
                     <div class="project-actions">
-                        <a href="#" class="btn btn-secondary" onclick="downloadJSON('invoice'); return false;">
-                            <span>📥 Download Workflow</span>
-                        </a>
+                        <a href="#" class="btn btn-secondary" onclick="downloadJSON('invoice');return false;"><span>📥 Download Workflow</span></a>
                     </div>
                 </div>
-
-                <p class="project-description">
-                    A smart accounts receivable automation that monitors invoice statuses and sends professional payment reminders via email. Triggered by simple Telegram commands, the system identifies overdue invoices, sends personalized reminders, and updates tracking records automatically.
-                </p>
-
+                <p class="project-description">A smart accounts receivable automation that monitors invoice statuses and sends professional payment reminders via email. Triggered by simple Telegram commands, the system identifies overdue invoices, sends personalized reminders, and updates tracking records automatically.</p>
                 <div class="workflow-diagram">
                     <div class="workflow-container">
-                        <div class="workflow-node telegram">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div>
-                            <div class="node-label">Telegram<br>Command</div>
-                        </div>
+                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Telegram<br>Command</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node conditional">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Curly_Brackets.svg"></div>
-                            <div class="node-label">Check<br>Command</div>
-                        </div>
+                        <div class="workflow-node conditional"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Curly_Brackets.svg"></div><div class="node-label">Check<br>Command</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node sheets">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div>
-                            <div class="node-label">Read Invoice<br>Sheet</div>
-                        </div>
+                        <div class="workflow-node sheets"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div><div class="node-label">Read Invoice<br>Sheet</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node conditional">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Curly_Brackets.svg"></div>
-                            <div class="node-label">Filter<br>Unpaid</div>
-                        </div>
+                        <div class="workflow-node conditional"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Curly_Brackets.svg"></div><div class="node-label">Filter<br>Unpaid</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node gmail">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"></div>
-                            <div class="node-label">Send Email<br>Reminder</div>
-                        </div>
+                        <div class="workflow-node gmail"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"></div><div class="node-label">Send Email<br>Reminder</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node sheets">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div>
-                            <div class="node-label">Update<br>Status</div>
-                        </div>
+                        <div class="workflow-node sheets"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div><div class="node-label">Update<br>Status</div></div>
                         <div class="workflow-arrow">→</div>
-                        <div class="workflow-node telegram">
-                            <div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div>
-                            <div class="node-label">Send<br>Report</div>
-                        </div>
+                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Send<br>Report</div></div>
                     </div>
                 </div>
-
                 <ul class="project-features">
                     <li><strong>Telegram Control:</strong> Simple "remind" command triggers the entire workflow remotely</li>
                     <li><strong>Smart Filtering:</strong> Automatically identifies unpaid invoices and excludes already-reminded customers</li>
@@ -1124,16 +881,21 @@
                     <li><strong>Impact:</strong> Reduced accounts receivable follow-up time by 90%, improved payment collection by 35%</li>
                 </ul>
             </div>
-            
         </section>
-                <!-- Marquee Section: Tech Stack -->
+
+        <!-- ════════════════════════════════════════════════════════
+             MARQUEE SECTION
+             Three rows of logos.
+             Row 1 & 3: direction left  (data-direction="1")
+             Row 2:     direction right (data-direction="-1")
+             data-speed = base px-per-frame at 60fps
+        ════════════════════════════════════════════════════════ -->
         <div class="marquee-section">
             <p class="marquee-section-title">Automated by n8n</p>
 
-            <!-- Marquee 1: n8n Nodes -->
-            <div class="marquee-track-wrapper">
-                <div class="marquee-track" id="mq1">
-                    <!-- Set 1 -->
+            <!-- Row 1 — n8n Nodes — LEFT -->
+            <div class="marquee-viewport" data-speed="0.55" data-direction="1">
+                <div class="marquee-track">
                     <div class="marquee-item" title="Telegram"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"></div>
                     <div class="marquee-item" title="Google Sheets"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"></div>
                     <div class="marquee-item" title="Google Drive"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive"></div>
@@ -1141,68 +903,38 @@
                     <div class="marquee-item" title="HTTP Request"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/HTTP_logo.png" alt="HTTP" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1006/1006771.png'"></div>
                     <div class="marquee-item" title="OpenAI"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="OpenAI"></div>
                     <div class="marquee-item" title="Webhook"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Tabler-icons_webhook.svg" alt="Webhook"></div>
-                    <div class="marquee-item" title="Airtable"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable" onerror="this.style.display='none'"></div>
-                    <div class="marquee-item" title="Slack"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack"></div>
-                    <div class="marquee-item" title="Notion"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion"></div>
-                    <div class="marquee-item" title="MySQL"><img src="https://upload.wikimedia.org/wikipedia/de/d/dd/MySQL_logo.svg" alt="MySQL"></div>
-		    <div class="marquee-item" title="Hubspot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="Hubspot"></div>
-                    <div class="marquee-item" title="Postgres"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="Postgres"></div>
-                    <!-- Set 2 (clone for seamless loop) -->
-                    <div class="marquee-item" title="Telegram"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"></div>
-                    <div class="marquee-item" title="Google Sheets"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"></div>
-                    <div class="marquee-item" title="Google Drive"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive"></div>
-                    <div class="marquee-item" title="Gmail"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"></div>
-                    <div class="marquee-item" title="HTTP Request"><img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="HTTP"></div>
-                    <div class="marquee-item" title="OpenAI"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="OpenAI"></div>
-                    <div class="marquee-item" title="Webhook"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Tabler-icons_webhook.svg" alt="Webhook"></div>
                     <div class="marquee-item" title="Airtable"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable"></div>
                     <div class="marquee-item" title="Slack"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack"></div>
                     <div class="marquee-item" title="Notion"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion"></div>
                     <div class="marquee-item" title="MySQL"><img src="https://upload.wikimedia.org/wikipedia/de/d/dd/MySQL_logo.svg" alt="MySQL"></div>
-		    <div class="marquee-item" title="Hubspot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="Hubspot"></div>
+                    <div class="marquee-item" title="HubSpot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot"></div>
                     <div class="marquee-item" title="Postgres"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="Postgres"></div>
                 </div>
             </div>
 
-            <!-- Marquee 2: Applications (reverse direction) -->
-            <div class="marquee-track-wrapper">
-                <div class="marquee-track marquee-track-reverse" id="mq2">
-                    <!-- Set 1 -->
-                    <div class="marquee-item" title="Slack"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack"></div>
-                    <div class="marquee-item" title="Discord"><img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/653714a64fd5d0b2bb4b5c84_636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg" alt="Discord" onerror="this.src='https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg'"></div>
-                    <div class="marquee-item" title="Telegram"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"></div>
-                    <div class="marquee-item" title="Gmail"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"></div>
-                    <div class="marquee-item" title="WhatsApp"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></div>
-                    <div class="marquee-item" title="Zoom"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Zoom_Logo_2022.svg/512px-Zoom_Logo_2022.svg.png" alt="Zoom"></div>
-                    <div class="marquee-item" title="Notion"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion"></div>
-                    <div class="marquee-item" title="Trello"><img src="https://cdn.worldvectorlogo.com/logos/trello.svg" alt="Trello"></div>
-                    <div class="marquee-item" title="Airtable"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable"></div>
-                    <div class="marquee-item" title="Google Meet"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg" alt="Google Meet"></div>
-                    <div class="marquee-item" title="Microsoft Teams"><img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Microsoft_Teams.png" alt="Teams"></div>
-                    <div class="marquee-item" title="Asana"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Asana_logo.svg" alt="Asana"></div>
-		    <div class="marquee-item" title="Hubspot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="Hubspot"></div>
-                    <!-- Set 2 -->
+            <!-- Row 2 — Apps — RIGHT -->
+            <div class="marquee-viewport" data-speed="0.45" data-direction="-1">
+                <div class="marquee-track">
                     <div class="marquee-item" title="Slack"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack"></div>
                     <div class="marquee-item" title="Discord"><img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg" alt="Discord"></div>
                     <div class="marquee-item" title="Telegram"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"></div>
                     <div class="marquee-item" title="Gmail"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"></div>
-		    <div class="marquee-item" title="Airtable"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable"></div>
                     <div class="marquee-item" title="WhatsApp"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></div>
                     <div class="marquee-item" title="Zoom"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Zoom_Logo_2022.svg/512px-Zoom_Logo_2022.svg.png" alt="Zoom"></div>
                     <div class="marquee-item" title="Notion"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion"></div>
                     <div class="marquee-item" title="Trello"><img src="https://cdn.worldvectorlogo.com/logos/trello.svg" alt="Trello"></div>
+                    <div class="marquee-item" title="Airtable"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable"></div>
                     <div class="marquee-item" title="Google Meet"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg" alt="Google Meet"></div>
                     <div class="marquee-item" title="Microsoft Teams"><img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Microsoft_Teams.png" alt="Teams"></div>
                     <div class="marquee-item" title="Asana"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Asana_logo.svg" alt="Asana"></div>
-		    <div class="marquee-item" title="Hubspot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="Hubspot"></div>
+                    <div class="marquee-item" title="HubSpot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot"></div>
                 </div>
             </div>
 
-            <!-- Marquee 3: AI APIs -->
-            <div class="marquee-track-wrapper">
-                <div class="marquee-track" id="mq3">
-                    <!-- Set 1 -->
-		    <div class="marquee-item" title="Hubspot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="Hubspot"></div>
+            <!-- Row 3 — AI APIs — LEFT -->
+            <div class="marquee-viewport" data-speed="0.5" data-direction="1">
+                <div class="marquee-track">
+                    <div class="marquee-item" title="HubSpot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot"></div>
                     <div class="marquee-item" title="ChatGPT / OpenAI"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"></div>
                     <div class="marquee-item" title="Claude / Anthropic"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Claude_AI_symbol.svg" alt="Claude"></div>
                     <div class="marquee-item" title="Grok / xAI"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Grok-icon.svg" alt="Grok"></div>
@@ -1213,32 +945,17 @@
                     <div class="marquee-item" title="DeepSeek"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/DeepSeek_logo.svg" alt="DeepSeek" onerror="this.parentElement.style.background='#4D6BFE';this.style.display='none'"></div>
                     <div class="marquee-item" title="Cohere"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Cohere-Logo.png" alt="Cohere" onerror="this.parentElement.style.background='#39594d';this.style.display='none'"></div>
                     <div class="marquee-item" title="Hugging Face"><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HuggingFace" onerror="this.parentElement.style.background='#ff9d00';this.style.display='none'"></div>
-		    <div class="marquee-item" title="Stability.Ai"><img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Stability_Ai_%E2%80%94_wordmark.png" alt="Stability.Ai"></div>
-		    <div class="marquee-item" title="ElevenLabs.Ai"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/ElevenLabs_Logo_04.png" alt="ElevenLabs.Ai"></div>
-                    <!-- Set 2 -->
-		    <div class="marquee-item" title="Hubspot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="Hubspot"></div>
-                    <div class="marquee-item" title="ChatGPT / OpenAI"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"></div>
-                    <div class="marquee-item" title="Claude / Anthropic"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Claude_AI_symbol.svg" alt="Claude"></div>
-                    <div class="marquee-item" title="Grok / xAI"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Grok-icon.svg" alt="Grok"></div>
-                    <div class="marquee-item" title="Google Gemini"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/512px-Google_Gemini_logo.svg.png" alt="Gemini"></div>
-                    <div class="marquee-item" title="Meta Llama"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Meta_Platforms_logo.svg" alt="Llama"></div>
-                    <div class="marquee-item" title="Mistral AI"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Mistral_AI_logo_%282025%E2%80%93%29.svg" alt="Mistral"></div>
-                    <div class="marquee-item" title="Perplexity AI"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Perplexity_AI_Turquoise_on_White.png" alt="Perplexity"></div>
-                    <div class="marquee-item" title="DeepSeek"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/DeepSeek_logo.svg" alt="DeepSeek"></div>
-                    <div class="marquee-item" title="Cohere"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Cohere-Logo.png" alt="Cohere"></div>
-                    <div class="marquee-item" title="Hugging Face"><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HuggingFace"></div>
-		    <div class="marquee-item" title="Stability.Ai"><img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Stability_Ai_%E2%80%94_wordmark.png" alt="Stability.Ai"></div>
-		    <div class="marquee-item" title="ElevenLabs.Ai"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/ElevenLabs_Logo_04.png" alt="ElevenLabs.Ai"></div>
+                    <div class="marquee-item" title="Stability AI"><img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Stability_Ai_%E2%80%94_wordmark.png" alt="Stability AI"></div>
+                    <div class="marquee-item" title="ElevenLabs"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/ElevenLabs_Logo_04.png" alt="ElevenLabs"></div>
                 </div>
             </div>
         </div>
-        
-        <!-- Education BEFORE Resume -->
+
         <section id="education">
             <h2>Education</h2>
             <div class="card">
                 <h3>Bachelor of Science in Business Administration</h3>
-                <p style="color: var(--accent); margin-bottom: 5px;">Financial Management</p>
+                <p style="color:var(--accent);margin-bottom:5px;">Financial Management</p>
                 <p class="date">North Eastern Mindanao State University | 2017 – 2023</p>
             </div>
         </section>
@@ -1246,7 +963,7 @@
         <section id="resume">
             <h2>Resume Summary</h2>
             <div class="card">
-                <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 25px;">
+                <p style="font-size:1rem;color:var(--text-secondary);line-height:1.8;margin-bottom:25px;">
                     Results-driven Automation Specialist and CRM Expert with 2+ years of remote experience. Specializes in designing n8n workflows, integrating APIs, and building AI-driven automation systems that eliminate manual tasks and accelerate business operations.
                 </p>
                 <div class="resume-grid">
@@ -1282,191 +999,293 @@
                 </div>
                 <div class="resume-cta">
                     <p>Want the full picture? Review my complete resume for detailed work history, certifications, and references.</p>
-                    <a href="https://drive.google.com/file/d/1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4/view?usp=drivesdk" class="btn">
-                        <span>📄 View Full Resume</span>
-                    </a>
+                    <a href="https://drive.google.com/file/d/1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4/view?usp=drivesdk" class="btn"><span>📄 View Full Resume</span></a>
                 </div>
             </div>
         </section>
 
         <section id="contact">
             <h2>Let's Work Together</h2>
-            <div class="card" style="text-align: center;">
-                <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 30px;">
+            <div class="card" style="text-align:center;">
+                <p style="font-size:1.1rem;color:var(--text-secondary);margin-bottom:30px;">
                     I'm available for freelance automation projects and remote opportunities. Let's discuss how I can help streamline your business processes.
                 </p>
                 <div class="contact-buttons">
-                    <a href="https://wa.me/639638291756" target="_blank" class="btn btn-whatsapp">
-                        <span>💬 WhatsApp</span>
-                    </a>
-                    <a href="mailto:reymancasio.5@gmail.com" class="btn btn-email">
-                        <span>📧 Send Email</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/reyman-casio-112ba83aa" target="_blank" class="btn btn-linkedin">
-                        <span>🔗 LinkedIn Profile</span>
-                    </a>
+                    <a href="https://wa.me/639638291756" target="_blank" class="btn btn-whatsapp"><span>💬 WhatsApp</span></a>
+                    <a href="mailto:reymancasio.5@gmail.com" class="btn btn-email"><span>📧 Send Email</span></a>
+                    <a href="https://www.linkedin.com/in/reyman-casio-112ba83aa" target="_blank" class="btn btn-linkedin"><span>🔗 LinkedIn Profile</span></a>
                 </div>
             </div>
         </section>
+
     </div>
 
     <footer>
         <p>&copy; 2026 Reyman D. Casio. All rights reserved.</p>
-        <p style="margin-top: 10px; font-size: 0.9rem;">Built with passion for automation and efficiency.</p>
+        <p style="margin-top:10px;font-size:0.9rem;">Built with passion for automation and efficiency.</p>
     </footer>
 
     <script>
-        // =============================================================
-        // UTILITY: scroll to a section's h2 heading, offset by nav bar
-        // =============================================================
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (!section) return;
+    /* ═══════════════════════════════════════════════════════════════════
+       MARQUEE ENGINE  —  requestAnimationFrame-owned position
+       ───────────────────────────────────────────────────────────────────
 
-            const nav = document.getElementById('mainNav');
-            const navHeight = nav ? nav.offsetHeight : 0;
+       Why rAF instead of CSS animation:
+       CSS animation cannot change playback rate mid-flight without
+       resetting the keyframe position. rAF owns the numeric position
+       entirely, so speed changes are instant and seamless.
 
-            // Target the h2 inside the section for precise heading scroll
-            const heading = section.querySelector('h2');
-            const target  = heading || section;
+       Seamless loop:
+       Each track's original children are cloned once, doubling the
+       strip.  When |pos| reaches exactly half the total scrollWidth
+       (= one full set of items), pos wraps back by that amount.
+       Because the second half is an exact copy of the first, the
+       visual seam is invisible.
 
-            const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 12;
-            window.scrollTo({ top, behavior: 'smooth' });
-        }
+       Smooth speed change:
+       currentSpeed lerps toward targetSpeed each frame with a fixed
+       coefficient (LERP). This creates an easing curve on every
+       hover-enter and hover-leave without any abrupt jump.
 
-        // =============================================================
-        // DESKTOP NAV — click scrolls to h2 of that section
-        // =============================================================
-        document.querySelectorAll('.nav-desktop a').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                const id = this.getAttribute('href').replace('#', '');
-                scrollToSection(id);
+       Drag:
+       On pointer/touch start, velocity is zeroed and position is
+       driven directly by pointer delta.  On release, velocity easing
+       resumes from the current position — no snap, no reset.
+
+       dt normalization:
+       Each frame's pixel delta is scaled by (dt / 16.667) so the
+       animation runs at the same apparent speed on 30 fps, 60 fps,
+       and 120 fps displays.
+    ═══════════════════════════════════════════════════════════════════ */
+
+    (function () {
+
+        const HOVER_RATIO = 0.12;
+        const LERP        = 0.055;
+
+        document.querySelectorAll('.marquee-viewport').forEach(function (viewport) {
+
+            var track     = viewport.querySelector('.marquee-track');
+            var baseSpeed = parseFloat(viewport.dataset.speed)     || 0.55;
+            var dir       = parseFloat(viewport.dataset.direction)  || 1;
+
+            Array.from(track.children).forEach(function (child) {
+                track.appendChild(child.cloneNode(true));
             });
-        });
 
-        // =============================================================
-        // SCROLL REVEAL
-        // =============================================================
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.style.opacity = '1';
-                    e.target.style.transform = 'translateY(0)';
+            var halfWidth    = track.scrollWidth / 2;
+            var pos          = 0;
+            var currentSpeed = baseSpeed;
+            var targetSpeed  = baseSpeed;
+            var isDragging   = false;
+            var isHovered    = false;
+            var dragStartX   = 0;
+            var posAtDrag    = 0;
+            var lastTs       = null;
+
+            window.addEventListener('resize', function () {
+                halfWidth = track.scrollWidth / 2;
+            });
+
+            function setX(x) {
+                track.style.transform = 'translateX(' + x + 'px)';
+            }
+
+            function wrap(p) {
+                if (!halfWidth) return p;
+                p = p % halfWidth;
+                if (p > 0) p -= halfWidth;
+                return p;
+            }
+
+            (function tick(ts) {
+                requestAnimationFrame(tick);
+
+                var dt = lastTs === null ? 16.667 : Math.min(ts - lastTs, 50);
+                lastTs = ts;
+
+                if (!isDragging) {
+                    currentSpeed += (targetSpeed - currentSpeed) * LERP;
+                    pos = wrap(pos - dir * currentSpeed * (dt / 16.667));
+                    setX(pos);
                 }
+            })(performance.now());
+
+            viewport.addEventListener('mouseenter', function () {
+                isHovered   = true;
+                targetSpeed = baseSpeed * HOVER_RATIO;
             });
-        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-        document.querySelectorAll('section').forEach(s => {
-            s.style.opacity   = '0';
-            s.style.transform = 'translateY(20px)';
-            s.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            revealObserver.observe(s);
-        });
-
-        // =============================================================
-        // MOBILE NAV
-        // =============================================================
-        const sectionIds  = ['about', 'skills', 'experience', 'projects', 'education', 'resume', 'contact'];
-        const mobileItems = document.querySelectorAll('.mobile-nav-item');
-        const navDots     = document.querySelectorAll('.nav-dot');
-        const mobileTrack = document.getElementById('mobileNavTrack');
-        const mainNav     = document.getElementById('mainNav');
-
-        // When user taps a nav item, lock out scroll-detection briefly
-        // so the highlight doesn't immediately jump to the wrong section
-        // while the smooth-scroll animation is still in progress.
-        let scrollLocked = false;
-        let lockTimer    = null;
-
-        // ---------- Set which nav item is highlighted ----------
-        function setActive(index) {
-            if (index < 0 || index >= sectionIds.length) return;
-
-            mobileItems.forEach((item, i) => item.classList.toggle('active', i === index));
-            navDots.forEach((dot,  i) => dot.classList.toggle('active',  i === index));
-
-            // Auto-centre the active tab in the sliding nav strip
-            const activeItem = mobileItems[index];
-            if (activeItem && mobileTrack) {
-                const tr = mobileTrack.getBoundingClientRect();
-                const ir = activeItem.getBoundingClientRect();
-                const target = mobileTrack.scrollLeft + ir.left - tr.left - (tr.width / 2) + (ir.width / 2);
-                mobileTrack.scrollTo({ left: target, behavior: 'smooth' });
-            }
-        }
-
-        // ---------- FIX 1 + FIX 3: tap a nav item ----------
-        mobileItems.forEach((item, index) => {
-            item.addEventListener('click', function () {
-                const id = this.getAttribute('data-section');
-
-                // Immediately highlight the tapped item (FIX 1)
-                setActive(index);
-
-                // Lock scroll-based detection so it can't override us (FIX 1)
-                scrollLocked = true;
-                clearTimeout(lockTimer);
-                lockTimer = setTimeout(() => { scrollLocked = false; }, 1400);
-
-                // Scroll to the section's h2 heading (FIX 3)
-                scrollToSection(id);
+            viewport.addEventListener('mouseleave', function () {
+                isHovered = false;
+                if (!isDragging) targetSpeed = baseSpeed;
             });
-        });
 
-        // ---------- FIX 1: scroll-position based active detection ----------
-        // Using getBoundingClientRect per section is reliable and doesn't
-        // conflict with IntersectionObserver timing quirks.
-        function getActiveIndexByScroll() {
-            const navH   = mainNav ? mainNav.offsetHeight : 60;
-            // Treat any section whose top is within the top 40% of the viewport as active
-            const trigger = navH + 40;
-
-            let best = 0;
-            sectionIds.forEach((id, i) => {
-                const el = document.getElementById(id);
-                if (!el) return;
-                const rect = el.getBoundingClientRect();
-                // Section has scrolled up past the trigger line → candidate
-                if (rect.top <= trigger) best = i;
-            });
-            return best;
-        }
-
-        function onScroll() {
-            if (scrollLocked) return;           // respect tap-lock
-            setActive(getActiveIndexByScroll());
-        }
-
-        window.addEventListener('scroll', onScroll, { passive: true });
-
-        // Set correct initial highlight on page load
-        setActive(getActiveIndexByScroll());
-
-        // =============================================================
-        // DOWNLOAD JSON
-        // =============================================================
-        function downloadJSON(project) {
-            let filename, data;
-
-            if (project === 'receipt') {
-                filename = 'Receipt_stored_via_Telegram.json';
-                data = {"name":"Receipt stored via Telegram","nodes":[{"parameters":{"updates":["message"],"additionalFields":{}},"type":"n8n-nodes-base.telegramTrigger","typeVersion":1.2,"position":[-1136,352],"id":"66796944-a1fc-4107-ac82-eb488ab7950c","name":"Telegram Trigger","webhookId":"29e6e3d8-efbd-4752-8144-453a7bf73d70","credentials":{"telegramApi":{"id":"aX7fnszZlx0mtNHF","name":"Telegram account"}}},{"parameters":{"resource":"file","fileId":"={{ $json.message.photo[0].file_id }}","additionalFields":{}},"type":"n8n-nodes-base.telegram","typeVersion":1.2,"position":[-928,352],"id":"2c7ed3ba-6cce-46ee-a7fd-5e0d74b7ab37","name":"Get a file","webhookId":"3f576baf-872b-4db9-90e4-680a9ae8f9a1","credentials":{"telegramApi":{"id":"aX7fnszZlx0mtNHF","name":"Telegram account"}}},{"parameters":{"name":"={{ $now.format('yyyy-MM-dd HH:MM:ss') }}.{{ $('Get a file').item.binary.data.fileExtension }}","driveId":{"__rl":true,"mode":"list","value":"My Drive"},"folderId":{"__rl":true,"value":"https://drive.google.com/drive/folders/1FsInKctP_SmmJCR964e3wa809htXUo_Y","mode":"url"},"options":{}},"type":"n8n-nodes-base.googleDrive","typeVersion":3,"position":[-720,352],"id":"a80a1eae-8730-4a40-9284-19520c8b5a97","name":"Upload file","credentials":{"googleDriveOAuth2Api":{"id":"5xh2cnfKhCDUHAyg","name":"Google Drive account"}}},{"parameters":{"operation":"share","fileId":{"__rl":true,"value":"={{ $json.id }}","mode":"id"},"permissionsUi":{"permissionsValues":{"role":"reader","type":"anyone"}},"options":{}},"type":"n8n-nodes-base.googleDrive","typeVersion":3,"position":[-512,352],"id":"5ac6e36a-18bc-4051-94ad-c3362d5d6a0a","name":"Share file","credentials":{"googleDriveOAuth2Api":{"id":"5xh2cnfKhCDUHAyg","name":"Google Drive account"}}}],"pinData":{},"connections":{"Telegram Trigger":{"main":[[{"node":"Get a file","type":"main","index":0}]]},"Get a file":{"main":[[{"node":"Upload file","type":"main","index":0}]]},"Upload file":{"main":[[{"node":"Share file","type":"main","index":0}]]}},"active":false,"settings":{"executionOrder":"v1","binaryMode":"separate","availableInMCP":false},"versionId":"934964f6-793d-4c0d-a415-a71bb1c56cb9","meta":{"templateCredsSetupCompleted":true,"instanceId":"993638efe77790a0a62276f882d672c9832d331dc8e9dcc7fe03bcb05ecf1885"},"id":"bORoNMHojGJaHq5d","tags":[]};
-            } else if (project === 'invoice') {
-                filename = 'Overdue_Invoice_Reminder_System.json';
-                data = {"name":"Overdue Invoice Reminder System","nodes":[{"parameters":{"documentId":{"__rl":true,"mode":"id","value":"1hpJrE9KnbarMnl8jKcgMT7wGBtEkIIPaefFe-S-xEgA"},"sheetName":{"__rl":true,"value":"gid=0","mode":"list","cachedResultName":"Sheet1","cachedResultUrl":"https://docs.google.com/spreadsheets/d/1hpJrE9KnbarMnl8jKcgMT7wGBtEkIIPaefFe-S-xEgA/edit#gid=0"},"filtersUI":{"values":[{"lookupColumn":"Status","lookupValue":"Unpaid"}]},"options":{"returnAllMatches":"returnAllMatches"}},"id":"0316685f-62e0-4a72-9d4c-1c885047e95f","name":"Read Invoice Sheet","type":"n8n-nodes-base.googleSheets","typeVersion":4.4,"position":[-1344,48],"credentials":{"googleSheetsOAuth2Api":{"id":"Z9MORW9Kn53Jyu8J","name":"Google Sheets account"}}},{"parameters":{"fieldToSplitOut":"Status","options":{}},"type":"n8n-nodes-base.splitOut","typeVersion":1,"position":[-1168,48],"id":"74523f76-b514-403f-bd2c-87c33975e5d4","name":"Split Out"},{"parameters":{"sendTo":"={{ $('Read Invoice Sheet').item.json['Customer Email'] }}","subject":"=Payment Reminder – Invoice  {{ $('Read Invoice Sheet').item.json['Invoice Number'] }}","emailType":"text","message":"=Dear {{ $('Read Invoice Sheet').item.json['Customer Name'] }},  \n\nI hope this message finds you well.  This is a friendly reminder that Invoice {{ $('Read Invoice Sheet').item.json['Invoice Number'] }} in the amount of {{ $('Read Invoice Sheet').item.json['Invoice Amount'] }} was due on {{ $('Read Invoice Sheet').item.json['Due Date'] }} and is currently outstanding. According to our records, we have not yet received payment.  If payment has already been made, please disregard this message. Otherwise, we would appreciate your prompt attention to this matter.  \n\nShould you have any questions or require any documentation, feel free to let us know.  \n\nThank you for your cooperation.  \n\nBest regards, \nReyman Casio\nBilling Department","options":{"appendAttribution":false}},"type":"n8n-nodes-base.gmail","typeVersion":2.2,"position":[-656,32],"id":"a9bf4856-b952-426d-9d1e-be20a38e6be0","name":"Send a message","webhookId":"83d62123-2a96-4735-b49e-bf306c98a16b","credentials":{"gmailOAuth2":{"id":"EndAtCz1OUUtOAB6","name":"Gmail account"}}}],"pinData":{},"connections":{},"active":false,"settings":{"executionOrder":"v1","binaryMode":"separate","availableInMCP":false},"versionId":"92b3e992-3b3b-4138-850a-3182797fd997","meta":{"templateCredsSetupCompleted":true,"instanceId":"993638efe77790a0a62276f882d672c9832d331dc8e9dcc7fe03bcb05ecf1885"},"id":"XXTpsqUGO1PgIZZr","tags":[]};
+            function startDrag(clientX) {
+                isDragging   = true;
+                dragStartX   = clientX;
+                posAtDrag    = pos;
+                currentSpeed = 0;
+                targetSpeed  = 0;
+                viewport.style.cursor = 'grabbing';
             }
 
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url  = URL.createObjectURL(blob);
-            const a    = document.createElement('a');
-            a.href     = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            function moveDrag(clientX) {
+                if (!isDragging) return;
+                pos = wrap(posAtDrag + (clientX - dragStartX));
+                setX(pos);
+            }
+
+            function endDrag() {
+                if (!isDragging) return;
+                isDragging = false;
+                viewport.style.cursor = '';
+                targetSpeed = isHovered ? baseSpeed * HOVER_RATIO : baseSpeed;
+            }
+
+            viewport.addEventListener('mousedown', function (e) {
+                e.preventDefault();
+                startDrag(e.clientX);
+            });
+
+            window.addEventListener('mousemove', function (e) { moveDrag(e.clientX); });
+            window.addEventListener('mouseup',   endDrag);
+
+            viewport.addEventListener('touchstart', function (e) {
+                startDrag(e.touches[0].clientX);
+            }, { passive: true });
+
+            viewport.addEventListener('touchmove', function (e) {
+                moveDrag(e.touches[0].clientX);
+            }, { passive: true });
+
+            viewport.addEventListener('touchend', endDrag);
+        });
+
+    })();
+
+
+    /* ═══════════════════════════════════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════════════════════════════════ */
+
+    var revealObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (e.isIntersecting) {
+                e.target.style.opacity   = '1';
+                e.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('section').forEach(function (s) {
+        s.style.opacity    = '0';
+        s.style.transform  = 'translateY(20px)';
+        s.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        revealObs.observe(s);
+    });
+
+
+    /* ═══════════════════════════════════════════════════════════════════
+       DESKTOP NAV
+    ═══════════════════════════════════════════════════════════════════ */
+
+    function scrollToSection(id) {
+        var section = document.getElementById(id);
+        if (!section) return;
+        var nav     = document.getElementById('mainNav');
+        var navH    = nav ? nav.offsetHeight : 0;
+        var heading = section.querySelector('h2');
+        var target  = heading || section;
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - navH - 12, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('.nav-desktop a').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            scrollToSection(this.getAttribute('href').replace('#', ''));
+        });
+    });
+
+
+    /* ═══════════════════════════════════════════════════════════════════
+       MOBILE NAV
+    ═══════════════════════════════════════════════════════════════════ */
+
+    var sectionIds  = ['about','skills','experience','projects','education','resume','contact'];
+    var mobileItems = document.querySelectorAll('.mobile-nav-item');
+    var navDots     = document.querySelectorAll('.nav-dot');
+    var mobileTrack = document.getElementById('mobileNavTrack');
+    var mainNav     = document.getElementById('mainNav');
+    var scrollLocked = false;
+    var lockTimer;
+
+    function setActive(idx) {
+        if (idx < 0 || idx >= sectionIds.length) return;
+        mobileItems.forEach(function (item, i) { item.classList.toggle('active', i === idx); });
+        navDots.forEach(function (dot, i)       { dot.classList.toggle('active',  i === idx); });
+        var activeItem = mobileItems[idx];
+        if (activeItem && mobileTrack) {
+            var tr = mobileTrack.getBoundingClientRect();
+            var ir = activeItem.getBoundingClientRect();
+            mobileTrack.scrollTo({ left: mobileTrack.scrollLeft + ir.left - tr.left - tr.width / 2 + ir.width / 2, behavior: 'smooth' });
         }
+    }
+
+    mobileItems.forEach(function (item, idx) {
+        item.addEventListener('click', function () {
+            setActive(idx);
+            scrollLocked = true;
+            clearTimeout(lockTimer);
+            lockTimer = setTimeout(function () { scrollLocked = false; }, 1400);
+            scrollToSection(this.getAttribute('data-section'));
+        });
+    });
+
+    function getActiveIdx() {
+        var navH    = mainNav ? mainNav.offsetHeight : 60;
+        var trigger = navH + 40;
+        var best    = 0;
+        sectionIds.forEach(function (id, i) {
+            var el = document.getElementById(id);
+            if (el && el.getBoundingClientRect().top <= trigger) best = i;
+        });
+        return best;
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!scrollLocked) setActive(getActiveIdx());
+    }, { passive: true });
+
+    setActive(getActiveIdx());
+
+
+    /* ═══════════════════════════════════════════════════════════════════
+       DOWNLOAD JSON
+    ═══════════════════════════════════════════════════════════════════ */
+
+    function downloadJSON(project) {
+        var filename, data;
+
+        if (project === 'receipt') {
+            filename = 'Receipt_stored_via_Telegram.json';
+            data = {"name":"Receipt stored via Telegram","nodes":[{"parameters":{"updates":["message"],"additionalFields":{}},"type":"n8n-nodes-base.telegramTrigger","typeVersion":1.2,"position":[-1136,352],"id":"66796944-a1fc-4107-ac82-eb488ab7950c","name":"Telegram Trigger","webhookId":"29e6e3d8-efbd-4752-8144-453a7bf73d70","credentials":{"telegramApi":{"id":"aX7fnszZlx0mtNHF","name":"Telegram account"}}},{"parameters":{"resource":"file","fileId":"={{ $json.message.photo[0].file_id }}","additionalFields":{}},"type":"n8n-nodes-base.telegram","typeVersion":1.2,"position":[-928,352],"id":"2c7ed3ba-6cce-46ee-a7fd-5e0d74b7ab37","name":"Get a file","webhookId":"3f576baf-872b-4db9-90e4-680a9ae8f9a1","credentials":{"telegramApi":{"id":"aX7fnszZlx0mtNHF","name":"Telegram account"}}},{"parameters":{"name":"={{ $now.format('yyyy-MM-dd HH:MM:ss') }}.{{ $('Get a file').item.binary.data.fileExtension }}","driveId":{"__rl":true,"mode":"list","value":"My Drive"},"folderId":{"__rl":true,"value":"https://drive.google.com/drive/folders/1FsInKctP_SmmJCR964e3wa809htXUo_Y","mode":"url"},"options":{}},"type":"n8n-nodes-base.googleDrive","typeVersion":3,"position":[-720,352],"id":"a80a1eae-8730-4a40-9284-19520c8b5a97","name":"Upload file","credentials":{"googleDriveOAuth2Api":{"id":"5xh2cnfKhCDUHAyg","name":"Google Drive account"}}},{"parameters":{"operation":"share","fileId":{"__rl":true,"value":"={{ $json.id }}","mode":"id"},"permissionsUi":{"permissionsValues":{"role":"reader","type":"anyone"}},"options":{}},"type":"n8n-nodes-base.googleDrive","typeVersion":3,"position":[-512,352],"id":"5ac6e36a-18bc-4051-94ad-c3362d5d6a0a","name":"Share file","credentials":{"googleDriveOAuth2Api":{"id":"5xh2cnfKhCDUHAyg","name":"Google Drive account"}}}],"pinData":{},"connections":{"Telegram Trigger":{"main":[[{"node":"Get a file","type":"main","index":0}]]},"Get a file":{"main":[[{"node":"Upload file","type":"main","index":0}]]},"Upload file":{"main":[[{"node":"Share file","type":"main","index":0}]]}},"active":false,"settings":{"executionOrder":"v1","binaryMode":"separate","availableInMCP":false},"versionId":"934964f6-793d-4c0d-a415-a71bb1c56cb9","meta":{"templateCredsSetupCompleted":true,"instanceId":"993638efe77790a0a62276f882d672c9832d331dc8e9dcc7fe03bcb05ecf1885"},"id":"bORoNMHojGJaHq5d","tags":[]};
+        } else if (project === 'invoice') {
+            filename = 'Overdue_Invoice_Reminder_System.json';
+            data = {"name":"Overdue Invoice Reminder System","nodes":[{"parameters":{"documentId":{"__rl":true,"mode":"id","value":"1hpJrE9KnbarMnl8jKcgMT7wGBtEkIIPaefFe-S-xEgA"},"sheetName":{"__rl":true,"value":"gid=0","mode":"list","cachedResultName":"Sheet1","cachedResultUrl":"https://docs.google.com/spreadsheets/d/1hpJrE9KnbarMnl8jKcgMT7wGBtEkIIPaefFe-S-xEgA/edit#gid=0"},"filtersUI":{"values":[{"lookupColumn":"Status","lookupValue":"Unpaid"}]},"options":{"returnAllMatches":"returnAllMatches"}},"id":"0316685f-62e0-4a72-9d4c-1c885047e95f","name":"Read Invoice Sheet","type":"n8n-nodes-base.googleSheets","typeVersion":4.4,"position":[-1344,48],"credentials":{"googleSheetsOAuth2Api":{"id":"Z9MORW9Kn53Jyu8J","name":"Google Sheets account"}}},{"parameters":{"fieldToSplitOut":"Status","options":{}},"type":"n8n-nodes-base.splitOut","typeVersion":1,"position":[-1168,48],"id":"74523f76-b514-403f-bd2c-87c33975e5d4","name":"Split Out"},{"parameters":{"sendTo":"={{ $('Read Invoice Sheet').item.json['Customer Email'] }}","subject":"=Payment Reminder – Invoice  {{ $('Read Invoice Sheet').item.json['Invoice Number'] }}","emailType":"text","message":"=Dear {{ $('Read Invoice Sheet').item.json['Customer Name'] }},  \n\nI hope this message finds you well.  This is a friendly reminder that Invoice {{ $('Read Invoice Sheet').item.json['Invoice Number'] }} in the amount of {{ $('Read Invoice Sheet').item.json['Invoice Amount'] }} was due on {{ $('Read Invoice Sheet').item.json['Due Date'] }} and is currently outstanding. According to our records, we have not yet received payment.  If payment has already been made, please disregard this message. Otherwise, we would appreciate your prompt attention to this matter.  \n\nShould you have any questions or require any documentation, feel free to let us know.  \n\nThank you for your cooperation.  \n\nBest regards, \nReyman Casio\nBilling Department","options":{"appendAttribution":false}},"type":"n8n-nodes-base.gmail","typeVersion":2.2,"position":[-656,32],"id":"a9bf4856-b952-426d-9d1e-be20a38e6be0","name":"Send a message","webhookId":"83d62123-2a96-4735-b49e-bf306c98a16b","credentials":{"gmailOAuth2":{"id":"EndAtCz1OUUtOAB6","name":"Gmail account"}}}],"pinData":{},"connections":{},"active":false,"settings":{"executionOrder":"v1","binaryMode":"separate","availableInMCP":false},"versionId":"92b3e992-3b3b-4138-850a-3182797fd997","meta":{"templateCredsSetupCompleted":true,"instanceId":"993638efe77790a0a62276f882d672c9832d331dc8e9dcc7fe03bcb05ecf1885"},"id":"XXTpsqUGO1PgIZZr","tags":[]};
+        }
+
+        var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        var url  = URL.createObjectURL(blob);
+        var a    = document.createElement('a');
+        a.href   = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
     </script>
+
 </body>
 </html>
