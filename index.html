@@ -4,452 +4,416 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reyman D. Casio — Automation Specialist</title>
+  <meta name="description" content="Automation Specialist & CRM Support — n8n, API, AI Workflows" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- Animated background -->
-  <div class="bg-canvas" id="bgCanvas">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <!-- Glassdrop water-drop blur elements -->
-    <div class="glassdrop gd-1"></div>
-    <div class="glassdrop gd-2"></div>
-    <div class="glassdrop gd-3"></div>
-    <div class="glassdrop gd-4"></div>
-    <div class="glassdrop gd-5"></div>
+<!-- THREE.JS RAIN CANVAS -->
+<canvas id="rain-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="navbar" class="glass-nav">
+  <div class="nav-brand">
+    <span class="brand-accent">R</span>EYMAN
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="#skills" class="nav-link">Skills</a></li>
+    <li><a href="#experience" class="nav-link">Experience</a></li>
+    <li><a href="#projects" class="nav-link">Projects</a></li>
+    <li><a href="#education" class="nav-link">Education</a></li>
+    <li><a href="#resume" class="nav-link">Resume</a></li>
+    <li><a href="#contact" class="nav-link glass-btn-nav">Contact</a></li>
+  </ul>
+</nav>
 
-  <!-- Cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-trail" id="cursorTrail"></div>
-
-  <!-- ═══════════ NAV ═══════════ -->
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo">RDC<span class="dot">.</span></a>
-      <ul class="nav-links">
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#experience" class="nav-link">Experience</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#education" class="nav-link">Education</a></li>
-        <li><a href="#resume" class="nav-link">Resume</a></li>
-        <li><a href="#contact" class="nav-link cta-link">Contact</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+<!-- HERO -->
+<section id="hero" class="hero-section">
+  <div class="hero-badges">
+    <span class="badge">🤖 n8n Automation</span>
+    <span class="badge">📊 CRM Pipeline</span>
+    <span class="badge">📧 Gmail Integration</span>
+    <span class="badge">🔮 AI Agent</span>
+    <span class="badge">☁️ Google Drive</span>
+    <span class="badge">⚡ API Webhook</span>
+  </div>
+  <div class="availability-tag">
+    <span class="pulse-dot"></span>
+    Available for Remote Work
+  </div>
+  <div class="hero-inner">
+    <div class="hero-photo-wrap">
+      <div class="photo-ring"></div>
+      <img src="https://raw.githubusercontent.com/reymancasio5-bit/reymancasio5-bit.github.io/refs/heads/main/My%20Profile.jpeg" alt="Reyman D. Casio" class="hero-photo" />
     </div>
-  </nav>
+    <div class="hero-text">
+      <h1 class="hero-name">Reyman D. Casio</h1>
+      <p class="hero-title">Automation Specialist &amp; CRM Support</p>
+      <div class="hero-stats">
+        <div class="stat glass-card-mini">
+          <span class="stat-num" data-count="2">0</span><span class="stat-plus">+</span>
+          <span class="stat-label">Years Remote XP</span>
+        </div>
+        <div class="stat glass-card-mini">
+          <span class="stat-num" data-count="90">0</span><span class="stat-plus">%</span>
+          <span class="stat-label">Time Saved via Automation</span>
+        </div>
+        <div class="stat glass-card-mini">
+          <span class="stat-text">n8n</span>
+          <span class="stat-label">Automation Platform</span>
+        </div>
+        <div class="stat glass-card-mini">
+          <span class="stat-num" data-count="5">0</span><span class="stat-plus">+</span>
+          <span class="stat-label">CRM &amp; API Integrations</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="#projects" class="glass-btn primary-btn">View Projects</a>
+        <a href="#contact" class="glass-btn secondary-btn">Let's Talk</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- Mobile menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="#about" class="mob-link">About</a></li>
-      <li><a href="#skills" class="mob-link">Skills</a></li>
-      <li><a href="#experience" class="mob-link">Experience</a></li>
-      <li><a href="#projects" class="mob-link">Projects</a></li>
-      <li><a href="#education" class="mob-link">Education</a></li>
-      <li><a href="#resume" class="mob-link">Resume</a></li>
-      <li><a href="#contact" class="mob-link">Contact</a></li>
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <h2 class="section-title" data-label="01">Professional Summary</h2>
+    <div class="glass-card about-card">
+      <p>I design automation systems that replace repetitive manual work with scalable, AI-driven workflows. Specializing in n8n and CRM automation, I help businesses streamline operations, structure data intelligently, and build systems that support growth.</p>
+    </div>
+    <h3 class="sub-title">Core Competencies</h3>
+    <div class="competency-grid">
+      <div class="glass-card comp-item">Workflow Automation (n8n)</div>
+      <div class="glass-card comp-item">CRM Management &amp; Pipeline Optimization</div>
+      <div class="glass-card comp-item">API Integration &amp; Webhooks</div>
+      <div class="glass-card comp-item">AI Agent Implementation</div>
+      <div class="glass-card comp-item">Data Entry Automation</div>
+      <div class="glass-card comp-item">Google Sheets Automation</div>
+      <div class="glass-card comp-item">Telegram Bot Integration</div>
+      <div class="glass-card comp-item">Process Documentation</div>
+      <div class="glass-card comp-item">Microsoft Excel (Advanced)</div>
+      <div class="glass-card comp-item">Client Communication &amp; Remote Support</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS / TECH STACK -->
+<section id="skills" class="section">
+  <div class="container">
+    <h2 class="section-title" data-label="02">Tech Stack</h2>
+
+    <div class="stack-group">
+      <h3 class="stack-label">⚡ Automation &amp; Integration</h3>
+      <div class="icon-marquee-wrap">
+        <div class="icon-marquee">
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets" /><span>Sheets</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive" /><span>Drive</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" /><span>Gmail</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" /><span>Telegram</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/HTTP_logo.png" alt="HTTP" /><span>HTTP</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Tabler-icons_webhook.svg" alt="Webhook" /><span>Webhook</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable" /><span>Airtable</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack" /><span>Slack</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" /><span>Notion</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/de/d/dd/MySQL_logo.svg" alt="MySQL" /><span>MySQL</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot" /><span>HubSpot</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="Postgres" /><span>Postgres</span></div>
+          <!-- Duplicate for seamless loop -->
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets" /><span>Sheets</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive" /><span>Drive</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" /><span>Gmail</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" /><span>Telegram</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/HTTP_logo.png" alt="HTTP" /><span>HTTP</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Tabler-icons_webhook.svg" alt="Webhook" /><span>Webhook</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-group">
+      <h3 class="stack-label">💬 Communication &amp; Project Tools</h3>
+      <div class="icon-marquee-wrap reverse">
+        <div class="icon-marquee reverse-anim">
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" /><span>WhatsApp</span></div>
+          <div class="icon-item"><img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg" alt="Discord" /><span>Discord</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Zoom_Logo_2022.svg/512px-Zoom_Logo_2022.svg.png" alt="Zoom" /><span>Zoom</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Microsoft_Teams.png" alt="Teams" /><span>Teams</span></div>
+          <div class="icon-item"><img src="https://cdn.worldvectorlogo.com/logos/trello.svg" alt="Trello" /><span>Trello</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Asana_logo.svg" alt="Asana" /><span>Asana</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg" alt="Google Meet" /><span>Meet</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" /><span>Notion</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot" /><span>HubSpot</span></div>
+          <!-- Duplicate -->
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" /><span>WhatsApp</span></div>
+          <div class="icon-item"><img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg" alt="Discord" /><span>Discord</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Zoom_Logo_2022.svg/512px-Zoom_Logo_2022.svg.png" alt="Zoom" /><span>Zoom</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Microsoft_Teams.png" alt="Teams" /><span>Teams</span></div>
+          <div class="icon-item"><img src="https://cdn.worldvectorlogo.com/logos/trello.svg" alt="Trello" /><span>Trello</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-group">
+      <h3 class="stack-label">🤖 AI Models</h3>
+      <div class="icon-marquee-wrap">
+        <div class="icon-marquee">
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" /><span>ChatGPT</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Claude_AI_symbol.svg" alt="Claude" /><span>Claude</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Grok-icon.svg" alt="Grok" /><span>Grok</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/512px-Google_Gemini_logo.svg.png" alt="Gemini" /><span>Gemini</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Meta_Platforms_logo.svg" alt="Llama" /><span>Llama</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Mistral_AI_logo_%282025%E2%80%93%29.svg" alt="Mistral" /><span>Mistral</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Perplexity_AI_Turquoise_on_White.png" alt="Perplexity" /><span>Perplexity</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/DeepSeek_logo.svg" alt="DeepSeek" /><span>DeepSeek</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Cohere-Logo.png" alt="Cohere" /><span>Cohere</span></div>
+          <div class="icon-item"><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HuggingFace" /><span>HuggingFace</span></div>
+          <!-- Duplicate -->
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" /><span>ChatGPT</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Claude_AI_symbol.svg" alt="Claude" /><span>Claude</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Grok-icon.svg" alt="Grok" /><span>Grok</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/512px-Google_Gemini_logo.svg.png" alt="Gemini" /><span>Gemini</span></div>
+          <div class="icon-item"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Meta_Platforms_logo.svg" alt="Llama" /><span>Llama</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="container">
+    <h2 class="section-title" data-label="03">Professional Experience</h2>
+    <div class="glass-card exp-card">
+      <div class="exp-header">
+        <div>
+          <h3 class="exp-title">Automation &amp; CRM Specialist</h3>
+          <p class="exp-company">Remote — Freelance</p>
+        </div>
+        <span class="exp-date glass-tag">Jan 2023 – 2025</span>
+      </div>
+      <ul class="exp-list">
+        <li>Designed and deployed automation workflows using n8n to streamline business operations for remote clients.</li>
+        <li>Built CRM systems to manage leads, sales pipelines, and customer lifecycle processes.</li>
+        <li>Integrated third-party tools (Telegram, Google Sheets, APIs) to automate repetitive administrative tasks.</li>
+        <li>Reduced manual data entry workload by implementing AI-powered automation solutions.</li>
+        <li>Maintained system documentation and provided technical support to clients.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="container">
+    <h2 class="section-title" data-label="04">Featured Automation Projects</h2>
+
+    <!-- Project 1 -->
+    <div class="glass-card project-card" data-modal="modal-receipt">
+      <div class="project-badge">n8n + AI + Telegram + Drive + Sheets</div>
+      <h3 class="project-title">Receipt Data Entry Automation</h3>
+      <p class="project-desc">An intelligent automation system that transforms manual receipt processing into a seamless, AI-powered workflow. Users send receipt photos via Telegram and the system auto-extracts and logs data.</p>
+      <div class="workflow-flow">
+        <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" /><span>Telegram Trigger</span></div>
+        <div class="wf-arrow">→</div>
+        <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Drive" /><span>Upload Drive</span></div>
+        <div class="wf-arrow">→</div>
+        <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg" alt="AI" /><span>AI Extract</span></div>
+        <div class="wf-arrow">→</div>
+        <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Sheets" /><span>Log Sheet</span></div>
+      </div>
+      <div class="project-impact">⚡ 5 min → 10 sec per receipt · 100% manual entry eliminated</div>
+      <button class="glass-btn view-btn" data-modal="modal-receipt">↗ View Details</button>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="glass-card project-card" data-modal="modal-invoice">
+      <div class="project-badge">n8n + Telegram + Gmail + Sheets</div>
+      <h3 class="project-title">Overdue Invoice Reminder System</h3>
+      <p class="project-desc">A smart accounts receivable automation that monitors invoice statuses and sends professional payment reminders via email. Triggered by simple Telegram commands.</p>
+      <div class="workflow-flow">
+        <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" /><span>Telegram Cmd</span></div>
+        <div class="wf-arrow">→</div>
+        <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Sheets" /><span>Filter Unpaid</span></div>
+        <div class="wf-arrow">→</div>
+        <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" /><span>Send Email</span></div>
+        <div class="wf-arrow">→</div>
+        <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" /><span>Send Report</span></div>
+      </div>
+      <div class="project-impact">⚡ 90% less follow-up time · 35% better payment collection</div>
+      <button class="glass-btn view-btn" data-modal="modal-invoice">↗ View Details</button>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="section">
+  <div class="container">
+    <h2 class="section-title" data-label="05">Education</h2>
+    <div class="glass-card edu-card">
+      <div class="edu-icon">🎓</div>
+      <div class="edu-info">
+        <h3>Bachelor of Science in Business Administration</h3>
+        <p class="edu-major">Financial Management</p>
+        <p class="edu-school">North Eastern Mindanao State University</p>
+        <span class="glass-tag">2017 – 2023</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume" class="section">
+  <div class="container">
+    <h2 class="section-title" data-label="06">Resume</h2>
+    <div class="glass-card resume-card" id="resume-card">
+      <div class="resume-preview-wrap" id="resume-trigger">
+        <img src="https://drive.google.com/thumbnail?id=1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4&sz=w1600" alt="Resume Preview" class="resume-thumb" loading="lazy" />
+        <div class="resume-overlay">
+          <span>Click to Preview</span>
+        </div>
+      </div>
+      <div class="resume-details">
+        <h3>Resume Summary</h3>
+        <p>Results-driven Automation Specialist and CRM Expert with 2+ years of remote experience. Specializes in designing n8n workflows, integrating APIs, and building AI-driven automation systems.</p>
+        <div class="resume-highlights">
+          <div class="highlight-col">
+            <h4>💼 Experience Highlights</h4>
+            <ul>
+              <li>CRM Agent &amp; Automation Specialist (Remote) — 2+ years</li>
+              <li>Workflow design using n8n, Zapier &amp; Make</li>
+              <li>Customer pipeline management &amp; lead tracking</li>
+              <li>AI agent implementation for business automation</li>
+            </ul>
+          </div>
+          <div class="highlight-col">
+            <h4>🛠 Key Technical Skills</h4>
+            <ul>
+              <li>n8n Automation — Advanced</li>
+              <li>CRM Management &amp; Pipeline Optimization</li>
+              <li>Google Workspace (Sheets, Drive, Gmail)</li>
+              <li>Telegram Bot &amp; API Webhooks</li>
+            </ul>
+          </div>
+          <div class="highlight-col">
+            <h4>📈 Key Achievements</h4>
+            <ul>
+              <li>Reduced manual follow-up time by 90% via automation</li>
+              <li>Improved payment collection rate by 35%</li>
+              <li>Built real-time receipt capture system</li>
+              <li>Delivered multiple end-to-end automation workflows</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://drive.google.com/file/d/1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4/view?usp=sharing" target="_blank" class="glass-btn primary-btn">📄 View Full Resume</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="section-title" data-label="07">Let's Work Together</h2>
+    <p class="contact-sub">I'm available for freelance automation projects and remote opportunities. Let's discuss how I can help streamline your business processes.</p>
+    <div class="contact-links">
+      <a href="https://wa.me/639638291756" target="_blank" class="glass-btn contact-btn whatsapp">💬 WhatsApp</a>
+      <a href="mailto:reymancasio@gmail.com" class="glass-btn contact-btn email">📧 Send Email</a>
+      <a href="https://www.linkedin.com/in/reyman-casio-112ba83aa" target="_blank" class="glass-btn contact-btn linkedin">🔗 LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 Reyman D. Casio. All rights reserved.</p>
+  <p class="footer-sub">Built with passion for automation and efficiency.</p>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-receipt" role="dialog" aria-modal="true">
+  <div class="glass-card modal-content">
+    <button class="modal-close" data-close="modal-receipt">✕</button>
+    <h3>Receipt Data Entry Automation</h3>
+    <p class="modal-badge">n8n + AI + Telegram Bot + Google Drive + Google Sheets</p>
+    <a href="#" class="glass-btn small-btn">📥 Download Workflow</a>
+    <p>An intelligent automation system that transforms manual receipt processing into a seamless, AI-powered workflow. Users simply send receipt photos via Telegram, and the system automatically extracts data, categorizes expenses, and maintains organized financial records.</p>
+    <div class="workflow-flow modal-flow">
+      <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" /><span>Telegram Trigger</span></div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" /><span>Get File</span></div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Drive" /><span>Upload Drive</span></div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg" alt="AI" /><span>AI Extract</span></div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Sheets" /><span>Append Sheet</span></div>
+    </div>
+    <img src="https://drive.google.com/thumbnail?id=1IUhWV0wo-0269Vdw1GJXwpDFyKA_IpR9&sz=w1600" alt="Receipt Automation Workflow" class="modal-img" loading="lazy" />
+    <ul class="modal-list">
+      <li><strong>Telegram Integration:</strong> Users send receipt photos directly via Telegram bot for instant processing</li>
+      <li><strong>Cloud Storage:</strong> Automatic upload to Google Drive with secure sharing permissions</li>
+      <li><strong>AI-Powered OCR:</strong> GPT-4 extracts date, vendor, amount, tax, payment method, and expense category</li>
+      <li><strong>Structured Data Output:</strong> Automatic JSON parsing validates and normalizes extracted information</li>
+      <li><strong>Automated Logging:</strong> Data appended to Google Sheets with timestamps and categorization</li>
+      <li><strong>Instant Feedback:</strong> Confirmation message sent to user with verification link</li>
+      <li><strong>Impact:</strong> Eliminated 100% of manual data entry, reduced processing time from 5 minutes to 10 seconds per receipt</li>
     </ul>
   </div>
+</div>
 
-  <!-- ═══════════ HERO ═══════════ -->
-  <section class="hero" id="hero">
-    <div class="hero-content">
-      <div class="hero-badge glass-pill reveal">
-        <span class="pulse-dot"></span>
-        Available for Remote Work
-      </div>
-
-      <h1 class="hero-name reveal">
-        <span class="name-line">Reyman</span>
-        <span class="name-line accent-line">D. Casio</span>
-      </h1>
-      <p class="hero-title reveal">Automation Specialist <span class="amp">&</span> CRM Expert</p>
-      <p class="hero-sub reveal">I design AI-driven workflows that eliminate manual work,<br class="br-desk"> streamline operations, and scale businesses effortlessly.</p>
-
-      <div class="hero-stats reveal">
-        <div class="stat-card glass">
-          <span class="stat-num" data-target="2">0</span><span class="stat-plus">+</span>
-          <p>Years Remote XP</p>
-        </div>
-        <div class="stat-card glass">
-          <span class="stat-num" data-target="90">0</span><span class="stat-plus">%</span>
-          <p>Time Saved</p>
-        </div>
-        <div class="stat-card glass">
-          <span class="stat-label">n8n</span>
-          <p>Primary Platform</p>
-        </div>
-        <div class="stat-card glass">
-          <span class="stat-num" data-target="5">0</span><span class="stat-plus">+</span>
-          <p>CRM & API Integrations</p>
-        </div>
-      </div>
-
-      <div class="hero-actions reveal">
-        <a href="#projects" class="btn btn-primary glass-btn">View Projects</a>
-        <a href="#contact" class="btn btn-ghost">Let's Talk →</a>
-      </div>
+<div class="modal-overlay" id="modal-invoice" role="dialog" aria-modal="true">
+  <div class="glass-card modal-content">
+    <button class="modal-close" data-close="modal-invoice">✕</button>
+    <h3>Overdue Invoice Reminder System</h3>
+    <p class="modal-badge">n8n + Telegram Bot + Gmail + Google Sheets</p>
+    <a href="#" class="glass-btn small-btn">📥 Download Workflow</a>
+    <p>A smart accounts receivable automation that monitors invoice statuses and sends professional payment reminders via email. Triggered by simple Telegram commands, the system identifies overdue invoices, sends personalized reminders, and updates tracking records automatically.</p>
+    <div class="workflow-flow modal-flow">
+      <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" /><span>Telegram Cmd</span></div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Sheets" /><span>Read Sheet</span></div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" /><span>Send Email</span></div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Sheets" /><span>Update Status</span></div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" /><span>Send Report</span></div>
     </div>
+    <img src="https://drive.google.com/thumbnail?id=13iT4iahn-eTyQixmjvaiK--1pjZFrJsu&sz=w1600" alt="Invoice Reminder Workflow" class="modal-img" loading="lazy" />
+    <ul class="modal-list">
+      <li><strong>Telegram Control:</strong> Simple "remind" command triggers the entire workflow remotely</li>
+      <li><strong>Smart Filtering:</strong> Automatically identifies unpaid invoices and excludes already-reminded customers</li>
+      <li><strong>Personalized Emails:</strong> Dynamic email generation with customer name, invoice number, amount, and due date</li>
+      <li><strong>Professional Templates:</strong> Polite, professional reminder messages maintain good customer relationships</li>
+      <li><strong>Status Tracking:</strong> Automatic updates to Google Sheets mark reminder status and timestamps</li>
+      <li><strong>Batch Processing:</strong> Handles multiple overdue invoices in a single workflow execution</li>
+      <li><strong>Real-time Reporting:</strong> Sends summary to Telegram showing number of reminders sent</li>
+      <li><strong>Impact:</strong> Reduced accounts receivable follow-up time by 90%, improved payment collection by 35%</li>
+    </ul>
+  </div>
+</div>
 
-    <div class="hero-visual reveal">
-      <div class="profile-ring">
-        <div class="ring r1"></div>
-        <div class="ring r2"></div>
-        <div class="ring r3"></div>
-        <div class="profile-img-wrap glass">
-          <img src="https://raw.githubusercontent.com/reymancasio5-bit/reymancasio5-bit.github.io/refs/heads/main/My%20Profile.jpeg" alt="Reyman D. Casio" class="profile-img" />
-        </div>
-      </div>
+<div class="modal-overlay" id="modal-resume" role="dialog" aria-modal="true">
+  <div class="glass-card modal-content">
+    <button class="modal-close" data-close="modal-resume">✕</button>
+    <img src="https://drive.google.com/thumbnail?id=1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4&sz=w1600" alt="Resume Full View" class="modal-img" loading="lazy" />
+    <a href="https://drive.google.com/file/d/1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4/view?usp=sharing" target="_blank" class="glass-btn primary-btn">📄 Open Full Resume</a>
+  </div>
+</div>
 
-      <!-- Floating tech pills -->
-      <div class="tech-float f1 glass-pill">🤖 n8n</div>
-      <div class="tech-float f2 glass-pill">📊 CRM</div>
-      <div class="tech-float f3 glass-pill">⚡ API</div>
-      <div class="tech-float f4 glass-pill">🔮 AI Agent</div>
-    </div>
-  </section>
-
-  <!-- ═══════════ ABOUT ═══════════ -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">01 / About</span>
-        <h2 class="section-title">Professional Summary</h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-text glass-card reveal">
-          <p>I design automation systems that <strong>replace repetitive manual work</strong> with scalable, AI-driven workflows. Specializing in n8n and CRM automation, I help businesses streamline operations, structure data intelligently, and build systems that support growth.</p>
-          <p>With a foundation in Financial Management and hands-on remote experience, I bridge the gap between business logic and technical automation — turning complex processes into elegant, self-running workflows.</p>
-        </div>
-        <div class="about-competencies reveal">
-          <h3>Core Competencies</h3>
-          <div class="comp-grid">
-            <div class="comp-item glass">Workflow Automation (n8n)</div>
-            <div class="comp-item glass">CRM Management & Pipeline</div>
-            <div class="comp-item glass">API Integration & Webhooks</div>
-            <div class="comp-item glass">AI Agent Implementation</div>
-            <div class="comp-item glass">Data Entry Automation</div>
-            <div class="comp-item glass">Google Sheets Automation</div>
-            <div class="comp-item glass">Telegram Bot Integration</div>
-            <div class="comp-item glass">Process Documentation</div>
-            <div class="comp-item glass">Microsoft Excel (Advanced)</div>
-            <div class="comp-item glass">Client Communication</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ SKILLS ═══════════ -->
-  <section class="section" id="skills">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">02 / Skills</span>
-        <h2 class="section-title">Tech Ecosystem</h2>
-      </div>
-
-      <div class="skills-tabs reveal">
-        <button class="tab-btn active" data-tab="automation">Automation</button>
-        <button class="tab-btn" data-tab="communication">Communication</button>
-        <button class="tab-btn" data-tab="productivity">Productivity</button>
-        <button class="tab-btn" data-tab="ai">AI Models</button>
-      </div>
-
-      <div class="tab-content active" id="tab-automation">
-        <div class="logo-scroll-wrap">
-          <div class="logo-scroll">
-            <div class="logo-item glass" title="n8n"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Tabler-icons_webhook.svg" alt="n8n"><span>n8n</span></div>
-            <div class="logo-item glass" title="Google Sheets"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Sheets"><span>Sheets</span></div>
-            <div class="logo-item glass" title="Google Drive"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Drive"><span>Drive</span></div>
-            <div class="logo-item glass" title="Gmail"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"><span>Gmail</span></div>
-            <div class="logo-item glass" title="Airtable"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable"><span>Airtable</span></div>
-            <div class="logo-item glass" title="HubSpot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot"><span>HubSpot</span></div>
-            <div class="logo-item glass" title="MySQL"><img src="https://upload.wikimedia.org/wikipedia/de/d/dd/MySQL_logo.svg" alt="MySQL"><span>MySQL</span></div>
-            <div class="logo-item glass" title="PostgreSQL"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="Postgres"><span>Postgres</span></div>
-            <div class="logo-item glass" title="Notion"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion"><span>Notion</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-content" id="tab-communication">
-        <div class="logo-scroll-wrap">
-          <div class="logo-scroll">
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"><span>Telegram</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack"><span>Slack</span></div>
-            <div class="logo-item glass"><img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg" alt="Discord"><span>Discord</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"><span>WhatsApp</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"><span>Gmail</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg" alt="Meet"><span>Meet</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Microsoft_Teams.png" alt="Teams"><span>Teams</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Zoom_Logo_2022.svg/512px-Zoom_Logo_2022.svg.png" alt="Zoom"><span>Zoom</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-content" id="tab-productivity">
-        <div class="logo-scroll-wrap">
-          <div class="logo-scroll">
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion"><span>Notion</span></div>
-            <div class="logo-item glass"><img src="https://cdn.worldvectorlogo.com/logos/trello.svg" alt="Trello"><span>Trello</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable"><span>Airtable</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Asana_logo.svg" alt="Asana"><span>Asana</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot"><span>HubSpot</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Drive"><span>Drive</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-content" id="tab-ai">
-        <div class="logo-scroll-wrap">
-          <div class="logo-scroll">
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"><span>ChatGPT</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Claude_AI_symbol.svg" alt="Claude"><span>Claude</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Grok-icon.svg" alt="Grok"><span>Grok</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/512px-Google_Gemini_logo.svg.png" alt="Gemini"><span>Gemini</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Meta_Platforms_logo.svg" alt="Llama"><span>Llama</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Mistral_AI_logo_%282025%E2%80%93%29.svg" alt="Mistral"><span>Mistral</span></div>
-            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/DeepSeek_logo.svg" alt="DeepSeek"><span>DeepSeek</span></div>
-            <div class="logo-item glass"><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HuggingFace"><span>HuggingFace</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ EXPERIENCE ═══════════ -->
-  <section class="section" id="experience">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">03 / Experience</span>
-        <h2 class="section-title">Professional Journey</h2>
-      </div>
-      <div class="timeline reveal">
-        <div class="timeline-item glass-card">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Jan 2023 — 2025</div>
-          <h3>Automation & CRM Specialist</h3>
-          <span class="badge">Remote</span>
-          <ul class="timeline-list">
-            <li>Designed and deployed automation workflows using n8n to streamline business operations for remote clients.</li>
-            <li>Built CRM systems to manage leads, sales pipelines, and customer lifecycle processes.</li>
-            <li>Integrated third-party tools (Telegram, Google Sheets, APIs) to automate repetitive administrative tasks.</li>
-            <li>Reduced manual data entry workload by implementing AI-powered automation solutions.</li>
-            <li>Maintained system documentation and provided technical support to clients.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ PROJECTS ═══════════ -->
-  <section class="section" id="projects">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">04 / Projects</span>
-        <h2 class="section-title">Featured Automation Projects</h2>
-      </div>
-
-      <div class="projects-grid">
-
-        <!-- Project 1 -->
-        <div class="project-card glass-card reveal" data-project="receipt">
-          <div class="project-glow"></div>
-          <div class="project-meta">
-            <span class="project-tag">n8n + AI + Telegram</span>
-            <button class="project-details-btn" onclick="openModal('receipt')">View Details ↗</button>
-          </div>
-          <h3 class="project-title">Receipt Data Entry Automation</h3>
-          <p class="project-desc">An intelligent automation system that transforms manual receipt processing into a seamless, AI-powered workflow via Telegram bot.</p>
-
-          <div class="flow-diagram">
-            <div class="flow-node">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
-              <span>Trigger</span>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-node">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Drive">
-              <span>Upload</span>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-node">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg" alt="AI">
-              <span>AI Extract</span>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-node">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Sheets">
-              <span>Log</span>
-            </div>
-          </div>
-
-          <div class="impact-bar">
-            <span class="impact-label">Impact:</span>
-            <span class="impact-value">5 min → 10 sec per receipt</span>
-          </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project-card glass-card reveal" data-project="invoice">
-          <div class="project-glow"></div>
-          <div class="project-meta">
-            <span class="project-tag">n8n + Gmail + Telegram</span>
-            <button class="project-details-btn" onclick="openModal('invoice')">View Details ↗</button>
-          </div>
-          <h3 class="project-title">Overdue Invoice Reminder System</h3>
-          <p class="project-desc">A smart accounts receivable automation that monitors invoice statuses and sends professional payment reminders via email.</p>
-
-          <div class="flow-diagram">
-            <div class="flow-node">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
-              <span>Command</span>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-node">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Sheets">
-              <span>Filter</span>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-node">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail">
-              <span>Send</span>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-node">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
-              <span>Report</span>
-            </div>
-          </div>
-
-          <div class="impact-bar">
-            <span class="impact-label">Impact:</span>
-            <span class="impact-value">90% less follow-up time · +35% collection</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ EDUCATION ═══════════ -->
-  <section class="section" id="education">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">05 / Education</span>
-        <h2 class="section-title">Academic Background</h2>
-      </div>
-      <div class="edu-card glass-card reveal">
-        <div class="edu-icon">🎓</div>
-        <div class="edu-body">
-          <h3>Bachelor of Science in Business Administration</h3>
-          <p class="edu-major">Financial Management</p>
-          <p class="edu-school">North Eastern Mindanao State University</p>
-          <span class="edu-year glass-pill">2017 – 2023</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ RESUME ═══════════ -->
-  <section class="section" id="resume">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">06 / Resume</span>
-        <h2 class="section-title">Resume Overview</h2>
-      </div>
-      <div class="resume-grid">
-        <div class="resume-col glass-card reveal">
-          <div class="resume-icon">💼</div>
-          <h3>Experience Highlights</h3>
-          <ul>
-            <li>CRM Agent & Automation Specialist (Remote) — 2+ years</li>
-            <li>Workflow design using n8n, Zapier & Make</li>
-            <li>Customer pipeline management & lead tracking</li>
-            <li>AI agent implementation for business automation</li>
-            <li>API integration across Google, Telegram & CRM platforms</li>
-          </ul>
-        </div>
-        <div class="resume-col glass-card reveal">
-          <div class="resume-icon">🛠</div>
-          <h3>Key Technical Skills</h3>
-          <ul>
-            <li>n8n Automation — Advanced</li>
-            <li>CRM Management & Pipeline Optimization</li>
-            <li>Google Workspace (Sheets, Drive, Gmail)</li>
-            <li>Telegram Bot & API Webhooks</li>
-            <li>Microsoft Excel (Advanced) & Data Entry</li>
-          </ul>
-        </div>
-        <div class="resume-col glass-card reveal">
-          <div class="resume-icon">📈</div>
-          <h3>Key Achievements</h3>
-          <ul>
-            <li>Reduced manual follow-up time by 90% via automation</li>
-            <li>Improved payment collection rate by 35%</li>
-            <li>Built real-time receipt capture via Telegram + Google Drive</li>
-            <li>Delivered multiple end-to-end workflows for remote clients</li>
-          </ul>
-        </div>
-      </div>
-      <div class="resume-cta reveal">
-        <p>Want the full picture? Preview my complete resume below.</p>
-        <a href="https://drive.google.com/file/d/1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4/view?usp=sharing" target="_blank" class="btn btn-primary glass-btn">📄 View Full Resume</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ CONTACT ═══════════ -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">07 / Contact</span>
-        <h2 class="section-title">Let's Work Together</h2>
-      </div>
-      <p class="contact-sub reveal">I'm available for freelance automation projects and remote opportunities. Let's discuss how I can streamline your business processes.</p>
-      <div class="contact-cards reveal">
-        <a href="https://wa.me/639638291756" target="_blank" class="contact-card glass-card whatsapp">
-          <div class="contact-icon-wrap">
-            <img class="contact-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" loading="lazy" />
-          </div>
-          <span class="contact-label">WhatsApp</span>
-          <span class="contact-hint">+63 963 829 1756</span>
-        </a>
-        <a href="mailto:reymancasio@gmail.com" class="contact-card glass-card email">
-          <div class="contact-icon-wrap">
-            <img class="contact-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" loading="lazy" />
-          </div>
-          <span class="contact-label">Email</span>
-          <span class="contact-hint">reymancasio@gmail.com</span>
-        </a>
-        <a href="https://www.linkedin.com/in/reyman-casio-112ba83aa" target="_blank" class="contact-card glass-card linkedin">
-          <div class="contact-icon-wrap">
-            <img class="contact-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" loading="lazy" />
-          </div>
-          <span class="contact-label">LinkedIn</span>
-          <span class="contact-hint">reyman-casio</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ FOOTER ═══════════ -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <p class="footer-logo">RDC<span class="dot">.</span></p>
-      <p class="footer-copy">© 2026 Reyman D. Casio. All rights reserved.</p>
-      <p class="footer-tagline">Built with passion for automation & efficiency.</p>
-    </div>
-  </footer>
-
-  <!-- ═══════════ MODALS ═══════════ -->
-  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
-    <div class="modal glass-card" id="modal" onclick="event.stopPropagation()">
-      <button class="modal-close" onc
+<!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="js/rain.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
