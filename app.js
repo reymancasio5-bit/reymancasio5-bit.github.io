@@ -4,40 +4,53 @@
 
 'use strict';
 
-// ── Cursor ──────────────────────────────────
+// ── Cursor — RAF throttled for smoothness ────
 const cursor = document.getElementById('cursor');
 const cursorTrail = document.getElementById('cursorTrail');
 let mouseX = 0, mouseY = 0;
 let trailX = 0, trailY = 0;
+let rafScheduled = false;
 
-document.addEventListener('mousemove', e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
+function updateCursor() {
   cursor.style.left = mouseX + 'px';
-  cursor.style.top = mouseY + 'px';
-});
-
-function animateTrail() {
+  cursor.style.top  = mouseY + 'px';
   trailX += (mouseX - trailX) * 0.12;
   trailY += (mouseY - trailY) * 0.12;
   cursorTrail.style.left = trailX + 'px';
-  cursorTrail.style.top = trailY + 'px';
-  requestAnimationFrame(animateTrail);
+  cursorTrail.style.top  = trailY + 'px';
+  rafScheduled = false;
 }
-animateTrail();
 
-// Cursor states on interactive elements
-document.querySelectorAll('a, button, .glass-card, .logo-item, .comp-item, .stat-card').forEach(el => {
-  el.classList.add('interactive');
-  el.addEventListener('mouseenter', () => {
-    cursor.style.transform = 'translate(-50%,-50%) scale(1.8)';
-    cursorTrail.style.borderColor = 'rgba(56,189,248,0.8)';
+if (window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!rafScheduled) {
+      rafScheduled = true;
+      requestAnimationFrame(updateCursor);
+    }
+  }, { passive: true });
+
+  // Trail loop
+  (function loop() {
+    trailX += (mouseX - trailX) * 0.1;
+    trailY += (mouseY - trailY) * 0.1;
+    cursorTrail.style.left = trailX + 'px';
+    cursorTrail.style.top  = trailY + 'px';
+    requestAnimationFrame(loop);
+  })();
+
+  document.querySelectorAll('a, button, .glass-card, .logo-item, .comp-item, .stat-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1.8)';
+      cursorTrail.style.borderColor = 'rgba(56,189,248,0.8)';
+    }, { passive: true });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      cursorTrail.style.borderColor = 'rgba(56,189,248,0.5)';
+    }, { passive: true });
   });
-  el.addEventListener('mouseleave', () => {
-    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-    cursorTrail.style.borderColor = 'rgba(56,189,248,0.5)';
-  });
-});
+}
 
 // ── Nav ──────────────────────────────────────
 const nav = document.getElementById('nav');
@@ -155,36 +168,48 @@ document.querySelectorAll('.glass-card, .btn, .contact-card').forEach(el => {
   });
 });
 
-// ── Parallax orbs on mouse move ───────────────
-const orbs = document.querySelectorAll('.orb');
-let lastX = 0, lastY = 0;
+// ── Subtle glassdrop parallax — very light, RAF throttled ──
+const glassdrops = document.querySelectorAll('.glassdrop');
+let parallaxX = 0, parallaxY = 0;
+let targetPX = 0, targetPY = 0;
+let parallaxRaf = false;
 
-window.addEventListener('mousemove', e => {
-  const nx = (e.clientX / window.innerWidth - 0.5);
-  const ny = (e.clientY / window.innerHeight - 0.5);
-  orbs.forEach((orb, i) => {
-    const factor = (i + 1) * 18;
-    orb.style.transform = `translate(${nx * factor}px, ${ny * factor}px)`;
-  });
-});
+if (window.matchMedia('(pointer: fine) and (min-width: 1024px)').matches) {
+  document.addEventListener('mousemove', e => {
+    targetPX = (e.clientX / window.innerWidth  - 0.5) * 14;
+    targetPY = (e.clientY / window.innerHeight - 0.5) * 14;
+  }, { passive: true });
 
-// ── Card tilt on hover ────────────────────────
+  (function parallaxLoop() {
+    parallaxX += (targetPX - parallaxX) * 0.04;
+    parallaxY += (targetPY - parallaxY) * 0.04;
+    glassdrops.forEach((gd, i) => {
+      const f = (i % 3 + 1) * 0.4;
+      gd.style.transform = `translate(${parallaxX * f}px, ${parallaxY * f}px) translateZ(0)`;
+    });
+    requestAnimationFrame(parallaxLoop);
+  })();
+}
+
+// ── Card tilt on hover — RAF throttled ────────
 document.querySelectorAll('.glass-card').forEach(card => {
+  let tiltRaf = null;
   card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const dx = (x - cx) / cx;
-    const dy = (y - cy) / cy;
-    card.style.transform = `translateY(-4px) rotateX(${-dy * 5}deg) rotateY(${dx * 5}deg)`;
-  });
+    if (tiltRaf) return;
+    tiltRaf = requestAnimationFrame(() => {
+      const rect = card.getBoundingClientRect();
+      const dx = ((e.clientX - rect.left) / rect.width  - 0.5) * 8;
+      const dy = ((e.clientY - rect.top)  / rect.height - 0.5) * 8;
+      card.style.transform = `translateY(-4px) rotateX(${-dy}deg) rotateY(${dx}deg)`;
+      tiltRaf = null;
+    });
+  }, { passive: true });
   card.addEventListener('mouseleave', () => {
+    if (tiltRaf) { cancelAnimationFrame(tiltRaf); tiltRaf = null; }
+    card.style.transition = 'transform 0.5s ease, box-shadow 0.35s ease, border-color 0.35s ease';
     card.style.transform = '';
-    card.style.transition = 'transform 0.5s ease';
     setTimeout(() => { card.style.transition = ''; }, 500);
-  });
+  }, { passive: true });
 });
 
 // ── Modal ─────────────────────────────────────
