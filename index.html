@@ -1,1713 +1,453 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reyman D. Casio - Automation Specialist Portfolio</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg-primary: #0a0e27;
-            --bg-secondary: #151a35;
-            --bg-card: #1a1f3a;
-            --accent: #00d4ff;
-            --accent-hover: #00b8e6;
-            --text-primary: #e8eaf6;
-            --text-secondary: #b0b8d4;
-            --border: #2a3154;
-            --node-telegram: #0088cc;
-            --node-ai: #8a2be2;
-            --node-sheets: #34a853;
-            --node-drive: #4285f4;
-            --node-gmail: #ea4335;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        body.modal-open { overflow: hidden; }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background:
-                radial-gradient(ellipse at 20% 30%, rgba(0,212,255,0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(138,43,226,0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        header {
-            position: relative;
-            background: linear-gradient(135deg, #070b1f 0%, #0d1230 40%, #111830 100%);
-            padding: 110px 20px 90px;
-            text-align: center;
-            border-bottom: 2px solid var(--border);
-            box-shadow: 0 10px 60px rgba(0,0,0,0.7);
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image:
-                linear-gradient(rgba(0,212,255,0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,212,255,0.06) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: gridMove 20s linear infinite;
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            top: -40%; left: -10%;
-            width: 70%; height: 200%;
-            background: radial-gradient(ellipse, rgba(0,212,255,0.12) 0%, rgba(138,43,226,0.08) 40%, transparent 70%);
-            animation: orbPulse 6s ease-in-out infinite alternate;
-            pointer-events: none;
-        }
-
-        .header-orb2 {
-            position: absolute;
-            top: -20%; right: -10%;
-            width: 60%; height: 160%;
-            background: radial-gradient(ellipse, rgba(138,43,226,0.12) 0%, rgba(0,212,255,0.06) 40%, transparent 70%);
-            animation: orbPulse 8s ease-in-out infinite alternate-reverse;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .header-nodes { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; }
-
-        .header-node {
-            position: absolute;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            padding: 6px 12px;
-            border: 1px solid;
-            opacity: 0.18;
-            animation: floatNode 8s ease-in-out infinite;
-            white-space: nowrap;
-        }
-
-        .header-node:nth-child(1) { top:15%; left:5%;   border-color:#0088cc; color:#0088cc; animation-delay:0s;   }
-        .header-node:nth-child(2) { top:70%; left:3%;   border-color:#34a853; color:#34a853; animation-delay:1.5s; }
-        .header-node:nth-child(3) { top:25%; right:4%;  border-color:#ea4335; color:#ea4335; animation-delay:3s;   }
-        .header-node:nth-child(4) { top:65%; right:5%;  border-color:#8a2be2; color:#8a2be2; animation-delay:4.5s; }
-        .header-node:nth-child(5) { top:45%; left:8%;   border-color:#4285f4; color:#4285f4; animation-delay:2s;   }
-        .header-node:nth-child(6) { top:80%; right:8%;  border-color:#ff9800; color:#ff9800; animation-delay:1s;   }
-
-        @keyframes floatNode  { 0%,100%{transform:translateY(0);opacity:0.18} 50%{transform:translateY(-12px);opacity:0.28} }
-        @keyframes gridMove   { 0%{background-position:0 0} 100%{background-position:60px 60px} }
-        @keyframes orbPulse   { 0%{transform:scale(1) translate(0,0)} 100%{transform:scale(1.15) translate(3%,-5%)} }
-
-        .header-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-
-        .profile-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0,212,255,0.1);
-            border: 1px solid rgba(0,212,255,0.3);
-            border-radius: 30px;
-            padding: 6px 18px;
-            font-size: 0.85rem;
-            color: var(--accent);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            animation: fadeInDown 0.6s ease;
-        }
-
-        .profile-badge::before {
-            content: '';
-            width: 8px; height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: blink 1.5s ease-in-out infinite;
-        }
-
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--accent) 0%, #8a2be2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            animation: fadeInUp 0.8s ease 0.2s backwards;
-        }
-
-        .header-stats {
-            display: flex;
-            justify-content: center;
-            gap: 0;
-            flex-wrap: wrap;
-            margin-top: 30px;
-            animation: fadeInUp 0.8s ease 0.4s backwards;
-            border: 1px solid rgba(0,212,255,0.2);
-            border-radius: 12px;
-            overflow: hidden;
-            max-width: 720px;
-            margin-left: auto; margin-right: auto;
-            background: rgba(10,14,39,0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        .header-stat {
-            flex: 1; min-width: 140px;
-            padding: 18px 20px;
-            border-right: 1px solid rgba(0,212,255,0.15);
-            text-align: center;
-        }
-
-        .header-stat:last-child { border-right: none; }
-
-        .stat-number {
-            display: block;
-            font-size: 1.6rem; font-weight: 700;
-            background: linear-gradient(135deg, var(--accent), #8a2be2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            display: block;
-            font-size: 0.72rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 3px;
-        }
-
-        nav {
-            position: sticky; top: 0;
-            background: rgba(21,26,53,0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-
-        .nav-desktop {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        .nav-desktop a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-desktop a::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 50%;
-            width: 0; height: 2px;
-            background: var(--accent);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-desktop a:hover,
-        .nav-desktop a.active { color: var(--accent); }
-        .nav-desktop a:hover::after,
-        .nav-desktop a.active::after { width: 80%; }
-
-        .nav-mobile { display: none; }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            position: relative; z-index: 1;
-        }
-
-        section { margin-bottom: 80px; }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
-            color: var(--accent);
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px; left: 0;
-            width: 60%; height: 3px;
-            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
-        }
-
-        .card {
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            margin-bottom: 20px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,212,255,0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .card:hover::before { left: 100%; }
-        .card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 15px 40px rgba(0,212,255,0.2); }
-        .card h3 { color: var(--accent); font-size: 1.5rem; margin-bottom: 10px; }
-        .card .date { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px; }
-
-        .card.clickable { cursor: pointer; }
-
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-
-        .skill-tag {
-            background: var(--bg-secondary);
-            padding: 12px 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .skill-tag:hover {
-            background: var(--bg-card);
-            border-color: var(--accent);
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,212,255,0.15);
-        }
-
-        .project-card {
-            background: var(--bg-card);
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            position: relative;
-            margin-bottom: 40px;
-            cursor: pointer;
-        }
-
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 4px; height: 0;
-            background: var(--accent);
-            transition: height 0.4s ease;
-        }
-
-        .project-card:hover::after { height: 100%; }
-        .project-card:hover { transform: translateX(8px); border-color: var(--accent); box-shadow: 0 15px 40px rgba(0,212,255,0.2); }
-
-        .project-card .click-hint {
-            position: absolute;
-            top: 16px; right: 20px;
-            font-size: 0.72rem;
-            color: var(--accent);
-            opacity: 0.5;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .project-card:hover .click-hint { opacity: 1; }
-
-        .card.clickable .click-hint {
-            position: absolute;
-            top: 16px; right: 20px;
-            font-size: 0.72rem;
-            color: var(--accent);
-            opacity: 0.5;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .card.clickable:hover .click-hint { opacity: 1; }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 25px;
-            flex-wrap: wrap; gap: 20px;
-        }
-
-        .project-title { color: var(--accent); font-size: 1.8rem; margin-bottom: 10px; }
-        .project-tech  { color: var(--text-secondary); font-weight: 500; font-size: 1rem; }
-        .project-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-
-        .workflow-diagram {
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            padding: 30px;
-            margin: 30px 0;
-            overflow-x: auto;
-            border: 1px solid var(--border);
-        }
-
-        .workflow-container {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            align-items: center;
-            gap: 15px;
-            min-width: max-content;
-            padding: 20px;
-        }
-
-        .workflow-node {
-            background: var(--bg-card);
-            padding: 20px 25px;
-            border-radius: 10px;
-            border: 2px solid var(--border);
-            min-width: 140px;
-            text-align: center;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .workflow-node:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,212,255,0.3); }
-
-        .workflow-node.telegram   { border-color: var(--node-telegram); }
-        .workflow-node.ai         { border-color: var(--node-ai); }
-        .workflow-node.sheets     { border-color: var(--node-sheets); }
-        .workflow-node.drive      { border-color: var(--node-drive); }
-        .workflow-node.gmail      { border-color: var(--node-gmail); }
-        .workflow-node.conditional { border-color: #ff9800; }
-
-        .node-icon img { width: 46px; height: 46px; object-fit: contain; border-radius: 6px; }
-        .node-label    { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
-
-        .workflow-arrow { color: var(--accent); font-size: 1.5rem; flex-shrink: 0; display: inline-block; line-height: 1; }
-
-        .project-description { color: var(--text-secondary); line-height: 1.8; margin-bottom: 25px; }
-
-        .project-features { list-style: none; padding-left: 0; }
-
-        .project-features li {
-            padding: 10px 0 10px 30px;
-            position: relative;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .project-features li::before {
-            content: '✓';
-            position: absolute; left: 0;
-            color: var(--accent);
-            font-size: 1.3rem; font-weight: bold;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, var(--accent) 0%, #00b8e6 100%);
-            color: var(--bg-primary);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none; cursor: pointer;
-            position: relative; overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 0; height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: translate(-50%,-50%);
-            transition: width 0.5s ease, height 0.5s ease;
-        }
-
-        .btn:hover::before { width: 300px; height: 300px; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,212,255,0.4); }
-        .btn span  { position: relative; z-index: 1; }
-
-        .btn-secondary { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-        .btn-secondary:hover { background: var(--accent); color: var(--bg-primary); }
-
-        .contact-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
-        .btn-whatsapp  { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; }
-        .btn-whatsapp:hover  { box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
-        .btn-email     { background: linear-gradient(135deg, #ea4335, #c5221f); color: #fff; }
-        .btn-email:hover     { box-shadow: 0 8px 25px rgba(234,67,53,0.4); }
-        .btn-linkedin  { background: linear-gradient(135deg, #0077B5, #005983); color: #fff; }
-        .btn-linkedin:hover  { box-shadow: 0 8px 25px rgba(0,119,181,0.4); }
-
-        .resume-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
-        .resume-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 22px; }
-
-        .resume-block h4 {
-            color: var(--accent);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 14px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .resume-item {
-            display: flex; align-items: flex-start; gap: 10px;
-            margin-bottom: 10px; font-size: 0.92rem; color: var(--text-secondary);
-        }
-
-        .resume-item::before { content: '▸'; color: var(--accent); flex-shrink: 0; }
-
-        .resume-cta {
-            text-align: center; padding: 28px;
-            background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, rgba(138,43,226,0.05) 100%);
-            border: 1px dashed rgba(0,212,255,0.3);
-            border-radius: 12px;
-        }
-
-        .resume-cta p { color: var(--text-secondary); margin-bottom: 18px; font-size: 0.95rem; }
-
-        footer {
-            background: var(--bg-secondary);
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid var(--border);
-            margin-top: 80px;
-        }
-
-        footer p { color: var(--text-secondary); }
-
-        @keyframes fadeInDown { from{opacity:0;transform:translateY(-30px)} to{opacity:1;transform:translateY(0)} }
-        @keyframes fadeInUp   { from{opacity:0;transform:translateY(30px)}  to{opacity:1;transform:translateY(0)} }
-
-        .profile-photo-wrapper {
-            margin: 18px auto 22px;
-            width: 160px; height: 160px;
-            position: relative;
-            animation: fadeInDown 0.7s ease 0.1s backwards;
-        }
-
-        .profile-photo-wrapper::before {
-            content: '';
-            position: absolute; inset: -4px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent) 0%, #8a2be2 100%);
-            z-index: 0;
-            animation: spinBorder 6s linear infinite;
-        }
-
-        @keyframes spinBorder { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
-
-        .profile-photo {
-            position: relative; z-index: 1;
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            object-fit: cover; object-position: center top;
-            border: 4px solid var(--bg-primary);
-            display: block;
-        }
-
-        .marquee-section {
-            padding: 50px 0 30px;
-            margin-bottom: 60px;
-            position: relative; z-index: 1;
-        }
-
-        .marquee-section-title {
-            text-align: center;
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--text-secondary);
-            margin-bottom: 28px;
-        }
-
-        .marquee-viewport {
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 22px;
-            cursor: grab;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        .marquee-viewport:active { cursor: grabbing; }
-
-        .marquee-viewport::before {
-            content: '';
-            position: absolute; inset: 0;
-            z-index: 2;
-            pointer-events: none;
-            background: linear-gradient(
-                to right,
-                var(--bg-primary)    0%,
-                transparent         12%,
-                transparent         88%,
-                var(--bg-primary)  100%
-            );
-        }
-
-        .marquee-track {
-            display: flex;
-            gap: 30px;
-            width: max-content;
-            will-change: transform;
-            padding: 8px 0;
-        }
-
-        .marquee-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px; height: 60px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            flex-shrink: 0;
-        }
-
-        .marquee-item:hover {
-            border-color: var(--accent);
-            box-shadow: 0 4px 18px rgba(0,212,255,0.25);
-        }
-
-        .marquee-item img {
-            width: 36px; height: 36px;
-            object-fit: contain;
-            border-radius: 6px;
-            display: block;
-            pointer-events: none;
-        }
-
-        /* ═══ MODAL SYSTEM ═══ */
-
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(7,11,31,0.94);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            overflow-y: auto;
-            opacity: 0;
-            transition: opacity 0.38s cubic-bezier(0.4,0,0.2,1);
-        }
-
-        .modal-overlay.is-visible {
-            display: flex;
-        }
-
-        .modal-overlay.is-open {
-            opacity: 1;
-        }
-
-        .modal-inner {
-            background: var(--bg-card);
-            border: 1px solid rgba(0,212,255,0.18);
-            border-radius: 18px;
-            width: 100%;
-            max-width: 860px;
-            max-height: 88vh;
-            overflow-y: auto;
-            transform: scale(0.84) translateY(28px);
-            opacity: 0;
-            transition:
-                transform 0.42s cubic-bezier(0.34,1.56,0.64,1),
-                opacity 0.32s cubic-bezier(0.4,0,0.2,1),
-                box-shadow 0.42s ease;
-            position: relative;
-            box-shadow: 0 0 0 rgba(0,212,255,0);
-            scrollbar-width: thin;
-            scrollbar-color: var(--border) transparent;
-        }
-
-        .modal-inner::-webkit-scrollbar { width: 5px; }
-        .modal-inner::-webkit-scrollbar-track { background: transparent; }
-        .modal-inner::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-        .modal-overlay.is-open .modal-inner {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-            box-shadow:
-                0 40px 90px rgba(0,0,0,0.6),
-                0 0 0 1px rgba(0,212,255,0.12),
-                0 0 60px rgba(0,212,255,0.08);
-        }
-
-        .modal-topbar {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            display: flex;
-            justify-content: flex-end;
-            padding: 14px 18px 0;
-            background: linear-gradient(to bottom, var(--bg-card) 70%, transparent 100%);
-        }
-
-        .modal-close-btn {
-            background: rgba(0,212,255,0.08);
-            border: 1px solid rgba(0,212,255,0.25);
-            color: var(--accent);
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s, transform 0.25s ease, border-color 0.2s;
-            flex-shrink: 0;
-            line-height: 1;
-        }
-
-        .modal-close-btn:hover {
-            background: rgba(0,212,255,0.22);
-            border-color: var(--accent);
-            transform: rotate(90deg) scale(1.1);
-        }
-
-        .modal-body {
-            padding: 10px 38px 38px;
-        }
-
-        /* ═══ PROJECT SNAPSHOT (image inside modal only) ═══ */
-
-        .project-snapshot {
-            position: relative;
-            margin: 26px 0;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: zoom-in;
-        }
-
-        .project-snapshot::before,
-        .project-snapshot::after {
-            content: '';
-            position: absolute;
-            top: 0; bottom: 0;
-            width: 70px;
-            z-index: 2;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .project-snapshot::before {
-            left: 0;
-            background: linear-gradient(to right, var(--bg-secondary) 0%, transparent 100%);
-        }
-
-        .project-snapshot::after {
-            right: 0;
-            background: linear-gradient(to left, var(--bg-secondary) 0%, transparent 100%);
-        }
-
-        .project-snapshot:hover {
-            border-color: var(--accent);
-            box-shadow: 0 6px 28px rgba(0,212,255,0.22);
-        }
-
-        .project-snapshot img {
-            display: block;
-            width: 100%;
-            height: auto;
-            max-height: 340px;
-            object-fit: cover;
-            object-position: top;
-            transition: filter 0.3s ease, transform 0.35s ease;
-        }
-
-        .project-snapshot:hover img {
-            filter: brightness(1.12) saturate(1.18);
-            transform: scale(1.015);
-        }
-
-        /* ═══ RESUME EMBED (inside modal only) ═══ */
-
-        .resume-embed-wrap {
-            position: relative;
-            margin: 24px 0;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            background: var(--bg-secondary);
-            transition: box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: zoom-in;
-        }
-
-        .resume-embed-wrap::before,
-        .resume-embed-wrap::after {
-            content: '';
-            position: absolute;
-            left: 0; right: 0;
-            height: 48px;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .resume-embed-wrap::before {
-            top: 0;
-            background: linear-gradient(to bottom, var(--bg-secondary) 0%, transparent 100%);
-        }
-
-        .resume-embed-wrap::after {
-            bottom: 0;
-            background: linear-gradient(to top, var(--bg-secondary) 0%, transparent 100%);
-        }
-
-        .resume-embed-wrap:hover {
-            border-color: var(--accent);
-            box-shadow: 0 6px 28px rgba(0,212,255,0.22);
-        }
-
-        .resume-embed-wrap img {
-            display: block;
-            width: 100%;
-            height: auto;
-            max-height: 320px;
-            object-fit: cover;
-            object-position: top;
-            filter: brightness(0.96);
-            transition: filter 0.3s ease, transform 0.35s ease;
-        }
-
-        .resume-embed-wrap:hover img {
-            filter: brightness(1.08) saturate(1.1);
-            transform: scale(1.012);
-        }
-
-        /* ═══ IMAGE LIGHTBOX ═══ */
-
-        .img-lightbox {
-            position: fixed;
-            inset: 0;
-            background: rgba(5,8,22,0.97);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.32s cubic-bezier(0.4,0,0.2,1);
-            padding: 16px;
-            cursor: zoom-out;
-        }
-
-        .img-lightbox.is-visible { display: flex; }
-        .img-lightbox.is-open    { opacity: 1; }
-
-        .img-lightbox img {
-            max-width: 95vw;
-            max-height: 92vh;
-            object-fit: contain;
-            border-radius: 8px;
-            transform: scale(0.82);
-            opacity: 0;
-            transition:
-                transform 0.44s cubic-bezier(0.34,1.56,0.64,1),
-                opacity 0.3s cubic-bezier(0.4,0,0.2,1);
-            box-shadow: 0 24px 90px rgba(0,0,0,0.85);
-            pointer-events: none;
-        }
-
-        .img-lightbox.is-open img {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 18px; right: 22px;
-            background: rgba(0,212,255,0.1);
-            border: 1px solid rgba(0,212,255,0.3);
-            color: var(--accent);
-            width: 38px; height: 38px;
-            border-radius: 50%;
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s, transform 0.25s;
-            z-index: 1;
-        }
-
-        .lightbox-close:hover {
-            background: rgba(0,212,255,0.22);
-            transform: rotate(90deg) scale(1.1);
-        }
-
-        /* ═══ RESPONSIVE ═══ */
-
-        @media (max-width: 768px) {
-            h1       { font-size: 2.5rem; }
-            .tagline { font-size: 1.2rem; }
-            h2       { font-size: 2rem; }
-            .skills-grid     { grid-template-columns: 1fr; }
-            .project-header  { flex-direction: column; }
-            .project-card    { padding: 25px; }
-            .header-stats    { flex-direction: column; }
-            .header-stat     { border-right: none; border-bottom: 1px solid rgba(0,212,255,0.15); }
-            .header-stat:last-child { border-bottom: none; }
-            .resume-grid     { grid-template-columns: 1fr; }
-            .contact-buttons { flex-direction: column; align-items: center; }
-            .header-node     { display: none; }
-            .modal-body      { padding: 10px 18px 28px; }
-            .modal-inner     { max-height: 92vh; border-radius: 14px; }
-
-            .workflow-diagram { padding: 15px 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            .workflow-container { flex-direction: row !important; flex-wrap: nowrap !important; min-width: max-content; padding: 10px 5px; gap: 10px; }
-            .workflow-node  { min-width: 110px; padding: 14px 16px; }
-            .node-label     { font-size: 0.75rem; }
-            .workflow-arrow { font-size: 1.2rem; transform: none !important; }
-
-            .nav-desktop { display: none; }
-            .nav-mobile  { display: block; }
-
-            .mobile-nav-wrapper { position: relative; width: 100%; overflow: hidden; }
-
-            .mobile-nav-track {
-                display: flex; align-items: center;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none; -ms-overflow-style: none;
-                padding: 4px 24px;
-            }
-
-            .mobile-nav-track::-webkit-scrollbar { display: none; }
-
-            .mobile-nav-item {
-                scroll-snap-align: center;
-                flex-shrink: 0;
-                padding: 10px 20px;
-                color: var(--text-secondary);
-                text-decoration: none;
-                font-weight: 600; font-size: 0.95rem;
-                white-space: nowrap;
-                border-bottom: 2px solid transparent;
-                transition: color 0.25s ease, border-color 0.25s ease;
-                letter-spacing: 0.5px;
-                cursor: pointer; user-select: none;
-            }
-
-            .mobile-nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-            .mobile-nav-wrapper::before,
-            .mobile-nav-wrapper::after {
-                content: '';
-                position: absolute; top: 0; bottom: 0;
-                width: 28px; z-index: 2; pointer-events: none;
-            }
-
-            .mobile-nav-wrapper::before { left: 0; background: linear-gradient(to right, rgba(21,26,53,0.95), transparent); }
-            .mobile-nav-wrapper::after  { right: 0; background: linear-gradient(to left,  rgba(21,26,53,0.95), transparent); }
-
-            .nav-dots { display: flex; justify-content: center; gap: 5px; padding: 5px 0 3px; }
-
-            .nav-dot {
-                width: 4px; height: 4px;
-                border-radius: 50%;
-                background: var(--border);
-                transition: all 0.3s ease;
-            }
-
-            .nav-dot.active { background: var(--accent); width: 16px; border-radius: 2px; }
-
-            .marquee-viewport::before {
-                background: linear-gradient(
-                    to right,
-                    var(--bg-primary)  0%,
-                    transparent       8%,
-                    transparent      92%,
-                    var(--bg-primary) 100%
-                );
-            }
-        }
-
-        @media (min-width: 769px) { .nav-mobile { display: none; } }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reyman D. Casio — Automation Specialist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <header>
-        <div class="header-orb2"></div>
-        <div class="header-nodes">
-            <div class="header-node">🤖 n8n Automation</div>
-            <div class="header-node">📊 CRM Pipeline</div>
-            <div class="header-node">📧 Gmail Integration</div>
-            <div class="header-node">🔮 AI Agent</div>
-            <div class="header-node">☁️ Google Drive</div>
-            <div class="header-node">⚡ API Webhook</div>
-        </div>
-        <div class="header-content">
-            <div class="profile-badge">Available for Remote Work</div>
-            <div class="profile-photo-wrapper">
-                <img class="profile-photo" src="https://raw.githubusercontent.com/reymancasio5-bit/reymancasio5-bit.github.io/refs/heads/main/My%20Profile.jpeg" alt="Reyman D. Casio">
-            </div>
-            <h1>Reyman D. Casio</h1>
-            <p class="tagline">Automation Specialist & CRM Support</p>
-            <div class="header-stats">
-                <div class="header-stat"><span class="stat-number">2+</span><span class="stat-label">Years Remote XP</span></div>
-                <div class="header-stat"><span class="stat-number">90%</span><span class="stat-label">Time Saved via Automation</span></div>
-                <div class="header-stat"><span class="stat-number">n8n</span><span class="stat-label">Automation Platform</span></div>
-                <div class="header-stat"><span class="stat-number">5+</span><span class="stat-label">CRM & API Integrations</span></div>
-            </div>
-        </div>
-    </header>
+  <!-- Animated background -->
+  <div class="bg-canvas" id="bgCanvas">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="grid-overlay"></div>
+  </div>
 
-    <nav id="mainNav">
-        <ul class="nav-desktop">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
 
-        <div class="nav-mobile">
-            <div class="mobile-nav-wrapper">
-                <div class="mobile-nav-track" id="mobileNavTrack">
-                    <a class="mobile-nav-item active" data-section="about">About</a>
-                    <a class="mobile-nav-item" data-section="skills">Skills</a>
-                    <a class="mobile-nav-item" data-section="experience">Experience</a>
-                    <a class="mobile-nav-item" data-section="projects">Projects</a>
-                    <a class="mobile-nav-item" data-section="education">Education</a>
-                    <a class="mobile-nav-item" data-section="resume">Resume</a>
-                    <a class="mobile-nav-item" data-section="contact">Contact</a>
-                </div>
-            </div>
-            <div class="nav-dots" id="navDots">
-                <div class="nav-dot active"></div>
-                <div class="nav-dot"></div><div class="nav-dot"></div>
-                <div class="nav-dot"></div><div class="nav-dot"></div>
-                <div class="nav-dot"></div><div class="nav-dot"></div>
-            </div>
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">RDC<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#resume" class="nav-link">Resume</a></li>
+        <li><a href="#contact" class="nav-link cta-link">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#about" class="mob-link">About</a></li>
+      <li><a href="#skills" class="mob-link">Skills</a></li>
+      <li><a href="#experience" class="mob-link">Experience</a></li>
+      <li><a href="#projects" class="mob-link">Projects</a></li>
+      <li><a href="#education" class="mob-link">Education</a></li>
+      <li><a href="#resume" class="mob-link">Resume</a></li>
+      <li><a href="#contact" class="mob-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge glass-pill reveal">
+        <span class="pulse-dot"></span>
+        Available for Remote Work
+      </div>
+
+      <h1 class="hero-name reveal">
+        <span class="name-line">Reyman</span>
+        <span class="name-line accent-line">D. Casio</span>
+      </h1>
+      <p class="hero-title reveal">Automation Specialist <span class="amp">&</span> CRM Expert</p>
+      <p class="hero-sub reveal">I design AI-driven workflows that eliminate manual work,<br class="br-desk"> streamline operations, and scale businesses effortlessly.</p>
+
+      <div class="hero-stats reveal">
+        <div class="stat-card glass">
+          <span class="stat-num" data-target="2">0</span><span class="stat-plus">+</span>
+          <p>Years Remote XP</p>
         </div>
-    </nav>
+        <div class="stat-card glass">
+          <span class="stat-num" data-target="90">0</span><span class="stat-plus">%</span>
+          <p>Time Saved</p>
+        </div>
+        <div class="stat-card glass">
+          <span class="stat-label">n8n</span>
+          <p>Primary Platform</p>
+        </div>
+        <div class="stat-card glass">
+          <span class="stat-num" data-target="5">0</span><span class="stat-plus">+</span>
+          <p>CRM & API Integrations</p>
+        </div>
+      </div>
 
+      <div class="hero-actions reveal">
+        <a href="#projects" class="btn btn-primary glass-btn">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Let's Talk →</a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="profile-ring">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+        <div class="profile-img-wrap glass">
+          <img src="https://raw.githubusercontent.com/reymancasio5-bit/reymancasio5-bit.github.io/refs/heads/main/My%20Profile.jpeg" alt="Reyman D. Casio" class="profile-img" />
+        </div>
+      </div>
+
+      <!-- Floating tech pills -->
+      <div class="tech-float f1 glass-pill">🤖 n8n</div>
+      <div class="tech-float f2 glass-pill">📊 CRM</div>
+      <div class="tech-float f3 glass-pill">⚡ API</div>
+      <div class="tech-float f4 glass-pill">🔮 AI Agent</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section class="section" id="about">
     <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">01 / About</span>
+        <h2 class="section-title">Professional Summary</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text glass-card reveal">
+          <p>I design automation systems that <strong>replace repetitive manual work</strong> with scalable, AI-driven workflows. Specializing in n8n and CRM automation, I help businesses streamline operations, structure data intelligently, and build systems that support growth.</p>
+          <p>With a foundation in Financial Management and hands-on remote experience, I bridge the gap between business logic and technical automation — turning complex processes into elegant, self-running workflows.</p>
+        </div>
+        <div class="about-competencies reveal">
+          <h3>Core Competencies</h3>
+          <div class="comp-grid">
+            <div class="comp-item glass">Workflow Automation (n8n)</div>
+            <div class="comp-item glass">CRM Management & Pipeline</div>
+            <div class="comp-item glass">API Integration & Webhooks</div>
+            <div class="comp-item glass">AI Agent Implementation</div>
+            <div class="comp-item glass">Data Entry Automation</div>
+            <div class="comp-item glass">Google Sheets Automation</div>
+            <div class="comp-item glass">Telegram Bot Integration</div>
+            <div class="comp-item glass">Process Documentation</div>
+            <div class="comp-item glass">Microsoft Excel (Advanced)</div>
+            <div class="comp-item glass">Client Communication</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <section id="about">
-            <h2>Professional Summary</h2>
-            <div class="card">
-                <p style="font-size:1.1rem;color:var(--text-secondary);line-height:1.8;">
-                    I design automation systems that replace repetitive manual work with scalable, AI-driven workflows. Specializing in n8n and CRM automation, I help businesses streamline operations, structure data intelligently, and build systems that support growth.
-                </p>
+  <!-- ═══════════ SKILLS ═══════════ -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">02 / Skills</span>
+        <h2 class="section-title">Tech Ecosystem</h2>
+      </div>
+
+      <div class="skills-tabs reveal">
+        <button class="tab-btn active" data-tab="automation">Automation</button>
+        <button class="tab-btn" data-tab="communication">Communication</button>
+        <button class="tab-btn" data-tab="productivity">Productivity</button>
+        <button class="tab-btn" data-tab="ai">AI Models</button>
+      </div>
+
+      <div class="tab-content active" id="tab-automation">
+        <div class="logo-scroll-wrap">
+          <div class="logo-scroll">
+            <div class="logo-item glass" title="n8n"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Tabler-icons_webhook.svg" alt="n8n"><span>n8n</span></div>
+            <div class="logo-item glass" title="Google Sheets"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Sheets"><span>Sheets</span></div>
+            <div class="logo-item glass" title="Google Drive"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Drive"><span>Drive</span></div>
+            <div class="logo-item glass" title="Gmail"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"><span>Gmail</span></div>
+            <div class="logo-item glass" title="Airtable"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable"><span>Airtable</span></div>
+            <div class="logo-item glass" title="HubSpot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot"><span>HubSpot</span></div>
+            <div class="logo-item glass" title="MySQL"><img src="https://upload.wikimedia.org/wikipedia/de/d/dd/MySQL_logo.svg" alt="MySQL"><span>MySQL</span></div>
+            <div class="logo-item glass" title="PostgreSQL"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="Postgres"><span>Postgres</span></div>
+            <div class="logo-item glass" title="Notion"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion"><span>Notion</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-communication">
+        <div class="logo-scroll-wrap">
+          <div class="logo-scroll">
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"><span>Telegram</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack"><span>Slack</span></div>
+            <div class="logo-item glass"><img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg" alt="Discord"><span>Discord</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"><span>WhatsApp</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"><span>Gmail</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg" alt="Meet"><span>Meet</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Microsoft_Teams.png" alt="Teams"><span>Teams</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Zoom_Logo_2022.svg/512px-Zoom_Logo_2022.svg.png" alt="Zoom"><span>Zoom</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-productivity">
+        <div class="logo-scroll-wrap">
+          <div class="logo-scroll">
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion"><span>Notion</span></div>
+            <div class="logo-item glass"><img src="https://cdn.worldvectorlogo.com/logos/trello.svg" alt="Trello"><span>Trello</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable"><span>Airtable</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Asana_logo.svg" alt="Asana"><span>Asana</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot"><span>HubSpot</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Drive"><span>Drive</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-ai">
+        <div class="logo-scroll-wrap">
+          <div class="logo-scroll">
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"><span>ChatGPT</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Claude_AI_symbol.svg" alt="Claude"><span>Claude</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Grok-icon.svg" alt="Grok"><span>Grok</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/512px-Google_Gemini_logo.svg.png" alt="Gemini"><span>Gemini</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Meta_Platforms_logo.svg" alt="Llama"><span>Llama</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Mistral_AI_logo_%282025%E2%80%93%29.svg" alt="Mistral"><span>Mistral</span></div>
+            <div class="logo-item glass"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/DeepSeek_logo.svg" alt="DeepSeek"><span>DeepSeek</span></div>
+            <div class="logo-item glass"><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HuggingFace"><span>HuggingFace</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ EXPERIENCE ═══════════ -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">03 / Experience</span>
+        <h2 class="section-title">Professional Journey</h2>
+      </div>
+      <div class="timeline reveal">
+        <div class="timeline-item glass-card">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Jan 2023 — 2025</div>
+          <h3>Automation & CRM Specialist</h3>
+          <span class="badge">Remote</span>
+          <ul class="timeline-list">
+            <li>Designed and deployed automation workflows using n8n to streamline business operations for remote clients.</li>
+            <li>Built CRM systems to manage leads, sales pipelines, and customer lifecycle processes.</li>
+            <li>Integrated third-party tools (Telegram, Google Sheets, APIs) to automate repetitive administrative tasks.</li>
+            <li>Reduced manual data entry workload by implementing AI-powered automation solutions.</li>
+            <li>Maintained system documentation and provided technical support to clients.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PROJECTS ═══════════ -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">04 / Projects</span>
+        <h2 class="section-title">Featured Automation Projects</h2>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- Project 1 -->
+        <div class="project-card glass-card reveal" data-project="receipt">
+          <div class="project-glow"></div>
+          <div class="project-meta">
+            <span class="project-tag">n8n + AI + Telegram</span>
+            <button class="project-details-btn" onclick="openModal('receipt')">View Details ↗</button>
+          </div>
+          <h3 class="project-title">Receipt Data Entry Automation</h3>
+          <p class="project-desc">An intelligent automation system that transforms manual receipt processing into a seamless, AI-powered workflow via Telegram bot.</p>
+
+          <div class="flow-diagram">
+            <div class="flow-node">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+              <span>Trigger</span>
             </div>
-        </section>
-
-        <section id="skills">
-            <h2>Core Competencies</h2>
-            <div class="skills-grid">
-                <div class="skill-tag">Workflow Automation (n8n)</div>
-                <div class="skill-tag">CRM Management & Pipeline Optimization</div>
-                <div class="skill-tag">API Integration & Webhooks</div>
-                <div class="skill-tag">AI Agent Implementation</div>
-                <div class="skill-tag">Data Entry Automation</div>
-                <div class="skill-tag">Google Sheets Automation</div>
-                <div class="skill-tag">Telegram Bot Integration</div>
-                <div class="skill-tag">Process Documentation</div>
-                <div class="skill-tag">Microsoft Excel (Advanced)</div>
-                <div class="skill-tag">Client Communication & Remote Support</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Drive">
+              <span>Upload</span>
             </div>
-        </section>
-
-        <section id="experience">
-            <h2>Professional Experience</h2>
-            <div class="card">
-                <h3>Automation & CRM Specialist (Remote)</h3>
-                <p class="date">January 2023 – 2025</p>
-                <ul style="color:var(--text-secondary);padding-left:20px;">
-                    <li style="margin-bottom:10px;">Designed and deployed automation workflows using n8n to streamline business operations for remote clients.</li>
-                    <li style="margin-bottom:10px;">Built CRM systems to manage leads, sales pipelines, and customer lifecycle processes.</li>
-                    <li style="margin-bottom:10px;">Integrated third-party tools (Telegram, Google Sheets, APIs) to automate repetitive administrative tasks.</li>
-                    <li style="margin-bottom:10px;">Reduced manual data entry workload by implementing AI-powered automation solutions.</li>
-                    <li style="margin-bottom:10px;">Maintained system documentation and provided technical support to clients.</li>
-                </ul>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg" alt="AI">
+              <span>AI Extract</span>
             </div>
-        </section>
-
-        <section id="projects">
-            <h2>Featured Automation Projects</h2>
-
-            <!-- Receipt Project Card — click opens modal -->
-            <div class="project-card" onclick="openModal('modalReceipt')">
-                <span class="click-hint">↗ View Details</span>
-                <div class="project-header">
-                    <div>
-                        <h3 class="project-title">Receipt Data Entry Automation</h3>
-                        <p class="project-tech">n8n + AI + Telegram Bot + Google Drive + Google Sheets</p>
-                    </div>
-                    <div class="project-actions">
-                        <a href="#" class="btn btn-secondary" onclick="downloadJSON('receipt');event.stopPropagation();return false;"><span>📥 Download Workflow</span></a>
-                    </div>
-                </div>
-                <p class="project-description">An intelligent automation system that transforms manual receipt processing into a seamless, AI-powered workflow. Users simply send receipt photos via Telegram, and the system automatically extracts data, categorizes expenses, and maintains organized financial records.</p>
-                <div class="workflow-diagram">
-                    <div class="workflow-container">
-                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Telegram<br>Trigger</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Get<br>File</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node drive"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg"></div><div class="node-label">Upload to<br>Drive</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node drive"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg"></div><div class="node-label">Share<br>File</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node ai"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg"></div><div class="node-label">AI Extract<br>Data</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node sheets"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div><div class="node-label">Append to<br>Sheet</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Send<br>Confirmation</div></div>
-                    </div>
-                </div>
-                <ul class="project-features">
-                    <li><strong>Telegram Integration:</strong> Users send receipt photos directly via Telegram bot for instant processing</li>
-                    <li><strong>Cloud Storage:</strong> Automatic upload to Google Drive with secure sharing permissions</li>
-                    <li><strong>AI-Powered OCR:</strong> GPT-4 extracts date, vendor, amount, tax, payment method, and expense category</li>
-                    <li><strong>Structured Data Output:</strong> Automatic JSON parsing validates and normalizes extracted information</li>
-                    <li><strong>Automated Logging:</strong> Data appended to Google Sheets with timestamps and categorization</li>
-                    <li><strong>Instant Feedback:</strong> Confirmation message sent to user with verification link</li>
-                    <li><strong>Impact:</strong> Eliminated 100% of manual data entry, reduced processing time from 5 minutes to 10 seconds per receipt</li>
-                </ul>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Sheets">
+              <span>Log</span>
             </div>
+          </div>
 
-            <!-- Invoice Project Card — click opens modal -->
-            <div class="project-card" onclick="openModal('modalInvoice')">
-                <span class="click-hint">↗ View Details</span>
-                <div class="project-header">
-                    <div>
-                        <h3 class="project-title">Overdue Invoice Reminder System</h3>
-                        <p class="project-tech">n8n + Telegram Bot + Gmail + Google Sheets</p>
-                    </div>
-                    <div class="project-actions">
-                        <a href="#" class="btn btn-secondary" onclick="downloadJSON('invoice');event.stopPropagation();return false;"><span>📥 Download Workflow</span></a>
-                    </div>
-                </div>
-                <p class="project-description">A smart accounts receivable automation that monitors invoice statuses and sends professional payment reminders via email. Triggered by simple Telegram commands, the system identifies overdue invoices, sends personalized reminders, and updates tracking records automatically.</p>
-                <div class="workflow-diagram">
-                    <div class="workflow-container">
-                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Telegram<br>Command</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node conditional"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Curly_Brackets.svg"></div><div class="node-label">Check<br>Command</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node sheets"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div><div class="node-label">Read Invoice<br>Sheet</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node conditional"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Curly_Brackets.svg"></div><div class="node-label">Filter<br>Unpaid</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node gmail"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"></div><div class="node-label">Send Email<br>Reminder</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node sheets"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div><div class="node-label">Update<br>Status</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Send<br>Report</div></div>
-                    </div>
-                </div>
-                <ul class="project-features">
-                    <li><strong>Telegram Control:</strong> Simple "remind" command triggers the entire workflow remotely</li>
-                    <li><strong>Smart Filtering:</strong> Automatically identifies unpaid invoices and excludes already-reminded customers</li>
-                    <li><strong>Personalized Emails:</strong> Dynamic email generation with customer name, invoice number, amount, and due date</li>
-                    <li><strong>Professional Templates:</strong> Polite, professional reminder messages maintain good customer relationships</li>
-                    <li><strong>Status Tracking:</strong> Automatic updates to Google Sheets mark reminder status and timestamps</li>
-                    <li><strong>Batch Processing:</strong> Handles multiple overdue invoices in a single workflow execution</li>
-                    <li><strong>Real-time Reporting:</strong> Sends summary to Telegram showing number of reminders sent</li>
-                    <li><strong>Impact:</strong> Reduced accounts receivable follow-up time by 90%, improved payment collection by 35%</li>
-                </ul>
-            </div>
-        </section>
-
-        <div class="marquee-section">
-            <p class="marquee-section-title">Automated by n8n</p>
-
-            <div class="marquee-viewport" data-speed="0.55" data-direction="1">
-                <div class="marquee-track">
-                    <div class="marquee-item" title="Telegram"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"></div>
-                    <div class="marquee-item" title="Google Sheets"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"></div>
-                    <div class="marquee-item" title="Google Drive"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive"></div>
-                    <div class="marquee-item" title="Gmail"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"></div>
-                    <div class="marquee-item" title="HTTP Request"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/HTTP_logo.png" alt="HTTP" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1006/1006771.png'"></div>
-                    <div class="marquee-item" title="OpenAI"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="OpenAI"></div>
-                    <div class="marquee-item" title="Webhook"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Tabler-icons_webhook.svg" alt="Webhook"></div>
-                    <div class="marquee-item" title="Airtable"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable"></div>
-                    <div class="marquee-item" title="Slack"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack"></div>
-                    <div class="marquee-item" title="Notion"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion"></div>
-                    <div class="marquee-item" title="MySQL"><img src="https://upload.wikimedia.org/wikipedia/de/d/dd/MySQL_logo.svg" alt="MySQL"></div>
-                    <div class="marquee-item" title="HubSpot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot"></div>
-                    <div class="marquee-item" title="Postgres"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="Postgres"></div>
-                </div>
-            </div>
-
-            <div class="marquee-viewport" data-speed="0.45" data-direction="-1">
-                <div class="marquee-track">
-                    <div class="marquee-item" title="Slack"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack"></div>
-                    <div class="marquee-item" title="Discord"><img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg" alt="Discord"></div>
-                    <div class="marquee-item" title="Telegram"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"></div>
-                    <div class="marquee-item" title="Gmail"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"></div>
-                    <div class="marquee-item" title="WhatsApp"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></div>
-                    <div class="marquee-item" title="Zoom"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Zoom_Logo_2022.svg/512px-Zoom_Logo_2022.svg.png" alt="Zoom"></div>
-                    <div class="marquee-item" title="Notion"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion"></div>
-                    <div class="marquee-item" title="Trello"><img src="https://cdn.worldvectorlogo.com/logos/trello.svg" alt="Trello"></div>
-                    <div class="marquee-item" title="Airtable"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable"></div>
-                    <div class="marquee-item" title="Google Meet"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg" alt="Google Meet"></div>
-                    <div class="marquee-item" title="Microsoft Teams"><img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Microsoft_Teams.png" alt="Teams"></div>
-                    <div class="marquee-item" title="Asana"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Asana_logo.svg" alt="Asana"></div>
-                    <div class="marquee-item" title="HubSpot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot"></div>
-                </div>
-            </div>
-
-            <div class="marquee-viewport" data-speed="0.5" data-direction="1">
-                <div class="marquee-track">
-                    <div class="marquee-item" title="HubSpot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Hubspotlogo.png" alt="HubSpot"></div>
-                    <div class="marquee-item" title="ChatGPT / OpenAI"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"></div>
-                    <div class="marquee-item" title="Claude / Anthropic"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Claude_AI_symbol.svg" alt="Claude"></div>
-                    <div class="marquee-item" title="Grok / xAI"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Grok-icon.svg" alt="Grok"></div>
-                    <div class="marquee-item" title="Google Gemini"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/512px-Google_Gemini_logo.svg.png" alt="Gemini"></div>
-                    <div class="marquee-item" title="Meta Llama"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Meta_Platforms_logo.svg" alt="Llama"></div>
-                    <div class="marquee-item" title="Mistral AI"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Mistral_AI_logo_%282025%E2%80%93%29.svg" alt="Mistral" onerror="this.parentElement.style.background='#ff7000';this.style.display='none'"></div>
-                    <div class="marquee-item" title="Perplexity AI"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Perplexity_AI_Turquoise_on_White.png" alt="Perplexity" onerror="this.parentElement.style.background='#20808d';this.style.display='none'"></div>
-                    <div class="marquee-item" title="DeepSeek"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/DeepSeek_logo.svg" alt="DeepSeek" onerror="this.parentElement.style.background='#4D6BFE';this.style.display='none'"></div>
-                    <div class="marquee-item" title="Cohere"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Cohere-Logo.png" alt="Cohere" onerror="this.parentElement.style.background='#39594d';this.style.display='none'"></div>
-                    <div class="marquee-item" title="Hugging Face"><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HuggingFace" onerror="this.parentElement.style.background='#ff9d00';this.style.display='none'"></div>
-                    <div class="marquee-item" title="Stability AI"><img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Stability_Ai_%E2%80%94_wordmark.png" alt="Stability AI"></div>
-                    <div class="marquee-item" title="ElevenLabs"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/ElevenLabs_Logo_04.png" alt="ElevenLabs"></div>
-                </div>
-            </div>
+          <div class="impact-bar">
+            <span class="impact-label">Impact:</span>
+            <span class="impact-value">5 min → 10 sec per receipt</span>
+          </div>
         </div>
 
-        <section id="education">
-            <h2>Education</h2>
-            <div class="card">
-                <h3>Bachelor of Science in Business Administration</h3>
-                <p style="color:var(--accent);margin-bottom:5px;">Financial Management</p>
-                <p class="date">North Eastern Mindanao State University | 2017 – 2023</p>
-            </div>
-        </section>
+        <!-- Project 2 -->
+        <div class="project-card glass-card reveal" data-project="invoice">
+          <div class="project-glow"></div>
+          <div class="project-meta">
+            <span class="project-tag">n8n + Gmail + Telegram</span>
+            <button class="project-details-btn" onclick="openModal('invoice')">View Details ↗</button>
+          </div>
+          <h3 class="project-title">Overdue Invoice Reminder System</h3>
+          <p class="project-desc">A smart accounts receivable automation that monitors invoice statuses and sends professional payment reminders via email.</p>
 
-        <section id="resume">
-            <h2>Resume Summary</h2>
-            <!-- Resume card — click opens modal -->
-            <div class="card clickable" onclick="openModal('modalResume')">
-                <span class="click-hint">↗ View Full Resume</span>
-                <p style="font-size:1rem;color:var(--text-secondary);line-height:1.8;margin-bottom:20px;">
-                    Results-driven Automation Specialist and CRM Expert with 2+ years of remote experience. Specializes in designing n8n workflows, integrating APIs, and building AI-driven automation systems that eliminate manual tasks and accelerate business operations.
-                </p>
-                <div class="resume-grid">
-                    <div class="resume-block">
-                        <h4>💼 Experience Highlights</h4>
-                        <div class="resume-item">CRM Agent & Automation Specialist (Remote) — 2+ years</div>
-                        <div class="resume-item">Workflow design using n8n, Zapier & Make</div>
-                        <div class="resume-item">Customer pipeline management & lead tracking</div>
-                        <div class="resume-item">AI agent implementation for business automation</div>
-                        <div class="resume-item">API integration across Google, Telegram & CRM platforms</div>
-                    </div>
-                    <div class="resume-block">
-                        <h4>🛠 Key Technical Skills</h4>
-                        <div class="resume-item">n8n Automation — Advanced</div>
-                        <div class="resume-item">CRM Management & Pipeline Optimization</div>
-                        <div class="resume-item">Google Workspace (Sheets, Drive, Gmail)</div>
-                        <div class="resume-item">Telegram Bot & API Webhooks</div>
-                        <div class="resume-item">Microsoft Excel (Advanced) & Data Entry</div>
-                    </div>
-                    <div class="resume-block">
-                        <h4>🎓 Education</h4>
-                        <div class="resume-item">BS Business Administration — Financial Management</div>
-                        <div class="resume-item">North Eastern Mindanao State University</div>
-                        <div class="resume-item">Graduated: 2023</div>
-                    </div>
-                    <div class="resume-block">
-                        <h4>📈 Key Achievements</h4>
-                        <div class="resume-item">Reduced manual follow-up time by 90% via automation</div>
-                        <div class="resume-item">Improved payment collection rate by 35%</div>
-                        <div class="resume-item">Built real-time receipt capture system via Telegram + Google Drive</div>
-                        <div class="resume-item">Delivered multiple end-to-end automation workflows for remote clients</div>
-                    </div>
-                </div>
-                <div class="resume-cta" style="margin-top:20px;">
-                    <p>Want the full picture? Click anywhere on this card to preview my resume, or open the full document below.</p>
-                    <a href="https://drive.google.com/file/d/1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4/view?usp=sharing" target="_blank" class="btn" onclick="event.stopPropagation()"><span>📄 View Full Resume</span></a>
-                </div>
+          <div class="flow-diagram">
+            <div class="flow-node">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+              <span>Command</span>
             </div>
-        </section>
-
-        <section id="contact">
-            <h2>Let's Work Together</h2>
-            <div class="card" style="text-align:center;">
-                <p style="font-size:1.1rem;color:var(--text-secondary);margin-bottom:30px;">
-                    I'm available for freelance automation projects and remote opportunities. Let's discuss how I can help streamline your business processes.
-                </p>
-                <div class="contact-buttons">
-                    <a href="https://wa.me/639638291756" target="_blank" class="btn btn-whatsapp"><span>💬 WhatsApp</span></a>
-                    <a href="mailto:reymancasio.5@gmail.com" class="btn btn-email"><span>📧 Send Email</span></a>
-                    <a href="https://www.linkedin.com/in/reyman-casio-112ba83aa" target="_blank" class="btn btn-linkedin"><span>🔗 LinkedIn Profile</span></a>
-                </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Sheets">
+              <span>Filter</span>
             </div>
-        </section>
-
-    </div>
-
-    <footer>
-        <p>&copy; 2026 Reyman D. Casio. All rights reserved.</p>
-        <p style="margin-top:10px;font-size:0.9rem;">Built with passion for automation and efficiency.</p>
-    </footer>
-
-    <!-- ═══ MODAL: Receipt ═══ -->
-    <div class="modal-overlay" id="modalReceipt">
-        <div class="modal-inner">
-            <div class="modal-topbar">
-                <button class="modal-close-btn" onclick="closeModal('modalReceipt')">✕</button>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail">
+              <span>Send</span>
             </div>
-            <div class="modal-body">
-                <div class="project-header">
-                    <div>
-                        <h3 class="project-title">Receipt Data Entry Automation</h3>
-                        <p class="project-tech">n8n + AI + Telegram Bot + Google Drive + Google Sheets</p>
-                    </div>
-                    <div class="project-actions">
-                        <a href="#" class="btn btn-secondary" onclick="downloadJSON('receipt');return false;"><span>📥 Download Workflow</span></a>
-                    </div>
-                </div>
-                <p class="project-description">An intelligent automation system that transforms manual receipt processing into a seamless, AI-powered workflow. Users simply send receipt photos via Telegram, and the system automatically extracts data, categorizes expenses, and maintains organized financial records.</p>
-                <div class="workflow-diagram">
-                    <div class="workflow-container">
-                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Telegram<br>Trigger</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Get<br>File</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node drive"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg"></div><div class="node-label">Upload to<br>Drive</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node drive"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg"></div><div class="node-label">Share<br>File</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node ai"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg"></div><div class="node-label">AI Extract<br>Data</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node sheets"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div><div class="node-label">Append to<br>Sheet</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Send<br>Confirmation</div></div>
-                    </div>
-                </div>
-                <div class="project-snapshot" onclick="openLightbox('https://drive.google.com/thumbnail?id=1IUhWV0wo-0269Vdw1GJXwpDFyKA_IpR9&sz=w1600',event)">
-                    <img src="https://drive.google.com/thumbnail?id=1IUhWV0wo-0269Vdw1GJXwpDFyKA_IpR9&sz=w1600" alt="Receipt Automation Workflow Screenshot" loading="lazy">
-                </div>
-                <ul class="project-features">
-                    <li><strong>Telegram Integration:</strong> Users send receipt photos directly via Telegram bot for instant processing</li>
-                    <li><strong>Cloud Storage:</strong> Automatic upload to Google Drive with secure sharing permissions</li>
-                    <li><strong>AI-Powered OCR:</strong> GPT-4 extracts date, vendor, amount, tax, payment method, and expense category</li>
-                    <li><strong>Structured Data Output:</strong> Automatic JSON parsing validates and normalizes extracted information</li>
-                    <li><strong>Automated Logging:</strong> Data appended to Google Sheets with timestamps and categorization</li>
-                    <li><strong>Instant Feedback:</strong> Confirmation message sent to user with verification link</li>
-                    <li><strong>Impact:</strong> Eliminated 100% of manual data entry, reduced processing time from 5 minutes to 10 seconds per receipt</li>
-                </ul>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+              <span>Report</span>
             </div>
+          </div>
+
+          <div class="impact-bar">
+            <span class="impact-label">Impact:</span>
+            <span class="impact-value">90% less follow-up time · +35% collection</span>
+          </div>
         </div>
-    </div>
 
-    <!-- ═══ MODAL: Invoice ═══ -->
-    <div class="modal-overlay" id="modalInvoice">
-        <div class="modal-inner">
-            <div class="modal-topbar">
-                <button class="modal-close-btn" onclick="closeModal('modalInvoice')">✕</button>
-            </div>
-            <div class="modal-body">
-                <div class="project-header">
-                    <div>
-                        <h3 class="project-title">Overdue Invoice Reminder System</h3>
-                        <p class="project-tech">n8n + Telegram Bot + Gmail + Google Sheets</p>
-                    </div>
-                    <div class="project-actions">
-                        <a href="#" class="btn btn-secondary" onclick="downloadJSON('invoice');return false;"><span>📥 Download Workflow</span></a>
-                    </div>
-                </div>
-                <p class="project-description">A smart accounts receivable automation that monitors invoice statuses and sends professional payment reminders via email. Triggered by simple Telegram commands, the system identifies overdue invoices, sends personalized reminders, and updates tracking records automatically.</p>
-                <div class="workflow-diagram">
-                    <div class="workflow-container">
-                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Telegram<br>Command</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node conditional"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Curly_Brackets.svg"></div><div class="node-label">Check<br>Command</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node sheets"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div><div class="node-label">Read Invoice<br>Sheet</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node conditional"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Curly_Brackets.svg"></div><div class="node-label">Filter<br>Unpaid</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node gmail"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"></div><div class="node-label">Send Email<br>Reminder</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node sheets"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg"></div><div class="node-label">Update<br>Status</div></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-node telegram"><div class="node-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></div><div class="node-label">Send<br>Report</div></div>
-                    </div>
-                </div>
-                <div class="project-snapshot" onclick="openLightbox('https://drive.google.com/thumbnail?id=13iT4iahn-eTyQixmjvaiK--1pjZFrJsu&sz=w1600',event)">
-                    <img src="https://drive.google.com/thumbnail?id=13iT4iahn-eTyQixmjvaiK--1pjZFrJsu&sz=w1600" alt="Invoice Reminder Workflow Screenshot" loading="lazy">
-                </div>
-                <ul class="project-features">
-                    <li><strong>Telegram Control:</strong> Simple "remind" command triggers the entire workflow remotely</li>
-                    <li><strong>Smart Filtering:</strong> Automatically identifies unpaid invoices and excludes already-reminded customers</li>
-                    <li><strong>Personalized Emails:</strong> Dynamic email generation with customer name, invoice number, amount, and due date</li>
-                    <li><strong>Professional Templates:</strong> Polite, professional reminder messages maintain good customer relationships</li>
-                    <li><strong>Status Tracking:</strong> Automatic updates to Google Sheets mark reminder status and timestamps</li>
-                    <li><strong>Batch Processing:</strong> Handles multiple overdue invoices in a single workflow execution</li>
-                    <li><strong>Real-time Reporting:</strong> Sends summary to Telegram showing number of reminders sent</li>
-                    <li><strong>Impact:</strong> Reduced accounts receivable follow-up time by 90%, improved payment collection by 35%</li>
-                </ul>
-            </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ EDUCATION ═══════════ -->
+  <section class="section" id="education">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">05 / Education</span>
+        <h2 class="section-title">Academic Background</h2>
+      </div>
+      <div class="edu-card glass-card reveal">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-body">
+          <h3>Bachelor of Science in Business Administration</h3>
+          <p class="edu-major">Financial Management</p>
+          <p class="edu-school">North Eastern Mindanao State University</p>
+          <span class="edu-year glass-pill">2017 – 2023</span>
         </div>
+      </div>
     </div>
+  </section>
 
-    <!-- ═══ MODAL: Resume ═══ -->
-    <div class="modal-overlay" id="modalResume">
-        <div class="modal-inner">
-            <div class="modal-topbar">
-                <button class="modal-close-btn" onclick="closeModal('modalResume')">✕</button>
-            </div>
-            <div class="modal-body">
-                <p style="font-size:1rem;color:var(--text-secondary);line-height:1.8;margin-bottom:20px;">
-                    Results-driven Automation Specialist and CRM Expert with 2+ years of remote experience. Specializes in designing n8n workflows, integrating APIs, and building AI-driven automation systems that eliminate manual tasks and accelerate business operations.
-                </p>
-                <div class="resume-embed-wrap" onclick="openLightbox('https://drive.google.com/thumbnail?id=1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4&sz=w1600',event)">
-                    <img src="https://drive.google.com/thumbnail?id=1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4&sz=w1600" alt="Resume Preview" loading="lazy">
-                </div>
-                <div class="resume-grid" style="margin-top:24px;">
-                    <div class="resume-block">
-                        <h4>💼 Experience Highlights</h4>
-                        <div class="resume-item">CRM Agent & Automation Specialist (Remote) — 2+ years</div>
-                        <div class="resume-item">Workflow design using n8n, Zapier & Make</div>
-                        <div class="resume-item">Customer pipeline management & lead tracking</div>
-                        <div class="resume-item">AI agent implementation for business automation</div>
-                        <div class="resume-item">API integration across Google, Telegram & CRM platforms</div>
-                    </div>
-                    <div class="resume-block">
-                        <h4>🛠 Key Technical Skills</h4>
-                        <div class="resume-item">n8n Automation — Advanced</div>
-                        <div class="resume-item">CRM Management & Pipeline Optimization</div>
-                        <div class="resume-item">Google Workspace (Sheets, Drive, Gmail)</div>
-                        <div class="resume-item">Telegram Bot & API Webhooks</div>
-                        <div class="resume-item">Microsoft Excel (Advanced) & Data Entry</div>
-                    </div>
-                    <div class="resume-block">
-                        <h4>🎓 Education</h4>
-                        <div class="resume-item">BS Business Administration — Financial Management</div>
-                        <div class="resume-item">North Eastern Mindanao State University</div>
-                        <div class="resume-item">Graduated: 2023</div>
-                    </div>
-                    <div class="resume-block">
-                        <h4>📈 Key Achievements</h4>
-                        <div class="resume-item">Reduced manual follow-up time by 90% via automation</div>
-                        <div class="resume-item">Improved payment collection rate by 35%</div>
-                        <div class="resume-item">Built real-time receipt capture system via Telegram + Google Drive</div>
-                        <div class="resume-item">Delivered multiple end-to-end automation workflows for remote clients</div>
-                    </div>
-                </div>
-                <div class="resume-cta" style="margin-top:24px;">
-                    <p>Want the full picture? Review my complete resume for detailed work history, certifications, and references.</p>
-                    <a href="https://drive.google.com/file/d/1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4/view?usp=sharing" target="_blank" class="btn" onclick="event.stopPropagation()"><span>📄 Open Full Resume</span></a>
-                </div>
-            </div>
+  <!-- ═══════════ RESUME ═══════════ -->
+  <section class="section" id="resume">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">06 / Resume</span>
+        <h2 class="section-title">Resume Overview</h2>
+      </div>
+      <div class="resume-grid">
+        <div class="resume-col glass-card reveal">
+          <div class="resume-icon">💼</div>
+          <h3>Experience Highlights</h3>
+          <ul>
+            <li>CRM Agent & Automation Specialist (Remote) — 2+ years</li>
+            <li>Workflow design using n8n, Zapier & Make</li>
+            <li>Customer pipeline management & lead tracking</li>
+            <li>AI agent implementation for business automation</li>
+            <li>API integration across Google, Telegram & CRM platforms</li>
+          </ul>
         </div>
+        <div class="resume-col glass-card reveal">
+          <div class="resume-icon">🛠</div>
+          <h3>Key Technical Skills</h3>
+          <ul>
+            <li>n8n Automation — Advanced</li>
+            <li>CRM Management & Pipeline Optimization</li>
+            <li>Google Workspace (Sheets, Drive, Gmail)</li>
+            <li>Telegram Bot & API Webhooks</li>
+            <li>Microsoft Excel (Advanced) & Data Entry</li>
+          </ul>
+        </div>
+        <div class="resume-col glass-card reveal">
+          <div class="resume-icon">📈</div>
+          <h3>Key Achievements</h3>
+          <ul>
+            <li>Reduced manual follow-up time by 90% via automation</li>
+            <li>Improved payment collection rate by 35%</li>
+            <li>Built real-time receipt capture via Telegram + Google Drive</li>
+            <li>Delivered multiple end-to-end workflows for remote clients</li>
+          </ul>
+        </div>
+      </div>
+      <div class="resume-cta reveal">
+        <p>Want the full picture? Preview my complete resume below.</p>
+        <a href="https://drive.google.com/file/d/1pZLcabLuA2ON8293WRwtzQJfCLsP9tM4/view?usp=sharing" target="_blank" class="btn btn-primary glass-btn">📄 View Full Resume</a>
+      </div>
     </div>
+  </section>
 
-    <!-- ═══ IMAGE LIGHTBOX ═══ -->
-    <div class="img-lightbox" id="imgLightbox">
-        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-        <img id="imgLightboxSrc" src="" alt="Full view">
+  <!-- ═══════════ CONTACT ═══════════ -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">07 / Contact</span>
+        <h2 class="section-title">Let's Work Together</h2>
+      </div>
+      <p class="contact-sub reveal">I'm available for freelance automation projects and remote opportunities. Let's discuss how I can streamline your business processes.</p>
+      <div class="contact-cards reveal">
+        <a href="https://wa.me/639638291756" target="_blank" class="contact-card glass-card">
+          <span class="contact-icon">💬</span>
+          <span class="contact-label">WhatsApp</span>
+          <span class="contact-hint">+63 963 829 1756</span>
+        </a>
+        <a href="mailto:reymancasio@gmail.com" class="contact-card glass-card">
+          <span class="contact-icon">📧</span>
+          <span class="contact-label">Email</span>
+          <span class="contact-hint">reymancasio@gmail.com</span>
+        </a>
+        <a href="https://www.linkedin.com/in/reyman-casio-112ba83aa" target="_blank" class="contact-card glass-card">
+          <span class="contact-icon">🔗</span>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-hint">reyman-casio</span>
+        </a>
+      </div>
     </div>
+  </section>
 
-    <script>
-    /* ═══════════════════════════════════════════════════════════════
-       MODAL ENGINE
-    ═══════════════════════════════════════════════════════════════ */
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-logo">RDC<span class="dot">.</span></p>
+      <p class="footer-copy">© 2026 Reyman D. Casio. All rights reserved.</p>
+      <p class="footer-tagline">Built with passion for automation & efficiency.</p>
+    </div>
+  </footer>
 
-    function openModal(id) {
-        var overlay = document.getElementById(id);
-        if (!overlay) return;
-        overlay.classList.add('is-visible');
-        document.body.classList.add('modal-open');
-        requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-                overlay.classList.add('is-open');
-            });
-        });
-        overlay.addEventListener('click', function onBg(e) {
-            if (e.target === overlay) {
-                closeModal(id);
-                overlay.removeEventListener('click', onBg);
-            }
-        });
-    }
+  <!-- ═══════════ MODALS ═══════════ -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal glass-card" id="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
 
-    function closeModal(id) {
-        var overlay = document.getElementById(id);
-        if (!overlay) return;
-        overlay.classList.remove('is-open');
-        overlay.addEventListener('transitionend', function handler(e) {
-            if (e.propertyName !== 'opacity') return;
-            overlay.classList.remove('is-visible');
-            document.body.classList.remove('modal-open');
-            overlay.removeEventListener('transitionend', handler);
-        });
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       LIGHTBOX ENGINE
-    ═══════════════════════════════════════════════════════════════ */
-
-    function openLightbox(src, e) {
-        if (e) { e.stopPropagation(); e.preventDefault(); }
-        var lb  = document.getElementById('imgLightbox');
-        var img = document.getElementById('imgLightboxSrc');
-        img.src = src;
-        lb.classList.add('is-visible');
-        requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-                lb.classList.add('is-open');
-            });
-        });
-        lb.onclick = function (ev) {
-            if (ev.target === lb) closeLightbox();
-        };
-    }
-
-    function closeLightbox() {
-        var lb = document.getElementById('imgLightbox');
-        lb.classList.remove('is-open');
-        lb.addEventListener('transitionend', function handler(e) {
-            if (e.propertyName !== 'opacity') return;
-            lb.classList.remove('is-visible');
-            document.getElementById('imgLightboxSrc').src = '';
-            lb.removeEventListener('transitionend', handler);
-        });
-    }
-
-    document.addEventListener('keydown', function (e) {
-        if (e.key !== 'Escape') return;
-        ['modalReceipt','modalInvoice','modalResume'].forEach(closeModal);
-        closeLightbox();
-    });
-
-    /* ═══════════════════════════════════════════════════════════════
-       MARQUEE ENGINE
-    ═══════════════════════════════════════════════════════════════ */
-
-    (function () {
-        var HOVER_RATIO = 0.12;
-        var LERP        = 0.055;
-
-        document.querySelectorAll('.marquee-viewport').forEach(function (viewport) {
-            var track     = viewport.querySelector('.marquee-track');
-            var baseSpeed = parseFloat(viewport.dataset.speed)    || 0.55;
-            var dir       = parseFloat(viewport.dataset.direction) || 1;
-
-            Array.from(track.children).forEach(function (child) {
-                track.appendChild(child.cloneNode(true));
-            });
-
-            var halfWidth    = track.scrollWidth / 2;
-            var pos          = 0;
-            var currentSpeed = baseSpeed;
-            var targetSpeed  = baseSpeed;
-            var isDragging   = false;
-            var isHovered    = false;
-            var dragStartX   = 0;
-            var posAtDrag    = 0;
-            var lastTs       = null;
-
-            window.addEventListener('resize', function () { halfWidth = track.scrollWidth / 2; });
-
-            function setX(x) { track.style.transform = 'translateX(' + x + 'px)'; }
-
-            function wrap(p) {
-                if (!halfWidth) return p;
-                p = p % halfWidth;
-                if (p > 0) p -= halfWidth;
-                return p;
-            }
-
-            (function tick(ts) {
-                requestAnimationFrame(tick);
-                var dt = lastTs === null ? 16.667 : Math.min(ts - lastTs, 50);
-                lastTs = ts;
-                if (!isDragging) {
-                    currentSpeed += (targetSpeed - currentSpeed) * LERP;
-                    pos = wrap(pos - dir * currentSpeed * (dt / 16.667));
-                    setX(pos);
-                }
-            })(performance.now());
-
-            viewport.addEventListener('mouseenter', function () { isHovered = true;  targetSpeed = baseSpeed * HOVER_RATIO; });
-            viewport.addEventListener('mouseleave', function () { isHovered = false; if (!isDragging) targetSpeed = baseSpeed; });
-
-            function startDrag(clientX) { isDragging = true; dragStartX = clientX; posAtDrag = pos; currentSpeed = 0; targetSpeed = 0; viewport.style.cursor = 'grabbing'; }
-            function moveDrag(clientX)  { if (!isDragging) return; pos = wrap(posAtDrag + (clientX - dragStartX)); setX(pos); }
-            function endDrag()          { if (!isDragging) return; isDragging = false; viewport.style.cursor = ''; targetSpeed = isHovered ? baseSpeed * HOVER_RATIO : baseSpeed; }
-
-            viewport.addEventListener('mousedown',  function (e) { e.preventDefault(); startDrag(e.clientX); });
-            window.addEventListener('mousemove',    function (e) { moveDrag(e.clientX); });
-            window.addEventListener('mouseup',      endDrag);
-            viewport.addEventListener('touchstart', function (e) { startDrag(e.touches[0].clientX); }, { passive: true });
-            viewport.addEventListener('touchmove',  function (e) { moveDrag(e.touches[0].clientX); }, { passive: true });
-            viewport.addEventListener('touchend',   endDrag);
-        });
-    })();
-
-    /* ═══════════════════════════════════════════════════════════════
-       SCROLL REVEAL
-    ═══════════════════════════════════════════════════════════════ */
-
-    var revealObs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-            if (e.isIntersecting) {
-                e.target.style.opacity   = '1';
-                e.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('section').forEach(function (s) {
-        s.style.opacity    = '0';
-        s.style.transform  = 'translateY(20px)';
-        s.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        revealObs.observe(s);
-    });
-
-    /* ═══════════════════════════════════════════════════════════════
-       DESKTOP NAV
-    ═══════════════════════════════════════════════════════════════ */
-
-    function scrollToSection(id) {
-        var section = document.getElementById(id);
-        if (!section) return;
-        var nav    = document.getElementById('mainNav');
-        var navH   = nav ? nav.offsetHeight : 0;
-        var heading = section.querySelector('h2');
-        var target  = heading || section;
-        window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - navH - 12, behavior: 'smooth' });
-    }
-
-    document.querySelectorAll('.nav-desktop a').forEach(function (link) {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            scrollToSection(this.getAttribute('href').replace('#', ''));
-        });
-    });
-
-    /* ═══════════════════════════════════════════════════════════════
-       MOBILE NAV
-    ═══════════════════════════════════════════════════════════════ */
-
-    var sectionIds   = ['about','skills','experience','projects','education','resume','contact'];
-    var mobileItems  = document.querySelectorAll('.mobile-nav-item');
-    var navDots      = document.querySelectorAll('.nav-dot');
-    var mobileTrack  = document.getElementById('mobileNavTrack');
-    var mainNav      = document.getElementById('mainNav');
-    var scrollLocked = false;
-    var lockTimer;
-
-    function setActive(idx) {
-        if (idx < 0 || idx >= sectionIds.length) return;
-        mobileItems.forEach(function (item, i) { item.classList.toggle('active', i === idx); });
-        navDots.forEach(function (dot, i)       { dot.classList.toggle('active',  i === idx); });
-        var activeItem = mobileItems[idx];
-        if (activeItem && mobileTrack) {
-            var tr = mobileTrack.getBoundingClientRect();
-            var ir = activeItem.getBoundingClientRect();
-            mobileTrack.scrollTo({ left: mobileTrack.scrollLeft + ir.left - tr.left - tr.width / 2 + ir.width / 2, behavior: 'smooth' });
-        }
-    }
-
-    mobileItems.forEach(function (item, idx) {
-        item.addEventListener('click', function () {
-            setActive(idx);
-            scrollLocked = true;
-            clearTimeout(lockTimer);
-            lockTimer = setTimeout(function () { scrollLocked = false; }, 1400);
-            scrollToSection(this.getAttribute('data-section'));
-        });
-    });
-
-    function getActiveIdx() {
-        var navH    = mainNav ? mainNav.offsetHeight : 60;
-        var trigger = navH + 40;
-        var best    = 0;
-        sectionIds.forEach(function (id, i) {
-            var el = document.getElementById(id);
-            if (el && el.getBoundingClientRect().top <= trigger) best = i;
-        });
-        return best;
-    }
-
-    window.addEventListener('scroll', function () { if (!scrollLocked) setActive(getActiveIdx()); }, { passive: true });
-    setActive(getActiveIdx());
-
-    /* ═══════════════════════════════════════════════════════════════
-       DOWNLOAD JSON
-    ═══════════════════════════════════════════════════════════════ */
-
-    function downloadJSON(project) {
-        var filename, data;
-
-        if (project === 'receipt') {
-            filename = 'Receipt_stored_via_Telegram.json';
-            data = {"name":"Receipt stored via Telegram","nodes":[{"parameters":{"updates":["message"],"additionalFields":{}},"type":"n8n-nodes-base.telegramTrigger","typeVersion":1.2,"position":[-1136,352],"id":"66796944-a1fc-4107-ac82-eb488ab7950c","name":"Telegram Trigger","webhookId":"29e6e3d8-efbd-4752-8144-453a7bf73d70","credentials":{"telegramApi":{"id":"aX7fnszZlx0mtNHF","name":"Telegram account"}}},{"parameters":{"resource":"file","fileId":"={{ $json.message.photo[0].file_id }}","additionalFields":{}},"type":"n8n-nodes-base.telegram","typeVersion":1.2,"position":[-928,352],"id":"2c7ed3ba-6cce-46ee-a7fd-5e0d74b7ab37","name":"Get a file","webhookId":"3f576baf-872b-4db9-90e4-680a9ae8f9a1","credentials":{"telegramApi":{"id":"aX7fnszZlx0mtNHF","name":"Telegram account"}}},{"parameters":{"name":"={{ $now.format('yyyy-MM-dd HH:MM:ss') }}.{{ $('Get a file').item.binary.data.fileExtension }}","driveId":{"__rl":true,"mode":"list","value":"My Drive"},"folderId":{"__rl":true,"value":"https://drive.google.com/drive/folders/1FsInKctP_SmmJCR964e3wa809htXUo_Y","mode":"url"},"options":{}},"type":"n8n-nodes-base.googleDrive","typeVersion":3,"position":[-720,352],"id":"a80a1eae-8730-4a40-9284-19520c8b5a97","name":"Upload file","credentials":{"googleDriveOAuth2Api":{"id":"5xh2cnfKhCDUHAyg","name":"Google Drive account"}}},{"parameters":{"operation":"share","fileId":{"__rl":true,"value":"={{ $json.id }}","mode":"id"},"permissionsUi":{"permissionsValues":{"role":"reader","type":"anyone"}},"options":{}},"type":"n8n-nodes-base.googleDrive","typeVersion":3,"position":[-512,352],"id":"5ac6e36a-18bc-4051-94ad-c3362d5d6a0a","name":"Share file","credentials":{"googleDriveOAuth2Api":{"id":"5xh2cnfKhCDUHAyg","name":"Google Drive account"}}}],"pinData":{},"connections":{"Telegram Trigger":{"main":[[{"node":"Get a file","type":"main","index":0}]]},"Get a file":{"main":[[{"node":"Upload file","type":"main","index":0}]]},"Upload file":{"main":[[{"node":"Share file","type":"main","index":0}]]}},"active":false,"settings":{"executionOrder":"v1","binaryMode":"separate","availableInMCP":false},"versionId":"934964f6-793d-4c0d-a415-a71bb1c56cb9","meta":{"templateCredsSetupCompleted":true,"instanceId":"993638efe77790a0a62276f882d672c9832d331dc8e9dcc7fe03bcb05ecf1885"},"id":"bORoNMHojGJaHq5d","tags":[]};
-        } else if (project === 'invoice') {
-            filename = 'Overdue_Invoice_Reminder_System.json';
-            data = {"name":"Overdue Invoice Reminder System","nodes":[{"parameters":{"documentId":{"__rl":true,"mode":"id","value":"1hpJrE9KnbarMnl8jKcgMT7wGBtEkIIPaefFe-S-xEgA"},"sheetName":{"__rl":true,"value":"gid=0","mode":"list","cachedResultName":"Sheet1","cachedResultUrl":"https://docs.google.com/spreadsheets/d/1hpJrE9KnbarMnl8jKcgMT7wGBtEkIIPaefFe-S-xEgA/edit#gid=0"},"filtersUI":{"values":[{"lookupColumn":"Status","lookupValue":"Unpaid"}]},"options":{"returnAllMatches":"returnAllMatches"}},"id":"0316685f-62e0-4a72-9d4c-1c885047e95f","name":"Read Invoice Sheet","type":"n8n-nodes-base.googleSheets","typeVersion":4.4,"position":[-1344,48],"credentials":{"googleSheetsOAuth2Api":{"id":"Z9MORW9Kn53Jyu8J","name":"Google Sheets account"}}},{"parameters":{"fieldToSplitOut":"Status","options":{}},"type":"n8n-nodes-base.splitOut","typeVersion":1,"position":[-1168,48],"id":"74523f76-b514-403f-bd2c-87c33975e5d4","name":"Split Out"},{"parameters":{"sendTo":"={{ $('Read Invoice Sheet').item.json['Customer Email'] }}","subject":"=Payment Reminder – Invoice  {{ $('Read Invoice Sheet').item.json['Invoice Number'] }}","emailType":"text","message":"=Dear {{ $('Read Invoice Sheet').item.json['Customer Name'] }},  \n\nI hope this message finds you well.  This is a friendly reminder that Invoice {{ $('Read Invoice Sheet').item.json['Invoice Number'] }} in the amount of {{ $('Read Invoice Sheet').item.json['Invoice Amount'] }} was due on {{ $('Read Invoice Sheet').item.json['Due Date'] }} and is currently outstanding. According to our records, we have not yet received payment.  If payment has already been made, please disregard this message. Otherwise, we would appreciate your prompt attention to this matter.  \n\nShould you have any questions or require any documentation, feel free to let us know.  \n\nThank you for your cooperation.  \n\nBest regards, \nReyman Casio\nBilling Department","options":{"appendAttribution":false}},"type":"n8n-nodes-base.gmail","typeVersion":2.2,"position":[-656,32],"id":"a9bf4856-b952-426d-9d1e-be20a38e6be0","name":"Send a message","webhookId":"83d62123-2a96-4735-b49e-bf306c98a16b","credentials":{"gmailOAuth2":{"id":"EndAtCz1OUUtOAB6","name":"Gmail account"}}}],"pinData":{},"connections":{},"active":false,"settings":{"executionOrder":"v1","binaryMode":"separate","availableInMCP":false},"versionId":"92b3e992-3b3b-4138-850a-3182797fd997","meta":{"templateCredsSetupCompleted":true,"instanceId":"993638efe77790a0a62276f882d672c9832d331dc8e9dcc7fe03bcb05ecf1885"},"id":"XXTpsqUGO1PgIZZr","tags":[]};
-        }
-
-        var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        var url  = URL.createObjectURL(blob);
-        var a    = document.createElement('a');
-        a.href   = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }
-    </script>
-
+  <script src="app.js"></script>
 </body>
 </html>
