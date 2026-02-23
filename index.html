@@ -15,9 +15,12 @@
   <div class="bg-canvas" id="bgCanvas">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="orb orb-4"></div>
-    <div class="grid-overlay"></div>
+    <!-- Glassdrop water-drop blur elements -->
+    <div class="glassdrop gd-1"></div>
+    <div class="glassdrop gd-2"></div>
+    <div class="glassdrop gd-3"></div>
+    <div class="glassdrop gd-4"></div>
+    <div class="glassdrop gd-5"></div>
   </div>
 
   <!-- Cursor -->
@@ -412,18 +415,24 @@
       </div>
       <p class="contact-sub reveal">I'm available for freelance automation projects and remote opportunities. Let's discuss how I can streamline your business processes.</p>
       <div class="contact-cards reveal">
-        <a href="https://wa.me/639638291756" target="_blank" class="contact-card glass-card">
-          <span class="contact-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/5/58/WhatsApp_Logo.png"></span>
+        <a href="https://wa.me/639638291756" target="_blank" class="contact-card glass-card whatsapp">
+          <div class="contact-icon-wrap">
+            <img class="contact-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" loading="lazy" />
+          </div>
           <span class="contact-label">WhatsApp</span>
           <span class="contact-hint">+63 963 829 1756</span>
         </a>
-        <a href="mailto:reymancasio@gmail.com" class="contact-card glass-card">
-          <span class="contact-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Gmail-highres_2.png"></span>
+        <a href="mailto:reymancasio@gmail.com" class="contact-card glass-card email">
+          <div class="contact-icon-wrap">
+            <img class="contact-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" loading="lazy" />
+          </div>
           <span class="contact-label">Email</span>
           <span class="contact-hint">reymancasio@gmail.com</span>
         </a>
-        <a href="https://www.linkedin.com/in/reyman-casio-112ba83aa" target="_blank" class="contact-card glass-card">
-          <span class="contact-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Linkedin-logo-blue-In-square-40px.png"></span>
+        <a href="https://www.linkedin.com/in/reyman-casio-112ba83aa" target="_blank" class="contact-card glass-card linkedin">
+          <div class="contact-icon-wrap">
+            <img class="contact-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" loading="lazy" />
+          </div>
           <span class="contact-label">LinkedIn</span>
           <span class="contact-hint">reyman-casio</span>
         </a>
@@ -443,11 +452,4 @@
   <!-- ═══════════ MODALS ═══════════ -->
   <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
     <div class="modal glass-card" id="modal" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal()">✕</button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
-</body>
-</html>
+      <button class="modal-close" onc
