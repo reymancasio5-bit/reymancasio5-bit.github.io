@@ -1,187 +1,248 @@
 /**
- * rain.js — Three.js Raindrop Renderer
- * Architecture: InstancedMesh + object pooling for maximum performance
- * Target: 60fps on low-end mobile devices
+ * rain.js — Wet Glass Window Raindrop Effect
+ * Technique: Canvas 2D — realistic droplets clinging and sliding on glass
+ * NO Three.js for this effect (Canvas 2D is faster for this specific look)
+ * Performance: static background layer (painted once) + animated drops only
  */
 (function () {
   'use strict';
 
-  // ─── Performance detection ───────────────────────────────────────────────
-  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-  const isLowEnd = navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 2;
-
-  // Drop count scaled to device capability
-  const DROP_COUNT = isLowEnd ? 120 : (isMobile ? 200 : 350);
-  const SPLASH_POOL = 30;
-
-  // ─── Scene setup ──────────────────────────────────────────────────────────
   const canvas = document.getElementById('rain-canvas');
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    alpha: true,
-    antialias: false,       // off for perf
-    powerPreference: 'low-power',
-    stencil: false,
-    depth: false,
-  });
+  const ctx = canvas.getContext('2d', { alpha: true });
 
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
-  renderer.setClearColor(0x000000, 0);
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  const cores = navigator.hardwareConcurrency || 2;
+  const isLowEnd = cores <= 2;
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.OrthographicCamera(0, window.innerWidth, window.innerHeight, 0, -1, 1);
-  camera.position.z = 0;
+  let W = window.innerWidth;
+  let H = window.innerHeight;
+  const DPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5);
 
-  // ─── Raindrop geometry & material ─────────────────────────────────────────
-  // Each drop is a thin elongated quad rendered as InstancedMesh
-  const DROP_W = 1.2;
-  const DROP_H = isMobile ? 14 : 18;
+  // ─── Off-screen static layer ─────────────────────────────────────────────
+  const staticCanvas = document.createElement('canvas');
+  const sCtx = staticCanvas.getContext('2d');
 
-  const dropGeo = new THREE.PlaneGeometry(DROP_W, DROP_H);
-  const dropMat = new THREE.MeshBasicMaterial({
-    color: 0x00c8ff,
-    transparent: true,
-    opacity: 0.18,
-    depthWrite: false,
-  });
+  function buildStatic() {
+    staticCanvas.width  = Math.round(W * DPR);
+    staticCanvas.height = Math.round(H * DPR);
+    sCtx.save();
+    sCtx.scale(DPR, DPR);
 
-  const instancedDrops = new THREE.InstancedMesh(dropGeo, dropMat, DROP_COUNT);
-  instancedDrops.frustumCulled = false;
-  scene.add(instancedDrops);
+    // Dark navy background gradient
+    const bg = sCtx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0,   '#010810');
+    bg.addColorStop(0.5, '#020c1c');
+    bg.addColorStop(1,   '#010a16');
+    sCtx.fillStyle = bg;
+    sCtx.fillRect(0, 0, W, H);
 
-  // ─── Drop state arrays (avoids object GC pressure) ────────────────────────
-  const posX = new Float32Array(DROP_COUNT);
-  const posY = new Float32Array(DROP_COUNT);
-  const speed = new Float32Array(DROP_COUNT);
-  const opacity = new Float32Array(DROP_COUNT);
-  const length = new Float32Array(DROP_COUNT);
+    // Blurred city-light colour blobs (bokeh effect — seen through wet glass)
+    const blobs = [
+      { x: 0.12, y: 0.18, r: 160, h: 210, s: 0.7, l: 0.35, a: 0.12 },
+      { x: 0.78, y: 0.12, r: 130, h: 195, s: 0.8, l: 0.4,  a: 0.10 },
+      { x: 0.50, y: 0.55, r: 200, h: 230, s: 0.6, l: 0.3,  a: 0.09 },
+      { x: 0.88, y: 0.72, r: 110, h: 165, s: 0.9, l: 0.45, a: 0.08 },
+      { x: 0.08, y: 0.82, r: 140, h: 200, s: 0.7, l: 0.38, a: 0.10 },
+      { x: 0.62, y: 0.28, r: 90,  h: 270, s: 0.8, l: 0.4,  a: 0.07 },
+      { x: 0.35, y: 0.88, r: 120, h: 220, s: 0.6, l: 0.35, a: 0.08 },
+    ];
 
-  const dummy = new THREE.Object3D();
-  const color = new THREE.Color();
+    blobs.forEach(b => {
+      const bx = b.x * W, by = b.y * H;
+      const g = sCtx.createRadialGradient(bx, by, 0, bx, by, b.r);
+      const col = `hsla(${b.h},${b.s*100}%,${b.l*100}%,${b.a})`;
+      g.addColorStop(0, col);
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      sCtx.fillStyle = g;
+      sCtx.beginPath();
+      sCtx.arc(bx, by, b.r, 0, Math.PI * 2);
+      sCtx.fill();
+    });
 
-  function initDrop(i, yOverride) {
-    posX[i] = Math.random() * (window.innerWidth + 100) - 50;
-    posY[i] = yOverride !== undefined ? yOverride : Math.random() * -window.innerHeight * 1.5;
-    speed[i] = 4 + Math.random() * 7;
-    opacity[i] = 0.08 + Math.random() * 0.18;
-    length[i] = 10 + Math.random() * 14;
-  }
+    // Glass fog / condensation — very faint white vignette
+    const fog = sCtx.createRadialGradient(W/2, H/2, H*0.1, W/2, H/2, H*0.85);
+    fog.addColorStop(0, 'rgba(0,0,0,0)');
+    fog.addColorStop(1, 'rgba(180,220,255,0.025)');
+    sCtx.fillStyle = fog;
+    sCtx.fillRect(0, 0, W, H);
 
-  for (let i = 0; i < DROP_COUNT; i++) {
-    initDrop(i, Math.random() * window.innerHeight); // start spread across screen
-  }
-
-  // ─── Splash pool ──────────────────────────────────────────────────────────
-  // Simple splash: tiny white circle that fades out
-  const splashGeo = new THREE.CircleGeometry(2, 6); // low poly circle
-  const splashMat = new THREE.MeshBasicMaterial({
-    color: 0x00c8ff,
-    transparent: true,
-    opacity: 0,
-    depthWrite: false,
-  });
-
-  const splashes = [];
-  for (let s = 0; s < SPLASH_POOL; s++) {
-    const mesh = new THREE.Mesh(splashGeo, splashMat.clone());
-    mesh.userData = { active: false, life: 0 };
-    mesh.visible = false;
-    scene.add(mesh);
-    splashes.push(mesh);
-  }
-
-  let splashIdx = 0;
-  function triggerSplash(x, y) {
-    const s = splashes[splashIdx % SPLASH_POOL];
-    splashIdx++;
-    s.position.set(x, y, 0);
-    s.scale.set(1, 1, 1);
-    s.material.opacity = 0.45;
-    s.visible = true;
-    s.userData.active = true;
-    s.userData.life = 1.0;
-  }
-
-  // ─── Animation loop ───────────────────────────────────────────────────────
-  let frameId;
-  let lastTime = 0;
-  const TARGET_DELTA = 1 / 60; // seconds
-
-  function animate(now) {
-    frameId = requestAnimationFrame(animate);
-
-    const dt = Math.min((now - lastTime) / 1000, 0.05); // cap delta to avoid spikes
-    lastTime = now;
-
-    const W = window.innerWidth;
-    const H = window.innerHeight;
-
-    for (let i = 0; i < DROP_COUNT; i++) {
-      posY[i] += speed[i] * dt * 60 * 0.5;
-
-      if (posY[i] > H + DROP_H) {
-        // Trigger splash at bottom occasionally
-        if (Math.random() < 0.3) triggerSplash(posX[i], H - 2);
-        initDrop(i, -DROP_H - Math.random() * 80);
-        posX[i] = Math.random() * (W + 100) - 50;
-      }
-
-      dummy.position.set(posX[i], posY[i], 0);
-      dummy.scale.set(1, length[i] / DROP_H, 1);
-      dummy.updateMatrix();
-      instancedDrops.setMatrixAt(i, dummy.matrix);
-
-      // Cyan tint with slight variation
-      color.setHSL(0.55 + Math.random() * 0.02, 1, 0.6 + Math.random() * 0.1);
-      instancedDrops.setColorAt(i, color);
+    // Static micro-drops (dew) — tiny still droplets on the glass
+    const micro = isLowEnd ? 80 : (isMobile ? 150 : 260);
+    for (let i = 0; i < micro; i++) {
+      const mx = Math.random() * W;
+      const my = Math.random() * H;
+      const mr = 1 + Math.random() * 4;
+      paintDrop(sCtx, mx, my, mr, 0, 0.5 + Math.random() * 0.4);
     }
 
-    instancedDrops.instanceMatrix.needsUpdate = true;
-    if (instancedDrops.instanceColor) instancedDrops.instanceColor.needsUpdate = true;
+    sCtx.restore();
+  }
 
-    // Update splashes
-    for (let s = 0; s < splashes.length; s++) {
-      const sp = splashes[s];
-      if (!sp.userData.active) continue;
-      sp.userData.life -= dt * 3;
-      if (sp.userData.life <= 0) {
-        sp.visible = false;
-        sp.userData.active = false;
+  // ─── Drop painter ────────────────────────────────────────────────────────
+  // r = radius, elongation = how much taller (sliding), alpha = opacity
+  function paintDrop(c, x, y, r, elong, alpha) {
+    if (r < 0.4) return;
+    c.save();
+    c.globalAlpha = alpha;
+
+    const h = r + elong; // total height
+
+    // Drop path: rounded top + pointed/elongated bottom
+    c.beginPath();
+    if (elong > 0) {
+      // Teardrop / sliding shape
+      c.moveTo(x, y - h);
+      c.bezierCurveTo(x + r,     y - h + r*0.8,
+                      x + r*0.9, y + h * 0.4,
+                      x,         y + h);
+      c.bezierCurveTo(x - r*0.9, y + h * 0.4,
+                      x - r,     y - h + r*0.8,
+                      x,         y - h);
+    } else {
+      c.arc(x, y, r, 0, Math.PI * 2);
+    }
+    c.closePath();
+
+    // Body gradient — dark cool interior, lighter edge (lens effect)
+    const bodyG = c.createRadialGradient(
+      x - r * 0.2, y - r * 0.25, r * 0.05,
+      x,           y,             r * 1.1
+    );
+    bodyG.addColorStop(0,    'rgba(200, 235, 255, 0.60)');
+    bodyG.addColorStop(0.25, 'rgba(80,  160, 240, 0.40)');
+    bodyG.addColorStop(0.6,  'rgba(15,  55,  130, 0.55)');
+    bodyG.addColorStop(1,    'rgba(0,   10,  35,  0.70)');
+    c.fillStyle = bodyG;
+    c.fill();
+
+    // Internal "refraction" — lighter oval inside simulating inverted scene
+    const refrG = c.createRadialGradient(
+      x + r * 0.15, y + r * 0.2, 0,
+      x + r * 0.1,  y + r * 0.1, r * 0.75
+    );
+    refrG.addColorStop(0,   'rgba(140, 210, 255, 0.45)');
+    refrG.addColorStop(0.5, 'rgba(30,  100, 200, 0.15)');
+    refrG.addColorStop(1,   'rgba(0,   0,   0,   0)');
+    c.fillStyle = refrG;
+    c.fill();
+
+    // Specular highlight — top-left bright crescent (key visual cue for "glass")
+    const specG = c.createRadialGradient(
+      x - r * 0.32, y - r * 0.38, 0,
+      x - r * 0.25, y - r * 0.2,  r * 0.52
+    );
+    specG.addColorStop(0,   'rgba(255, 255, 255, 0.85)');
+    specG.addColorStop(0.4, 'rgba(210, 240, 255, 0.30)');
+    specG.addColorStop(1,   'rgba(0,   0,   0,   0)');
+    c.fillStyle = specG;
+    c.fill();
+
+    // Thin rim
+    c.strokeStyle = 'rgba(140, 210, 255, 0.18)';
+    c.lineWidth   = 0.4;
+    c.stroke();
+
+    c.restore();
+  }
+
+  // ─── Animated drop objects ───────────────────────────────────────────────
+  const LIVE_COUNT = isLowEnd ? 20 : (isMobile ? 32 : 50);
+
+  function newDrop(randomY) {
+    const r = 3 + Math.random() * 11;
+    return {
+      x:     Math.random() * W,
+      y:     randomY ? Math.random() * H : -(r * 4),
+      r:     r,
+      elong: r * (0.5 + Math.random() * 2.5),
+      speed: 0.08 + Math.random() * 0.3,   // slow — clinging to glass
+      alpha: 0.45 + Math.random() * 0.45,
+      drift: (Math.random() - 0.5) * 0.006,
+      // Pause: drops hesitate before sliding (surface tension)
+      paused:     Math.random() > 0.5,
+      pauseTicks: Math.floor(Math.random() * 180 + 40),
+    };
+  }
+
+  let drops = Array.from({ length: LIVE_COUNT }, () => newDrop(true));
+
+  // ─── Render loop ─────────────────────────────────────────────────────────
+  let raf = null;
+  let lastNow = 0;
+  let tick = 0;
+  const SKIP = isLowEnd ? 3 : (isMobile ? 2 : 1); // frame skip on weak devices
+
+  function render(now) {
+    raf = requestAnimationFrame(render);
+    tick++;
+    if (tick % SKIP !== 0) return;
+
+    const dt = Math.min((now - lastNow) / 16.67, 3);
+    lastNow = now;
+
+    // Clear
+    ctx.clearRect(0, 0, W, H);
+
+    // Blit static background
+    ctx.drawImage(staticCanvas, 0, 0, staticCanvas.width, staticCanvas.height, 0, 0, W, H);
+
+    // Animate + draw live drops
+    for (let i = 0; i < drops.length; i++) {
+      const d = drops[i];
+
+      if (d.paused) {
+        d.pauseTicks -= dt;
+        if (d.pauseTicks <= 0) d.paused = false;
+      } else {
+        d.y += d.speed * dt;
+        d.x += d.drift * d.r * dt;
+        // Slight x clamp so drops don't wander off too fast
+        if (d.x < -20) d.x = W + 20;
+        if (d.x > W + 20) d.x = -20;
+      }
+
+      if (d.y > H + d.r * 4) {
+        drops[i] = newDrop(false);
         continue;
       }
-      const t = sp.userData.life;
-      sp.material.opacity = t * 0.45;
-      sp.scale.setScalar(1 + (1 - t) * 2.5);
-    }
 
-    renderer.render(scene, camera);
+      paintDrop(ctx, d.x, d.y, d.r, d.elong, d.alpha);
+    }
   }
 
-  // ─── Resize handler ───────────────────────────────────────────────────────
+  // ─── Resize ──────────────────────────────────────────────────────────────
+  function handleResize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width  = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.scale(DPR, DPR);
+    buildStatic();
+    drops = Array.from({ length: LIVE_COUNT }, () => newDrop(true));
+  }
+
+  handleResize(); // initial sizing
+
   let resizeTO;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTO);
-    resizeTO = setTimeout(() => {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      camera.right = window.innerWidth;
-      camera.top = window.innerHeight;
-      camera.updateProjectionMatrix();
-    }, 150);
+    resizeTO = setTimeout(handleResize, 200);
   }, { passive: true });
 
-  // ─── Visibility API — pause when tab hidden ───────────────────────────────
+  // Pause when tab hidden
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-      cancelAnimationFrame(frameId);
+      cancelAnimationFrame(raf);
+      raf = null;
     } else {
-      lastTime = performance.now();
-      animate(lastTime);
+      lastNow = performance.now();
+      render(lastNow);
     }
   });
 
-  // ─── Start ────────────────────────────────────────────────────────────────
-  lastTime = performance.now();
-  animate(lastTime);
+  lastNow = performance.now();
+  render(lastNow);
 
 })();
