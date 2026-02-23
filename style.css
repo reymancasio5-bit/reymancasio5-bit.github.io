@@ -36,6 +36,21 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  /* Smooth rendering everywhere */
+  text-rendering: optimizeSpeed;
+}
+/* GPU compositing hints for animated elements */
+.glassdrop, .orb, .hero-visual, .tech-float,
+.ring, .profile-ring, .nav {
+  will-change: transform;
+  transform: translateZ(0);
+}
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.15s !important;
+  }
 }
 img { max-width: 100%; display: block; }
 a { text-decoration: none; color: inherit; }
@@ -48,53 +63,89 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 ::-webkit-scrollbar-thumb { background: var(--clr-accent); border-radius: 3px; }
 
 /* ══════════════════════════════════════════
-   BACKGROUND
+   BACKGROUND — Glassdrop + Orbs
    ══════════════════════════════════════════ */
 .bg-canvas {
   position: fixed; inset: 0; z-index: 0;
   overflow: hidden; pointer-events: none;
 }
+
+/* Glassdrop layer — large translucent blobs that create the "glassdrop" refraction effect */
+.bg-canvas::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 20%, rgba(56,189,248,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 85% 75%, rgba(129,140,248,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 10%, rgba(52,211,153,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 40% at 70% 50%, rgba(56,189,248,0.05) 0%, transparent 50%);
+  filter: blur(60px);
+  z-index: 0;
+}
+
+/* Glassdrop "drops" — frosted translucent circles that look like water drops on glass */
+.glassdrop {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255,255,255,0.06) 0%,
+    rgba(255,255,255,0.01) 50%,
+    transparent 100%
+  );
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.1),
+    inset 0 -1px 1px rgba(0,0,0,0.2),
+    0 4px 24px rgba(0,0,0,0.15);
+}
+.gd-1 { width: 520px; height: 520px; top: -120px; right: -80px;  animation: gdFloat1 24s ease-in-out infinite; }
+.gd-2 { width: 380px; height: 380px; bottom: 5%;  left: -100px;  animation: gdFloat2 28s ease-in-out infinite; }
+.gd-3 { width: 260px; height: 260px; top: 40%;   left: 55%;     animation: gdFloat3 20s ease-in-out infinite; }
+.gd-4 { width: 180px; height: 180px; top: 70%;   right: 12%;    animation: gdFloat4 18s ease-in-out infinite; }
+.gd-5 { width: 130px; height: 130px; top: 20%;   left: 20%;     animation: gdFloat5 22s ease-in-out infinite; }
+
+/* Colored accent inside each drop */
+.gd-1::after { content:''; position:absolute; inset:20%; border-radius:50%; background:radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%); filter:blur(20px); }
+.gd-2::after { content:''; position:absolute; inset:20%; border-radius:50%; background:radial-gradient(circle, rgba(129,140,248,0.12) 0%, transparent 70%); filter:blur(20px); }
+.gd-3::after { content:''; position:absolute; inset:20%; border-radius:50%; background:radial-gradient(circle, rgba(52,211,153,0.1)  0%, transparent 70%); filter:blur(16px); }
+.gd-4::after { content:''; position:absolute; inset:20%; border-radius:50%; background:radial-gradient(circle, rgba(56,189,248,0.1)  0%, transparent 70%); filter:blur(12px); }
+.gd-5::after { content:''; position:absolute; inset:20%; border-radius:50%; background:radial-gradient(circle, rgba(129,140,248,0.1) 0%, transparent 70%); filter:blur(10px); }
+
+@keyframes gdFloat1 { 0%,100%{transform:translate(0,0)} 40%{transform:translate(-30px,25px)} 70%{transform:translate(20px,-20px)} }
+@keyframes gdFloat2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-30px)} }
+@keyframes gdFloat3 { 0%,100%{transform:translate(0,0)} 35%{transform:translate(-20px,18px)} 70%{transform:translate(15px,-12px)} }
+@keyframes gdFloat4 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-18px,14px)} }
+@keyframes gdFloat5 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(12px,-16px)} }
+
+/* Keep 2 orbs max for performance — subtle ambient color only */
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
   will-change: transform;
+  pointer-events: none;
 }
 .orb-1 {
-  width: 650px; height: 650px;
-  top: -200px; right: -100px;
-  background: radial-gradient(circle, rgba(56,189,248,0.18) 0%, transparent 70%);
-  animation: orbFloat1 18s ease-in-out infinite;
+  width: 700px; height: 700px;
+  top: -250px; right: -180px;
+  background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 65%);
+  filter: blur(100px);
+  animation: orbDrift1 30s ease-in-out infinite;
 }
 .orb-2 {
   width: 500px; height: 500px;
-  bottom: 10%; left: -150px;
-  background: radial-gradient(circle, rgba(129,140,248,0.18) 0%, transparent 70%);
-  animation: orbFloat2 22s ease-in-out infinite;
+  bottom: 0; left: -180px;
+  background: radial-gradient(circle, rgba(129,140,248,0.12) 0%, transparent 65%);
+  filter: blur(100px);
+  animation: orbDrift2 36s ease-in-out infinite;
 }
-.orb-3 {
-  width: 350px; height: 350px;
-  top: 50%; left: 50%;
-  background: radial-gradient(circle, rgba(52,211,153,0.12) 0%, transparent 70%);
-  animation: orbFloat3 16s ease-in-out infinite;
-}
-.orb-4 {
-  width: 280px; height: 280px;
-  bottom: 5%; right: 10%;
-  background: radial-gradient(circle, rgba(56,189,248,0.1) 0%, transparent 70%);
-  animation: orbFloat4 20s ease-in-out infinite;
-}
-.grid-overlay {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-@keyframes orbFloat1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-60px,40px) scale(1.1)} 66%{transform:translate(40px,-30px) scale(0.95)} }
-@keyframes orbFloat2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(70px,-50px)} }
-@keyframes orbFloat3 { 0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-60%,-40%) scale(1.15)} }
-@keyframes orbFloat4 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,30px)} }
+/* orb-3 and orb-4 hidden — handled by glassdrop now */
+.orb-3, .orb-4 { display: none; }
+
+@keyframes orbDrift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,30px)} }
+@keyframes orbDrift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(50px,-35px)} }
 
 /* ══════════════════════════════════════════
    CUSTOM CURSOR
@@ -906,11 +957,11 @@ body:has(.interactive:hover) .cursor-trail { width: 56px; height: 56px; opacity:
   gap: 20px;
 }
 .contact-card {
-  padding: 32px 24px;
+  padding: 36px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-align: center;
   transition: all var(--transition);
 }
@@ -919,8 +970,37 @@ body:has(.interactive:hover) .cursor-trail { width: 56px; height: 56px; opacity:
   transform: translateY(-6px);
   box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px var(--clr-glow);
 }
-.contact-icon { display: flex; align-items: center; justify-content: center; }
-.contact-icon img { width: 28px; height: 28px; }
+.contact-card:hover .contact-icon-img { transform: scale(1.1); }
+
+.contact-icon-img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  transition: transform var(--transition);
+  border-radius: 12px;
+}
+/* WhatsApp — green tint bg */
+.contact-card.whatsapp .contact-icon-wrap {
+  background: rgba(37, 211, 102, 0.12);
+  border: 1px solid rgba(37, 211, 102, 0.2);
+}
+/* Email — blue tint bg */
+.contact-card.email .contact-icon-wrap {
+  background: rgba(234, 67, 53, 0.1);
+  border: 1px solid rgba(234, 67, 53, 0.18);
+}
+/* LinkedIn — LinkedIn blue tint */
+.contact-card.linkedin .contact-icon-wrap {
+  background: rgba(10, 102, 194, 0.12);
+  border: 1px solid rgba(10, 102, 194, 0.22);
+}
+.contact-icon-wrap {
+  width: 72px; height: 72px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .contact-label {
   font-family: var(--font-display);
   font-size: 1.05rem;
